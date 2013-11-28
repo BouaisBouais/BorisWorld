@@ -1,0 +1,7 @@
+H:\Small World\Small World\Small World\bin\Debug\Small World.pdb
+H:\Small World\Small World\Small World\obj\Debug\Small World.pdb
+H:\Small World\Small World\Small World\obj\Debug\Small World.csprojResolveAssemblyReference.cache
+H:\Small World\Small World\Small World\bin\Debug\Wrapper.dll
+H:\Small World\Small World\Small World\bin\Debug\Wrapper.pdb
+H:\Small World\Small World\Small World\bin\Debug\Small World.exe
+H:\Small World\Small World\Small World\obj\Debug\Small World.exe
