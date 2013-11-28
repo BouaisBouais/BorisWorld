@@ -9,6 +9,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Wrapper", "Projet1\Projet1.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MapLib", "MapLib\MapLib.vcxproj", "{5CC7FD23-BD7D-4E91-BBC4-0186FFFF20EF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{2B2EC4D3-D671-4B42-B540-C77F0DDF330F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,16 @@ Global
 		{5CC7FD23-BD7D-4E91-BBC4-0186FFFF20EF}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{5CC7FD23-BD7D-4E91-BBC4-0186FFFF20EF}.Release|Win32.ActiveCfg = Release|Win32
 		{5CC7FD23-BD7D-4E91-BBC4-0186FFFF20EF}.Release|Win32.Build.0 = Release|Win32
+		{2B2EC4D3-D671-4B42-B540-C77F0DDF330F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B2EC4D3-D671-4B42-B540-C77F0DDF330F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B2EC4D3-D671-4B42-B540-C77F0DDF330F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2B2EC4D3-D671-4B42-B540-C77F0DDF330F}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2B2EC4D3-D671-4B42-B540-C77F0DDF330F}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{2B2EC4D3-D671-4B42-B540-C77F0DDF330F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B2EC4D3-D671-4B42-B540-C77F0DDF330F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B2EC4D3-D671-4B42-B540-C77F0DDF330F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2B2EC4D3-D671-4B42-B540-C77F0DDF330F}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2B2EC4D3-D671-4B42-B540-C77F0DDF330F}.Release|Win32.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

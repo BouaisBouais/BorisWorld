@@ -11,21 +11,12 @@ namespace Small_World
     {
         static void Main(string[] args)
         {
-            WrapperMap wrapper = new WrapperMap();
+            FabriqueAutre fabrique = new FabriqueAutre();
+            Carte carte = fabrique.creerCarte(TypeCarte.Normale);
+            carte.print();
 
-            unsafe
-            {
-                int** map = wrapper.genererMap(5);
-                	for(int x=0; x<5; x++){
-		                for(int y=0; y<5; y++){
-                            Console.WriteLine(map[x][y]);
-                        }
-                        Console.WriteLine("\n");
-                    }
-
-            }
-
-            
+            Case tile = Carte.getCase(1,1);
+            tile.print();
         }
 
 

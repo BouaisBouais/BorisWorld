@@ -49,9 +49,8 @@
     <Compile Include="CaseForet.cs" />
     <Compile Include="CaseMontagne.cs" />
     <Compile Include="CasePlaine.cs" />
-    <Compile Include="CreerCarte.cs" />
     <Compile Include="FabriqueCase.cs" />
-    <Compile Include="FabriqueJeu.cs" />
+    <Compile Include="FabriqueAutre.cs" />
     <Compile Include="FabriquePartie.cs" />
     <Compile Include="Gaulois.cs" />
     <Compile Include="Jeu.cs" />
@@ -64,7 +63,7 @@
     <Compile Include="FabriqueViking.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SmallWorld.cs" />
-    <Compile Include="TypeCarte.cs" />
+    <Compile Include="Carte.cs" />
     <Compile Include="Unite.cs" />
     <Compile Include="Viking.cs" />
   </ItemGroup>

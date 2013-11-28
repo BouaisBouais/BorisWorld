@@ -7,5 +7,9 @@ namespace Small_World
 {
     public class CaseForet : Case
     {
+        public void print()
+        {
+            Console.Write("Case");
+        }
     }
 }

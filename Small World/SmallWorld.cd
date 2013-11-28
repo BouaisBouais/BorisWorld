@@ -15,7 +15,7 @@
   <Class Name="Small_World.SmallWorld">
     <Position X="3" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAUAAAAAAAQAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAUAAAAAAAQAAAAAAAAAAAACAAAAAAAAAAAABAAAAAA=</HashCode>
       <FileName>SmallWorld.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -51,7 +51,7 @@
     <Position X="6" Y="2.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>FabriqueJeu.cs</FileName>
+      <FileName>FabriqueAutre.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Small_World.Joueur">
@@ -65,7 +65,7 @@
     <Position X="2.5" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>TypeCarte.cs</FileName>
+      <FileName>Carte.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Small_World.CasePlaine" Collapsed="true">

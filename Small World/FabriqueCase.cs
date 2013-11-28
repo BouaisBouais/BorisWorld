@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Small_World
 {
-    enum  typeCases{
+    public enum  typeCases{
 		DESERT,
 		EAU,
 		FORET,
@@ -13,15 +13,15 @@ namespace Small_World
 		PLAINE
 	}
 
-    public class FabriqueCase
+    static public class FabriqueCase
     {
-        private CasePlaine plaine = null;
-        private CaseEau eau = null;
-        private CaseForet foret = null;
-        private CaseMontagne montagne = null;
-        private CaseDesert desert = null;
+        static private CasePlaine plaine = null;
+        static private CaseEau eau = null;
+        static private CaseForet foret = null;
+        static private CaseMontagne montagne = null;
+        static private CaseDesert desert = null;
 
-        Case obtenirCase(typeCases type)
+        static public Case obtenirCase(typeCases type)
         {
             switch (type)
             {
@@ -49,23 +49,23 @@ namespace Small_World
             throw new Exception("Type de case inconnu");
         }
 
-        void creerCasePlaine()
+        static void creerCasePlaine()
         {
         }
 
-        void creerCaseEau()
+        static void creerCaseEau()
         {
         }
 
-        void creerCaseForet()
+        static void creerCaseForet()
         {
         }
 
-        void creerCaseMontagne()
+        static void creerCaseMontagne()
         {
         }
 
-        void creerCaseDesert()
+        static void creerCaseDesert()
         {
         }
     }
