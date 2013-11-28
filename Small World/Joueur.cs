@@ -5,14 +5,22 @@ using System.Text;
 
 namespace Small_World
 {
+    enum TypeUnite {Viking,Gaulois,Nain};
+
     public class Joueur
     {
-        private int peuple;
-        private Unite unites;
+        private TypeUnite peuple;
+        private List<Unite> unites = new List<Unite>();
 
-
-        void addUnite(Unite unite)
+        public Joueur(TypeUnite t)
         {
+            peuple = t;
         }
+
+        public void addUnite(Unite unite)
+        {
+            unites.Add(unite);
+        }
+   
     }
 }
