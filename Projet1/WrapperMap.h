@@ -16,7 +16,8 @@ namespace Wrapper {
 			WrapperMap(){ map = MapLib_new(); }
 			~WrapperMap(){ MapLib_delete(map); }
 			int** genererMap(int taille) { return MapLib_genererMap(map,taille);}
-
+			int** posJoueurs() { return MapLib_posJoueurs(map);}
+			int** suggestions(int peuple, int* coords) { return MapLib_suggestions(map, peuple, coords);}
 	};
 }
 #endif

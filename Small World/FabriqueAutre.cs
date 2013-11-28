@@ -23,9 +23,9 @@ namespace Small_World
             }
         }
 
-        Joueur creerJoueur(string peuple)
+        Joueur creerJoueur(TypeUnite peuple)
         {
-            return new Joueur();
+            return new Joueur(peuple);
         }
     }
 }

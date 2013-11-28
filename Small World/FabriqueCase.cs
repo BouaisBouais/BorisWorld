@@ -6,7 +6,7 @@ using System.Text;
 namespace Small_World
 {
     public enum  typeCases{
-		DESERT,
+		DESERT = 0,
 		EAU,
 		FORET,
 		MONTAGNE,
@@ -32,41 +32,46 @@ namespace Small_World
                 case typeCases.PLAINE:
                     if (plaine == null)
                         creerCasePlaine();
-                    return desert;
+                    return plaine;
                 case typeCases.EAU:
                     if (eau == null)
                         creerCaseEau();
-                    return desert;
+                    return eau;
                 case typeCases.MONTAGNE:
                     if (montagne == null)
                         creerCaseMontagne();
-                    return desert;
+                    return montagne;
                 case typeCases.FORET:
                     if (foret == null)
                         creerCaseForet();
-                    return desert;
+                    return foret;
             }
             throw new Exception("Type de case inconnu");
         }
 
         static void creerCasePlaine()
         {
+            plaine = new CasePlaine();
         }
 
         static void creerCaseEau()
         {
+            eau = new CaseEau();
         }
 
         static void creerCaseForet()
         {
+            foret = new CaseForet();
         }
 
         static void creerCaseMontagne()
         {
+            montagne = new CaseMontagne();
         }
 
         static void creerCaseDesert()
         {
+            desert = new CaseDesert();
         }
     }
 }

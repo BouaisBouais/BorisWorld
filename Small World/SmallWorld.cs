@@ -15,7 +15,9 @@ namespace Small_World
             Carte carte = fabrique.creerCarte(TypeCarte.Normale);
             carte.print();
 
-            Case tile = Carte.getCase(1,1);
+            //Case tile = Carte.getCase(Coordonnee.get(1,1));
+            //tile.print();
+            Case tile = Carte.getCase(new Coordonnee(1,1));
             tile.print();
         }
 

@@ -7,20 +7,24 @@ namespace Small_World
 {
     public class Nain : Unite
     {
-        private bool estSurMontagne = false;
-
-        public void deplacement(Case c, int x, int y)
+        public Nain(int id, Coordonnee coords) : base (id, coords)
         {
-            if (c is CaseMontagne)
+        }
+
+        public override void getPoints() { }
+
+        public override void deplacement(Case c, Coordonnee coords)
+        {
+            if (c is CaseMontagne) //TODO: Il faut vérifier que le Nain est bien sur une montagne aussi
             {
                 mouvement -= 0.5;
-                doDeplacement(x, y);
+                doDeplacement(coords);
 
             }
             else if (!(c is CaseEau) && mouvement >= 1)
             {
                 mouvement--;
-                doDeplacement(x, y);
+                doDeplacement(coords);
             }
         }
 

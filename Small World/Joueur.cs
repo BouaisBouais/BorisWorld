@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Small_World
 {
-    enum TypeUnite {Viking,Gaulois,Nain};
+    public enum TypeUnite {Viking,Gaulois,Nain};
 
     public class Joueur
     {

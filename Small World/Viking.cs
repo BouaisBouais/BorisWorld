@@ -7,15 +7,20 @@ namespace Small_World
 {
     public class Viking : Unite
     {
-
-        public void deplacement(Case c, int x, int y)
+        public Viking(int id, Coordonnee coords) : base(id, coords)
         {
-            int d = distance(x, y);
+        }
+
+        public override void getPoints() { }
+
+        public override void deplacement(Case c, Coordonnee coords)
+        {
+            int d = coordonnees.distance(coords);
 
             if (mouvement >= d)
             {
                 mouvement -= d;
-                doDeplacement(x, y);
+                doDeplacement(coords);
             }
         }
 

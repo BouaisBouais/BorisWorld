@@ -14,18 +14,15 @@ namespace Small_World
 
         unsafe public Carte(int taille)
         {
+            Coordonnee.initialiser(taille);
             WrapperMap wrapper = new WrapperMap();
             grid = wrapper.genererMap(taille);
             Carte.taille = taille;
         }
 
-        static public Case getCase(int X, int Y)
+        static public Case getCase(Coordonnee coord)
         {
-            if (X < 0 || X > taille || Y < 0 || Y > taille)
-            {
-                throw new Exception("Coordonnées invalides");
-            }
-            int type = grid[X][Y];
+            int type = grid[coord.getX()-1][coord.getY()-1];
 
             switch (type)
             {

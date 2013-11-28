@@ -49,6 +49,7 @@
     <Compile Include="CaseForet.cs" />
     <Compile Include="CaseMontagne.cs" />
     <Compile Include="CasePlaine.cs" />
+    <Compile Include="Coordonnee.cs" />
     <Compile Include="FabriqueCase.cs" />
     <Compile Include="FabriqueAutre.cs" />
     <Compile Include="FabriquePartie.cs" />

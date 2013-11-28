@@ -11,4 +11,6 @@ Class Wrapper.WrapperMap: AutoLayout, AnsiClass, Class, Public, BeforeFieldInit
     System.IDisposable
   Methods:
     genererMap(Int32): PrivateScope, Public, HideBySig
+    posJoueurs(): PrivateScope, Public, HideBySig
+    suggestions(Int32, Int32*): PrivateScope, Public, HideBySig
     Dispose(): PrivateScope, Public, Final, Virtual, HideBySig

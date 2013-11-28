@@ -1,17 +1,14 @@
-﻿La génération a démarré 21/11/2013 09:42:45.
-     1>Projet "H:\Small World\Small World\MapLib\MapLib.vcxproj" sur le nœud 4 (Build cible(s)).
-     1>InitializeBuildStatus:
-         Création de "Debug\MapLib.unsuccessfulbuild", car "AlwaysCreate" a été spécifié.
-       ClCompile:
-         Toutes les sorties sont à jour.
+﻿Build started 28/11/2013 16:16:26.
+     1>Project "C:\Users\Camille\Documents\GitHub\BorisWorld\MapLib\MapLib.vcxproj" on node 3 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt MapLib.cpp
+         MapLib.cpp
+     1>c:\users\camille\documents\github\borisworld\maplib\maplib.cpp(7): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
        Lib:
-         Toutes les sorties sont à jour.
-         MapLib.vcxproj -> H:\Small World\Small World\Debug\MapLib.lib
-       FinalizeBuildStatus:
-         Suppression du fichier "Debug\MapLib.unsuccessfulbuild".
-         Mise à jour de l'horodatage "Debug\MapLib.lastbuildstate".
-     1>Génération du projet "H:\Small World\Small World\MapLib\MapLib.vcxproj" terminée (Build cible(s)).
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:"C:\Users\Camille\Documents\GitHub\BorisWorld\Debug\MapLib.lib" /NOLOGO Debug\MapLib.obj
+         MapLib.vcxproj -> C:\Users\Camille\Documents\GitHub\BorisWorld\Debug\MapLib.lib
+     1>Done Building Project "C:\Users\Camille\Documents\GitHub\BorisWorld\MapLib\MapLib.vcxproj" (Build target(s)).
 
-La génération a réussi.
+Build succeeded.
 
-Temps écoulé 00:00:00.13
+Time Elapsed 00:00:00.35
