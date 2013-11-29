@@ -13,5 +13,10 @@ namespace WPF
     /// </summary>
     public partial class App : Application
     {
+        void App_startup(Object sender, StartupEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            window.Show();
+        }
     }
 }

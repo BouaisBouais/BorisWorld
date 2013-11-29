@@ -1,5 +1,5 @@
-﻿Build started 28/11/2013 16:16:26.
-     1>Project "C:\Users\Camille\Documents\GitHub\BorisWorld\MapLib\MapLib.vcxproj" on node 3 (Build target(s)).
+﻿Build started 29/11/2013 21:44:58.
+     1>Project "C:\Users\Camille\Documents\GitHub\BorisWorld\MapLib\MapLib.vcxproj" on node 3 (Rebuild target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt MapLib.cpp
          MapLib.cpp
@@ -7,8 +7,8 @@
        Lib:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\Lib.exe /OUT:"C:\Users\Camille\Documents\GitHub\BorisWorld\Debug\MapLib.lib" /NOLOGO Debug\MapLib.obj
          MapLib.vcxproj -> C:\Users\Camille\Documents\GitHub\BorisWorld\Debug\MapLib.lib
-     1>Done Building Project "C:\Users\Camille\Documents\GitHub\BorisWorld\MapLib\MapLib.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\Camille\Documents\GitHub\BorisWorld\MapLib\MapLib.vcxproj" (Rebuild target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.35
+Time Elapsed 00:00:00.19

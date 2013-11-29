@@ -1,8 +1,12 @@
 ﻿<Window x:Class="WPF.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="MainWindow" Height="350" Width="525">
+        Title="Boris World" Height="600" Width="800">
     <Grid>
-        
+        <ScrollViewer HorizontalAlignment="Left" Height="400" Margin="0,0,0,0" VerticalAlignment="Top" Width="794">
+            <Canvas Name="carte"></Canvas>
+        </ScrollViewer>
+        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="170" Margin="0,400,0,0" Stroke="Black" VerticalAlignment="Top" Width="794"/>
     </Grid>
+    
 </Window>
