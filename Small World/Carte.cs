@@ -11,13 +11,20 @@ namespace Small_World
     {
         static int** grid;
         static int taille;
+        WrapperMap wrapper;
+        Coordonnee departJ1;
+        Coordonnee departJ2;
 
         unsafe public Carte(int taille)
         {
             Coordonnee.initialiser(taille);
-            WrapperMap wrapper = new WrapperMap();
+            wrapper = new WrapperMap();
             grid = wrapper.genererMap(taille);
             Carte.taille = taille;
+
+            int** depart = wrapper.posJoueurs();
+            departJ1 = new Coordonnee(depart[0]);
+            departJ2 = new Coordonnee(depart[1]);
         }
 
         unsafe public Carte(int taille, int** g)
@@ -57,6 +64,8 @@ namespace Small_World
                 }
                 Console.WriteLine();
             }
+            Console.WriteLine("Depart J1 : (" + departJ1.getX() + "," + departJ1.getY() + ")");
+            Console.WriteLine("Depart J2 : (" + departJ2.getX() + "," + departJ2.getY() + ")");
         }
     }
 }

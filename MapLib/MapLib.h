@@ -1,3 +1,4 @@
+
 #ifdef WANTDLLEXP
 #define DLL _declspec(dllexport)
 #define EXTERNC extern "C"
@@ -11,6 +12,7 @@ private :
 	bool init;
 	int tailleCarte;
 	int** carte;
+	bool bordEau(Coordonnee coords);
 
 public:
 	static enum typeCases{
@@ -20,12 +22,18 @@ public:
 		MONTAGNE,
 		PLAINE
 	};
+	static enum typeUnite{
+		VIKING = 0,
+		GAULOIS,
+		NAIN
+	};
 
 	MapLib() {};
 	~MapLib() {};
 	int** genererMap(int taille);
 	int** posJoueurs(); 
 	int** suggestions(int peuple, int* coords);
+	int getCase(Coordonnee coords);
 };
 
 // A ne pas implémenter dans le .h !

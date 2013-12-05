@@ -18,9 +18,15 @@
     <ClInclude Include="MapLib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Coordonnee.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="MapLib.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Coordonnee.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

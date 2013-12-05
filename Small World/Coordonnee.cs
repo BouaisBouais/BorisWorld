@@ -20,24 +20,16 @@ namespace Small_World
 
         public Coordonnee(int x, int y)
         {
-            if (x > tailleMax) {
-                x = tailleMax;
-            }
-            else if (x < 1)
-            {
-                x = 1;
-            }
-            else if (y > tailleMax)
-            {
-                y = tailleMax;
-            }
-            else if (y < 1)
-            {
-                y = 1;
-            }
+            X = (x < 1) ? 1 : ((x > tailleMax) ? tailleMax : x);
+            Y = (y < 1) ? 1 : ((y > tailleMax) ? tailleMax : y);
+        }
 
-            X = x;
-            Y = y;
+        unsafe public Coordonnee(int* array)
+        {
+	        int x = array[0];
+	        int y = array[1];
+            X = (x < 1) ? 1 : ((x > tailleMax) ? tailleMax : x);
+            Y = (y < 1) ? 1 : ((y > tailleMax) ? tailleMax : y);
         }
 
         static public Coordonnee get(int x, int y)
@@ -57,7 +49,7 @@ namespace Small_World
 
         public void setX(int x)
         {
-            X = x;
+            X = (x < 1) ? 1 : ((x > tailleMax) ? tailleMax : x);
         }
 
         public int getY()
@@ -67,7 +59,7 @@ namespace Small_World
 
         public void setY(int y)
         {
-            Y = y;
+            Y = (y < 1) ? 1 : ((y > tailleMax) ? tailleMax : y);
         }
 
         public void clone(Coordonnee coords)

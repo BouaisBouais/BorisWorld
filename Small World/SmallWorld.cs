@@ -17,6 +17,7 @@ namespace Small_World
 
             Case tile = Carte.getCase(new Coordonnee(1, 1));
             tile.print();
+
         }
 
         static void Main(string[] args)
