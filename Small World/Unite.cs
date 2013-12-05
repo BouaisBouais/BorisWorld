@@ -14,12 +14,18 @@ namespace Small_World
         protected double mouvement;
         protected int idJoueur;
 
+        public static const int MOUVEMENT_MAX = 1;
+        public static const int ATTAQUE_MAX = 2;
+        public static const int VIE_MAX = 2;
+        public static const int DEFENSE_MAX = 1;
+
+
         public Unite(int id, Coordonnee coords)
         {
-            attaque = 2;
-            defense = 1;
-            vie = 2;
-            mouvement = 1;
+            attaque = ATTAQUE_MAX;
+            defense = DEFENSE_MAX;
+            vie = VIE_MAX;
+            mouvement = MOUVEMENT_MAX;
 
             idJoueur = id;
             coordonnees.clone(coords);
@@ -30,7 +36,7 @@ namespace Small_World
         /// Regarde en fonction de la case si l'unité peut se déplacer ou pas
         /// </summary>
         public abstract void deplacement(Case @case, Coordonnee coords);
-        public abstract void getPoints();
+        public abstract int getPoints();
 
 
         public void doDeplacement(Coordonnee newCoords)

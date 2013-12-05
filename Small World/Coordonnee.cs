@@ -20,10 +20,22 @@ namespace Small_World
 
         public Coordonnee(int x, int y)
         {
-            if (x > tailleMax || x < 1 || y > tailleMax || y < 1)
-            {
-                throw new Exception("Coordonnees invalides");
+            if (x > tailleMax) {
+                x = tailleMax;
             }
+            else if (x < 1)
+            {
+                x = 1;
+            }
+            else if (y > tailleMax)
+            {
+                y = tailleMax;
+            }
+            else if (y < 1)
+            {
+                y = 1;
+            }
+
             X = x;
             Y = y;
         }
@@ -62,6 +74,11 @@ namespace Small_World
         {
             X = coords.getX();
             Y = coords.getY();
+        }
+
+        public Coordonnee decaler(int x, int y)
+        {
+            return new Coordonnee(X + x, Y + y);
         }
 
         public int distance(Coordonnee coords)
