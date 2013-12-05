@@ -11,5 +11,11 @@ namespace Small_World
         {
             Console.Write("Case");
         }
+
+
+        public typeCases getTypeCase()
+        {
+            return typeCases.PLAINE;
+        }
     }
 }

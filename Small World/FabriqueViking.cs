@@ -7,8 +7,9 @@ namespace Small_World
 {
     public class FabriqueViking : FabriqueUnite
     {
-        public void fabriquerUnite()
+        public Unite fabriquerUnite(int id, Coordonnee coords)
         {
+            return new Viking(id, coords);
         }
     }
 }

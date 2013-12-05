@@ -20,6 +20,12 @@ namespace Small_World
             Carte.taille = taille;
         }
 
+        unsafe public Carte(int taille, int** g)
+        {
+            grid = g;
+            Carte.taille = taille;
+        }
+
         static public Case getCase(Coordonnee coord)
         {
             int type = grid[coord.getX()-1][coord.getY()-1];
