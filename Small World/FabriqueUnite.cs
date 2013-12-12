@@ -7,6 +7,6 @@ namespace Small_World
 {
     public interface FabriqueUnite
     {
-        public Unite fabriquerUnite(int id, Coordonnee coords);
+        Unite fabriquerUnite(int id, Coordonnee coords);
     }
 }

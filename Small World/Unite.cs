@@ -14,10 +14,10 @@ namespace Small_World
         protected double mouvement;
         protected int idJoueur;
 
-        public static const int MOUVEMENT_MAX = 1;
-        public static const int ATTAQUE_MAX = 2;
-        public static const int VIE_MAX = 2;
-        public static const int DEFENSE_MAX = 1;
+        public const int MOUVEMENT_MAX = 1;
+        public const int ATTAQUE_MAX = 2;
+        public const int VIE_MAX = 2;
+        public const int DEFENSE_MAX = 1;
 
 
         public Unite(int id, Coordonnee coords)

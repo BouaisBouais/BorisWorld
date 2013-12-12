@@ -1,4 +1,3 @@
-
 #ifdef WANTDLLEXP
 #define DLL _declspec(dllexport)
 #define EXTERNC extern "C"
@@ -6,6 +5,10 @@
 #define DLL
 #define EXTERNC
 #endif
+
+#ifndef MAPLIB
+#define MAPLIB
+#include "Coordonnee.h"
 
 class DLL MapLib {
 private :
@@ -42,3 +45,5 @@ EXTERNC DLL void MapLib_delete(MapLib* maplib);
 EXTERNC DLL int** MapLib_genererMap(MapLib* maplib, int taille);
 EXTERNC DLL int** MapLib_posJoueurs(MapLib* maplib);
 EXTERNC DLL int** MapLib_suggestions(MapLib* maplib, int peuple, int* coords);
+
+#endif
