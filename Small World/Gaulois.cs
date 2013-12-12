@@ -25,7 +25,7 @@ namespace Small_World
         }
 
 
-        public override  void deplacement(Case c, Coordonnee coords)
+        public override bool deplacement(Case c, Coordonnee coords)
         {
             int d = coordonnees.distance(coords);
 
@@ -33,14 +33,16 @@ namespace Small_World
             // n'est pas une plaine, le déplacement est de 1.5, pas 1. Donc il faut qu'on fonctionne par étapes.)
             if (c.getTypeCase() ==  typeCases.PLAINE && d == 1 && mouvement >= 0.5)
             {
-                mouvement -= 0.5;
-                doDeplacement(coords);
+                prochainMouvement = 0.5;
+                return true;
             }
             else if (!(c.getTypeCase() ==  typeCases.EAU) && d == 1 && mouvement >= 1)
             {
-                mouvement -= d;
-                doDeplacement(coords);
+                prochainMouvement = d;
+                return true;
             }
+
+            return false;
         }
 
 
