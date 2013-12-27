@@ -32,6 +32,8 @@ int** MapLib::genererMap(int taille){
 	return carte;
 }
 
+
+
 /**
 * Rend la positions de départ des deux joueurs, en tiles.
 * Le retour est ordonné de la manière suivante : 

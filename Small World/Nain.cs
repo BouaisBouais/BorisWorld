@@ -23,7 +23,7 @@ namespace Small_World
             }
         }
 
-        public override void deplacement(Case c, Coordonnee coords)
+        public override bool deplacementPossible(Case c, Coordonnee coords)
         {
             int d = coordonnees.distance(coords);
 
@@ -32,9 +32,11 @@ namespace Small_World
                 || ((c.getTypeCase() != typeCases.EAU) && d == 1 && mouvement >= 1)
             )
             {
-                mouvement--;
-                doDeplacement(coords);
+                prochainMouvement = 1;
+                return true;
             }
+
+            return false;
         }
 
     }

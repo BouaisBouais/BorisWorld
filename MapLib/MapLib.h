@@ -34,6 +34,7 @@ public:
 	MapLib() {};
 	~MapLib() {};
 	int** genererMap(int taille);
+	int** genererMapTest();
 	int** posJoueurs(); 
 	int** suggestions(int peuple, int* coords);
 	int getCase(Coordonnee coords);
