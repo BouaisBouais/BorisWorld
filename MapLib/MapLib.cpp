@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <cmath>
 #include "Coordonnee.h"
+#include <stdio.h>
 
 /**
 * Génère la carte de taille taille et la retourne sous tableau d'int
@@ -12,7 +13,7 @@
 */
 int** MapLib::genererMap(int taille){
 	int nbTypes = MapLib::typeCases::PLAINE;
-	srand (time(NULL));
+	srand (time(0));
 	Coordonnee::initialise(taille);
 	
 	carte = NULL;
@@ -45,33 +46,33 @@ int** MapLib::posJoueurs(){
 	int* joueur2 = new int[2];
 	int** positions = NULL;
 	positions = new int* [2];
-	srand(time(NULL));
+	srand(time(0));
 
 	int deltaRand = 2;
 
 	bool posJoueur1 = false;
 	while(!posJoueur1){
 		//Le joueur peut être au nord, est, sud ou ouest
-		int pos = rand()*4;
+		int pos = rand() % 4;
 		Coordonnee coords;
 		switch(pos)
 		{
 		case 0:
 		default:
-			coords.setY(1 + rand() * deltaRand);
-			coords.setX(rand() * tailleCarte + 1);
+			coords.setY(1 + rand() % deltaRand);
+			coords.setX(rand() % tailleCarte + 1);
 			break;
 		case 1:
-			coords.setX(tailleCarte - rand() * deltaRand);
-			coords.setY(rand() * tailleCarte + 1);
+			coords.setX(tailleCarte - rand() % deltaRand);
+			coords.setY(rand() % tailleCarte + 1);
 			break;
 		case 2:
-			coords.setY(tailleCarte - rand() * deltaRand);
-			coords.setX(rand() * tailleCarte + 1);
+			coords.setY(tailleCarte - rand() % deltaRand);
+			coords.setX(rand() % tailleCarte + 1);
 			break;
 		case 3:
 			coords.setX(1 + rand() * deltaRand);
-			coords.setY(rand() * tailleCarte + 1);
+			coords.setY(rand() % tailleCarte + 1);
 			break;
 		}
 		if(getCase(coords) != MapLib::typeCases::EAU){
@@ -83,10 +84,10 @@ int** MapLib::posJoueurs(){
 	bool posJoueur2 = false;
 	//TODO : Risque peut-être d'être trop proche du centre parfois.
 	while(!posJoueur2){
-		int deltaPlusMoins = rand() * 2 - 1; //On ajoute ou on retrait
+		int deltaPlusMoins = rand() % 2 - 1; //On ajoute ou on retrait
 		Coordonnee coords;
-		coords.setX(tailleCarte - joueur1[0] + 1 + rand() * deltaRand * deltaPlusMoins);
-		coords.setY(tailleCarte - joueur1[1] + 1 + rand() * deltaRand * deltaPlusMoins);
+		coords.setX(tailleCarte - joueur1[0] + 1 + (rand() % deltaRand) * deltaPlusMoins);
+		coords.setY(tailleCarte - joueur1[1] + 1 + (rand() % deltaRand) * deltaPlusMoins);
 
 		if(getCase(coords) != MapLib::typeCases::EAU){
 			joueur2 = coords.toArray();
@@ -181,10 +182,10 @@ int MapLib::getCase(Coordonnee coords){
 }
 
 bool MapLib::bordEau(Coordonnee coords){
-	return ( (coords.getX > 1 && getCase(coords.decaler(-1,0)) == MapLib::typeCases::EAU) ||
-		(coords.getY > 1 && getCase(coords.decaler(0,-1)) == MapLib::typeCases::EAU) ||
-		(coords.getX < tailleCarte && getCase(coords.decaler(1,0)) == MapLib::typeCases::EAU) ||
-		(coords.getY < tailleCarte && getCase(coords.decaler(0,1)) == MapLib::typeCases::EAU));
+	return ( (coords.getX() > 1 && getCase(coords.decaler(-1,0)) == MapLib::typeCases::EAU) ||
+		(coords.getY() > 1 && getCase(coords.decaler(0,-1)) == MapLib::typeCases::EAU) ||
+		(coords.getX() < tailleCarte && getCase(coords.decaler(1,0)) == MapLib::typeCases::EAU) ||
+		(coords.getY() < tailleCarte && getCase(coords.decaler(0,1)) == MapLib::typeCases::EAU));
 }
 
 MapLib* MapLib_new() { return new MapLib(); }

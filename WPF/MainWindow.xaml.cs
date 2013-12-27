@@ -25,11 +25,14 @@ namespace WPF
         {
             InitializeComponent();
             new SmallWorld();
+            dessinerCarte();
         }
 
-        unsafe public void dessinerCarte(int** carte)
+        unsafe public void dessinerCarte()//int** carte)
         {
-
+            double width = carte.RenderSize.Width;
+            double height = carte.ActualHeight;
+            Console.WriteLine("\nTaille Grid : " + width + ", " + height);
         }
     }
 }

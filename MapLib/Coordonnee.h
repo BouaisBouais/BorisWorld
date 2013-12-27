@@ -11,9 +11,9 @@ public:
 	Coordonnee(int* array);
 	static void initialise(int taille){ tailleCarte = taille; };
 	int getX(){ return X; };
-	int setX(int x);
+	void setX(int x);
 	int getY(){ return Y; };
-	int setY(int y);
+	void setY(int y);
 	Coordonnee decaler(int x, int y);
 	int* toArray();
 };

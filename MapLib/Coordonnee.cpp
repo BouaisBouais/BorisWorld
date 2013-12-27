@@ -1,5 +1,7 @@
 #include "Coordonnee.h"
 
+int Coordonnee::tailleCarte = 1;
+
 Coordonnee::Coordonnee(){
 	X=1;
 	Y=1;
@@ -16,11 +18,11 @@ Coordonnee::Coordonnee(int* array){
 	Y = (y < 1) ? 1 : ((y > tailleCarte) ? tailleCarte : y);
 }
 
-int Coordonnee::setX(int x){
+void Coordonnee::setX(int x){
 	X = (x < 1) ? 1 : ((x > tailleCarte) ? tailleCarte : x);
 }
 
-int Coordonnee::setY(int y){
+void Coordonnee::setY(int y){
 	Y = (y < 1) ? 1 : ((y > tailleCarte) ? tailleCarte : y);
 }
 
