@@ -9,10 +9,12 @@ namespace Small_World
 
     public class SmallWorld
     {
+        private Carte carte;
+
         public SmallWorld()
         {
             FabriqueAutre fabrique = new FabriqueAutre();
-            Carte carte = fabrique.creerCarte(TypeCarte.Normale);
+            carte = fabrique.creerCarte(TypeCarte.Normale);
             carte.print();
 
             Case tile = Carte.getCase(new Coordonnee(1, 1));
@@ -31,7 +33,6 @@ namespace Small_World
             Case tile = Carte.getCase(new Coordonnee(1,1));
             tile.print();
         }
-
 
 
         void nouvellePartie()

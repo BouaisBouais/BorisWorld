@@ -21,9 +21,6 @@ namespace Small_World
 
             carte = fabAutre.creerCarte(t);
 
-            
-
-
 
 
         }

@@ -46,23 +46,11 @@ namespace Small_World
         /// <summary>
         /// Regarde en fonction de la case si l'unité peut se déplacer ou pas
         /// </summary>
-       
-        public abstract bool deplacementPossible(Case @case, Coordonnee coords);
+
+        public abstract bool deplacement(Coordonnee coords);
+        public abstract bool deplacementPossible(Coordonnee coords);
         public abstract int getPoints();
 
-        public abstract void deplacement(Case @case, Coordonnee coords)
-        {
-            if (deplacementPossible(@case, coords))
-            {
-                doDeplacement(coords);
-            }
-        }
-
-        public void doDeplacement(Coordonnee newCoords)
-        {
-            mouvement -= prochainMouvement;
-            coordonnees.clone(newCoords);
-        }
 
         public void passerTour()
         {
@@ -78,7 +66,7 @@ namespace Small_World
 
 
             // choix de l'unité fait avant par monteur partie ou autre (celui qui à accès aux joueurs)
-            if (deplacementPossible(Carte.getCase(@unite.coordonnees), @unite.coordonnees))
+            if (deplacementPossible(@unite.coordonnees))
             {
                 if (@unite.defense != 0)
                 {
@@ -119,7 +107,7 @@ namespace Small_World
                 }
 
                 if (uniteSeule && @unite.vie == 0 && this.vie > 0)
-                    doDeplacement(@unite.coordonnees);
+                    deplacement(@unite.coordonnees);
 
 
                 if (@unite.vie == 0 && this.vie == 0)

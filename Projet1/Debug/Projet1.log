@@ -1,22 +1,12 @@
-﻿La génération a démarré 12/12/2013 08:36:10.
-     1>Projet "H:\Small World\Small World\Projet1\Projet1.vcxproj" sur le nœud 2 (Build cible(s)).
-     1>InitializeBuildStatus:
-         Création de "Debug\Wrapper.unsuccessfulbuild", car "AlwaysCreate" a été spécifié.
-       GenerateTargetFrameworkMonikerAttribute:
-       La cible est ignorée "GenerateTargetFrameworkMonikerAttribute", car tous les fichiers de sortie sont à jour par rapport aux fichiers d'entrée.
-       ClCompile:
-         Toutes les sorties sont à jour.
-         Toutes les sorties sont à jour.
-       Link:
-         Toutes les sorties sont à jour.
-         Projet1.vcxproj -> H:\Small World\Small World\Debug\Wrapper.dll
-       MetaGen:
-       La cible est ignorée "MetaGen", car tous les fichiers de sortie sont à jour par rapport aux fichiers d'entrée.
-       FinalizeBuildStatus:
-         Suppression du fichier "Debug\Wrapper.unsuccessfulbuild".
-         Mise à jour de l'horodatage "Debug\Wrapper.lastbuildstate".
-     1>Génération du projet "H:\Small World\Small World\Projet1\Projet1.vcxproj" terminée (Build cible(s)).
+﻿Build started 28/12/2013 17:11:23.
+     1>Project "C:\Users\Camille\Documents\GitHub\BorisWorld\Projet1\Projet1.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Camille\Documents\GitHub\BorisWorld\Debug\Wrapper.dll" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Camille\Documents\GitHub\BorisWorld\Debug\Wrapper.pdb" /ASSEMBLYDEBUG /TLBID:1 /DYNAMICBASE /FIXED:NO /NXCOMPAT /MACHINE:X86 /DLL Debug\WrapperMap.obj
+         "Debug\.NETFramework,Version=v4.5.AssemblyAttributes.obj"
+     1>MapLib.lib(MapLib.obj) : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+         Projet1.vcxproj -> C:\Users\Camille\Documents\GitHub\BorisWorld\Debug\Wrapper.dll
+     1>Done Building Project "C:\Users\Camille\Documents\GitHub\BorisWorld\Projet1\Projet1.vcxproj" (Build target(s)).
 
-La génération a réussi.
+Build succeeded.
 
-Temps écoulé 00:00:00.13
+Time Elapsed 00:00:00.37

@@ -24,25 +24,26 @@ namespace Small_World
             }
         }
 
-
-        public override bool deplacement(Case c, Coordonnee coords)
+        public override bool deplacementPossible(Coordonnee coords)
         {
-            int d = coordonnees.distance(coords);
+            Case c = Carte.getCase(coords);
+            int distance = coordonnees.distance(coords);
+            if (distance > 1 || c.getTypeCase() == typeCases.EAU) return false;
 
-            // A revoir (CH : en effet, il faut toujours ne se déplacer que d'une case. Si la case entre les deux
-            // n'est pas une plaine, le déplacement est de 1.5, pas 1. Donc il faut qu'on fonctionne par étapes.)
-            if (c.getTypeCase() ==  typeCases.PLAINE && d == 1 && mouvement >= 0.5)
-            {
-                prochainMouvement = 0.5;
-                return true;
-            }
-            else if (!(c.getTypeCase() ==  typeCases.EAU) && d == 1 && mouvement >= 1)
-            {
-                prochainMouvement = d;
-                return true;
-            }
+            if (c.getTypeCase() == typeCases.PLAINE && mouvement >= 0.5) return true;
 
-            return false;
+            return (mouvement >= 1);
+        }
+
+        public override bool deplacement(Coordonnee coords)
+        {
+            if (!deplacementPossible(coords)) return false;
+
+            Case c = Carte.getCase(coords);
+            if (c.getTypeCase() == typeCases.PLAINE) mouvement -= 0.5;
+            else mouvement -= 1.0;
+
+            return true;
         }
 
 

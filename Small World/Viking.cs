@@ -34,17 +34,19 @@ namespace Small_World
         
         }
 
-        public override bool deplacement(Case c, Coordonnee coords)
+        public override bool deplacementPossible(Coordonnee coords)
         {
-            int d = coordonnees.distance(coords);
+            int distance = coordonnees.distance(coords);
+            if (distance > 1) return false;
+            return (mouvement >= 1);
+        }
 
-            if (mouvement >= d)
-            {
-                prochainMouvement = d;
-                return true;
-            }
-
-            return false;
+        public override bool deplacement(Coordonnee coords)
+        {
+            if (!deplacementPossible(coords)) return false;
+            
+            mouvement -= 1.0;
+            return true;
         }
 
     }

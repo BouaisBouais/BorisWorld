@@ -12,7 +12,7 @@
 * @todo Donner des valeurs d'apparitions aux cases, sinon les vikngs sont meilleurs
 */
 int** MapLib::genererMap(int taille){
-	int nbTypes = MapLib::typeCases::PLAINE;
+	int nbTypes = MapLib::typeCases::PLAINE +1;
 	srand (time(0));
 	Coordonnee::initialise(taille);
 	

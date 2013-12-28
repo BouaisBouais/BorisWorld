@@ -21,17 +21,19 @@ namespace WPF
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static SmallWorld smallworld;
+
         public MainWindow()
         {
             InitializeComponent();
-            new SmallWorld();
+            smallworld = new SmallWorld();
             dessinerCarte();
         }
 
         unsafe public void dessinerCarte()//int** carte)
         {
-            double width = carte.RenderSize.Width;
-            double height = carte.ActualHeight;
+            double width = canvasCarte.RenderSize.Width;
+            double height = canvasCarte.ActualHeight;
             Console.WriteLine("\nTaille Grid : " + width + ", " + height);
         }
     }

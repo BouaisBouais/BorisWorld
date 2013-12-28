@@ -33,6 +33,11 @@ namespace Small_World
             Carte.taille = taille;
         }
 
+        static public int getTaille()
+        {
+            return taille;
+        }
+
        
         static public Case getCase(Coordonnee coord)
         {

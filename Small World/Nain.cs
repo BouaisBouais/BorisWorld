@@ -23,20 +23,27 @@ namespace Small_World
             }
         }
 
-        public override bool deplacementPossible(Case c, Coordonnee coords)
+        public override bool deplacement(Coordonnee coords)
         {
-            int d = coordonnees.distance(coords);
+            if (!deplacementPossible(coords)) return false;
 
-            if (
-                (Carte.getCase(coordonnees).getTypeCase() == typeCases.MONTAGNE && c.getTypeCase() == typeCases.MONTAGNE && mouvement >=1 )
-                || ((c.getTypeCase() != typeCases.EAU) && d == 1 && mouvement >= 1)
-            )
-            {
-                prochainMouvement = 1;
-                return true;
-            }
+            mouvement -= 1.0;
+            return true;
+        }
 
-            return false;
+        public override bool deplacementPossible(Coordonnee coords)
+        {
+            int distance = coordonnees.distance(coords);
+            Case c = Carte.getCase(coords);
+
+            if (c.getTypeCase() == typeCases.EAU) return false;
+
+            Case currentCase = Carte.getCase(coordonnees);
+            if (currentCase.getTypeCase() == typeCases.MONTAGNE && c.getTypeCase() == typeCases.MONTAGNE && mouvement >= 1) return true;
+
+            if (distance > 1) return false;
+
+            return (mouvement >= 1);
         }
 
     }
