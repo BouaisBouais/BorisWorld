@@ -7,9 +7,9 @@ namespace Small_World
 {
     public class FabriqueGaulois : FabriqueUnite
     {
-        public Unite fabriquerUnite(int id, Coordonnee coords)
+        public Unite fabriquerUnite(Coordonnee coords)
         {
-            return new Gaulois(id, coords);
+            return new Gaulois(coords);
         }
     }
 }

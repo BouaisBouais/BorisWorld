@@ -12,8 +12,10 @@ namespace Small_World
         static int** grid;
         static int taille;
         WrapperMap wrapper;
-        Coordonnee departJ1;
-        Coordonnee departJ2;
+
+        public List<Coordonnee> departJoueurs { get; private set; }
+        
+
 
         unsafe public Carte(int taille)
         {
@@ -23,8 +25,10 @@ namespace Small_World
             Carte.taille = taille;
 
             int** depart = wrapper.posJoueurs();
-            departJ1 = new Coordonnee(depart[0]);
-            departJ2 = new Coordonnee(depart[1]);
+            for (int i = 0; i < SmallWorld.NOMBRE_JOUEURS; i++)
+            {
+                departJoueurs.Add(new Coordonnee(depart[i]));
+            }
         }
 
         unsafe public Carte(int taille, int** g)
@@ -38,11 +42,45 @@ namespace Small_World
             return taille;
         }
 
+        // Renvoie le nombre d'unité de la carte en fonction de sa taille
+        static public int getNombreUniteMax()
+        {
+            switch (taille)
+            {
+                case (int) TypeCarte.DEMO:
+                    return 4;
+                case (int) TypeCarte.PETITE:
+                    return 6;
+                case (int) TypeCarte.NORMALE:
+                    return 8;
+                default:
+                    throw new Exception("Taille de la carte non reconnue");
+            }
+        }
+
+
+        // Renvoie le nombre de tour de la carte en fonction de sa taille
+        static public int getNombreTours()
+        {
+            switch (taille)
+            {
+                case (int)TypeCarte.DEMO:
+                    return 5;
+                case (int)TypeCarte.PETITE:
+                    return 20;
+                case (int)TypeCarte.NORMALE:
+                    return 30;
+                default:
+                    throw new Exception("Taille de la carte non reconnue");
+            }
+        }
+
+
         static public bool bordEau(Coordonnee coords){
-            return ((coords.getX() > 1 && getCase(coords.decaler(-1, 0)).getTypeCase() == typeCases.EAU) ||
-            (coords.getY() > 1 && getCase(coords.decaler(0, -1)).getTypeCase() == typeCases.EAU) ||
-            (coords.getX() < taille && getCase(coords.decaler(1, 0)).getTypeCase() == typeCases.EAU) ||
-            (coords.getY() < taille && getCase(coords.decaler(0, 1)).getTypeCase() == typeCases.EAU));
+            return ((coords.getX() > 1 && getCase(coords.decaler(-1, 0)).getTypeCase() == TypeCases.EAU) ||
+            (coords.getY() > 1 && getCase(coords.decaler(0, -1)).getTypeCase() == TypeCases.EAU) ||
+            (coords.getX() < taille && getCase(coords.decaler(1, 0)).getTypeCase() == TypeCases.EAU) ||
+            (coords.getY() < taille && getCase(coords.decaler(0, 1)).getTypeCase() == TypeCases.EAU));
         }
 
        
@@ -52,17 +90,17 @@ namespace Small_World
 
             switch (type)
             {
-                case (int)typeCases.DESERT:
-                    return FabriqueCase.obtenirCase(typeCases.DESERT);
-                case (int)typeCases.EAU:
-                    return FabriqueCase.obtenirCase(typeCases.EAU);
-                case (int)typeCases.FORET:
-                    return FabriqueCase.obtenirCase(typeCases.FORET);
-                case (int)typeCases.MONTAGNE:
-                    return FabriqueCase.obtenirCase(typeCases.MONTAGNE);
-                case (int)typeCases.PLAINE:
+                case (int)TypeCases.DESERT:
+                    return FabriqueCase.obtenirCase(TypeCases.DESERT);
+                case (int)TypeCases.EAU:
+                    return FabriqueCase.obtenirCase(TypeCases.EAU);
+                case (int)TypeCases.FORET:
+                    return FabriqueCase.obtenirCase(TypeCases.FORET);
+                case (int)TypeCases.MONTAGNE:
+                    return FabriqueCase.obtenirCase(TypeCases.MONTAGNE);
+                case (int)TypeCases.PLAINE:
                 default:
-                    return FabriqueCase.obtenirCase(typeCases.PLAINE);
+                    return FabriqueCase.obtenirCase(TypeCases.PLAINE);
             }
 
         }
@@ -77,8 +115,11 @@ namespace Small_World
                 }
                 Console.WriteLine();
             }
-            Console.WriteLine("Depart J1 : (" + departJ1.getX() + "," + departJ1.getY() + ")");
-            Console.WriteLine("Depart J2 : (" + departJ2.getX() + "," + departJ2.getY() + ")");
+
+           for (int i = 0; i < SmallWorld.NOMBRE_JOUEURS; i++) {
+                Console.WriteLine("Depart J"+ i + " : (" + departJoueurs[i].getX() + "," + departJoueurs[i].getY() + ")");
+            }
         }
+
     }
 }

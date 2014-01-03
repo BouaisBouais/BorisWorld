@@ -20,9 +20,9 @@ namespace UnitTests
         {
            
 
-           map[0] = new int[3] { (int) typeCases.MONTAGNE, (int) typeCases.DESERT, (int) typeCases.PLAINE };
-           map[1] = new int[3] { (int) typeCases.DESERT, (int) typeCases.PLAINE, (int) typeCases.FORET};
-           map[2] = new int[3] { (int) typeCases.EAU, (int) typeCases.DESERT,(int) typeCases.MONTAGNE};       
+           map[0] = new int[3] { (int) TypeCases.MONTAGNE, (int) TypeCases.DESERT, (int) TypeCases.PLAINE };
+           map[1] = new int[3] { (int) TypeCases.DESERT, (int) TypeCases.PLAINE, (int) TypeCases.FORET};
+           map[2] = new int[3] { (int) TypeCases.EAU, (int) TypeCases.DESERT,(int) TypeCases.MONTAGNE};       
 
            //c = new Carte(3, map);
         }

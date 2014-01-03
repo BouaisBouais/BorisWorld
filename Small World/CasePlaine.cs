@@ -13,9 +13,9 @@ namespace Small_World
         }
 
 
-        public typeCases getTypeCase()
+        public TypeCases getTypeCase()
         {
-            return typeCases.PLAINE;
+            return TypeCases.PLAINE;
         }
     }
 }

@@ -12,9 +12,9 @@ namespace Small_World
             Console.Write("Case");
         }
 
-        public typeCases getTypeCase()
+        public TypeCases getTypeCase()
         {
-            return typeCases.EAU;
+            return TypeCases.EAU;
         }
     }
 }

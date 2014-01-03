@@ -7,16 +7,16 @@ namespace Small_World
 {
     public class Nain : Unite
     {
-        public Nain(int id, Coordonnee coords) : base (id, coords)
+        public Nain(Coordonnee coords) : base (coords)
         {
         }
 
         public override int getPoints() {
             switch (Carte.getCase(coordonnees).getTypeCase())
             {
-                case typeCases.FORET:
+                case TypeCases.FORET:
                     return 2;
-                case typeCases.PLAINE:
+                case TypeCases.PLAINE:
                     return 0;
                 default:
                     return 1;
@@ -38,10 +38,10 @@ namespace Small_World
             int distance = coordonnees.distance(coords);
             Case c = Carte.getCase(coords);
 
-            if (c.getTypeCase() == typeCases.EAU) return false;
+            if (c.getTypeCase() == TypeCases.EAU) return false;
 
             Case currentCase = Carte.getCase(coordonnees);
-            if (currentCase.getTypeCase() == typeCases.MONTAGNE && c.getTypeCase() == typeCases.MONTAGNE && mouvement >= 1) return true;
+            if (currentCase.getTypeCase() == TypeCases.MONTAGNE && c.getTypeCase() == TypeCases.MONTAGNE && mouvement >= 1) return true;
 
             if (distance > 1) return false;
 

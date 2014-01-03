@@ -7,13 +7,13 @@ namespace Small_World
 {
     public class Viking : Unite
     {
-        public Viking(int id, Coordonnee coords) : base(id, coords)
+        public Viking(Coordonnee coords) : base(coords)
         {
         }
 
         public override int getPoints() {
 
-            if (Carte.getCase(coordonnees).getTypeCase() == typeCases.EAU) {
+            if (Carte.getCase(coordonnees).getTypeCase() == TypeCases.EAU) {
                 return 0;
             } else {
 

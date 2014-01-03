@@ -8,7 +8,7 @@ namespace Small_World
     public interface Case
     {
         void print();
-        typeCases getTypeCase();
+        TypeCases getTypeCase();
     }
 
 
