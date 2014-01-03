@@ -10,6 +10,9 @@ namespace Small_World
     public class SmallWorld
     {
         private Carte carte;
+        static public Joueur[] joueurs;
+        static public int joueurCourant;
+        //TODO : monteurPartie.
 
         public SmallWorld()
         {
@@ -32,6 +35,10 @@ namespace Small_World
             //tile.print();
             Case tile = Carte.getCase(new Coordonnee(1,1));
             tile.print();
+        }
+
+        public static Joueur getJoueurCourant(){
+            return joueurs[joueurCourant];
         }
 
 

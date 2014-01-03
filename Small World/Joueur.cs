@@ -21,6 +21,11 @@ namespace Small_World
         {
             unites.Add(unite);
         }
+
+        public List<Unite> getUnites()
+        {
+            return unites;
+        }
    
     }
 }

@@ -27,6 +27,8 @@ namespace Small_World
         {
             if (!deplacementPossible(coords)) return false;
 
+            verifUniteCase(coords);
+
             mouvement -= 1.0;
             return true;
         }

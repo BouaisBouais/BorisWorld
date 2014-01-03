@@ -17,19 +17,17 @@ namespace Small_World
 
     abstract public class Unite
     {
-        protected Coordonnee coordonnees = new Coordonnee();
-        protected int attaque;
-        protected int defense;
-        protected int vie;
-        protected double mouvement;
-        protected int idJoueur;
-        protected double prochainMouvement;
+        public Coordonnee coordonnees { get; set; }
+        public int attaque { get; set; }
+        public int defense { get; set; }
+        public int vie { get; set; }
+        public double mouvement { get; set; }
+        public int idJoueur { get; set; }
 
         public const int MOUVEMENT_MAX = 1;
         public const int ATTAQUE_MAX = 2;
         public const int VIE_MAX = 2;
         public const int DEFENSE_MAX = 1;
-
 
         public Unite(int id, Coordonnee coords)
         {
@@ -41,6 +39,10 @@ namespace Small_World
             idJoueur = id;
             coordonnees.clone(coords);
         }
+
+
+
+
 
 
         /// <summary>
@@ -133,6 +135,41 @@ namespace Small_World
           
         }
 
+        /**
+         * Vérifie si une ou plusieurs unité ennemies sont présentes sur la case
+         * Le cas échéant, lance une attaque contre l'unité ayant le plus de défense
+         * Sinon, déplace l'unité voulant se déplacer
+         */
+        protected void verifUniteCase(Coordonnee coords)
+        {
+
+            int defMax = 0;
+            Unite choisie = null;
+            bool uniteSeule = true;
+            foreach (Joueur j in SmallWorld.joueurs)
+            {
+                if (j != SmallWorld.getJoueurCourant())
+                {
+                    foreach (Unite u in j.getUnites())
+                    {
+                        if (u.defense > defMax && u.coordonnees == coords)
+                        {
+                            if (choisie != null) uniteSeule = false;
+                            choisie = u;
+                            defMax = u.defense;
+                        }
+                    }
+                }
+            }
+            if (choisie != null)
+            {
+                combattre(choisie, uniteSeule);
+            }
+            else
+            {
+                coordonnees = coords;
+            }
+        }
 
 
 

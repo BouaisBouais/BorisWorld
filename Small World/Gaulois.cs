@@ -39,6 +39,8 @@ namespace Small_World
         {
             if (!deplacementPossible(coords)) return false;
 
+            verifUniteCase(coords);
+
             Case c = Carte.getCase(coords);
             if (c.getTypeCase() == typeCases.PLAINE) mouvement -= 0.5;
             else mouvement -= 1.0;

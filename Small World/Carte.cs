@@ -38,6 +38,13 @@ namespace Small_World
             return taille;
         }
 
+        static public bool bordEau(Coordonnee coords){
+            return ((coords.getX() > 1 && getCase(coords.decaler(-1, 0)).getTypeCase() == typeCases.EAU) ||
+            (coords.getY() > 1 && getCase(coords.decaler(0, -1)).getTypeCase() == typeCases.EAU) ||
+            (coords.getX() < taille && getCase(coords.decaler(1, 0)).getTypeCase() == typeCases.EAU) ||
+            (coords.getY() < taille && getCase(coords.decaler(0, 1)).getTypeCase() == typeCases.EAU));
+        }
+
        
         static public Case getCase(Coordonnee coord)
         {

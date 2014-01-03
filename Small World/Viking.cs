@@ -17,11 +17,7 @@ namespace Small_World
                 return 0;
             } else {
 
-                // TODO : Probléme si on est au bord de la map sur une case d'eau (il comptera point double)
-                if (Carte.getCase(coordonnees.decaler(0, 1)).getTypeCase() == typeCases.EAU
-                    || Carte.getCase(coordonnees.decaler(0, -1)).getTypeCase() == typeCases.EAU
-                    || Carte.getCase(coordonnees.decaler(1, 0)).getTypeCase() == typeCases.EAU
-                    || Carte.getCase(coordonnees.decaler(-1, 0)).getTypeCase() == typeCases.EAU)
+                if (Carte.bordEau(coordonnees))
                 {
                     return 2;
                 }
@@ -44,7 +40,9 @@ namespace Small_World
         public override bool deplacement(Coordonnee coords)
         {
             if (!deplacementPossible(coords)) return false;
-            
+
+            verifUniteCase(coords);
+
             mouvement -= 1.0;
             return true;
         }
