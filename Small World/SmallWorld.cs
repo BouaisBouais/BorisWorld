@@ -23,12 +23,10 @@ namespace Small_World
 
         public SmallWorld()
         {
-<<<<<<< HEAD
+
             FabriqueAutre fabrique = new FabriqueAutre();
             carte = fabrique.creerCarte(TypeCarte.NORMALE);
             carte.print();
-=======
->>>>>>> 09e75f41b3a049967864aee8fe7c989e9dcf51e4
 
             MonteurPartie m = new MonteurPartie();
             m.creerPartie();

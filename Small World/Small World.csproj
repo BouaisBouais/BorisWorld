@@ -95,7 +95,6 @@
     <Compile Include="FabriquePartie.cs" />
     <Compile Include="Gaulois.cs" />
     <Compile Include="GestionFichiers.cs" />
-    <Compile Include="Jeu.cs" />
     <Compile Include="Joueur.cs" />
     <Compile Include="MonteurPartie.cs" />
     <Compile Include="Nain.cs" />

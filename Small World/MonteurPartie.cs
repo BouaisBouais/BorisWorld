@@ -18,14 +18,10 @@ namespace Small_World
             fabAutre = new FabriqueAutre();
         }
 
-<<<<<<< HEAD
-            TypeCarte t = TypeCarte.DEMO; // TODO : A récupérer
-=======
         public void creerPartie()
         {
             // TODO : A récupérer
             TypeCarte t = TypeCarte.DEMO;
->>>>>>> 09e75f41b3a049967864aee8fe7c989e9dcf51e4
 
             carteJeu = fabAutre.creerCarte(t);
    
