@@ -39,10 +39,10 @@ namespace Small_World
         }
 
         static public bool bordEau(Coordonnee coords){
-            return ((coords.getX() > 1 && getCase(coords.decaler(-1, 0)).getTypeCase() == typeCases.EAU) ||
-            (coords.getY() > 1 && getCase(coords.decaler(0, -1)).getTypeCase() == typeCases.EAU) ||
-            (coords.getX() < taille && getCase(coords.decaler(1, 0)).getTypeCase() == typeCases.EAU) ||
-            (coords.getY() < taille && getCase(coords.decaler(0, 1)).getTypeCase() == typeCases.EAU));
+            return ((coords.getX() > 1 && getCase(coords.decaler(-1, 0)).getTypeCase() == TypeCases.EAU) ||
+            (coords.getY() > 1 && getCase(coords.decaler(0, -1)).getTypeCase() == TypeCases.EAU) ||
+            (coords.getX() < taille && getCase(coords.decaler(1, 0)).getTypeCase() == TypeCases.EAU) ||
+            (coords.getY() < taille && getCase(coords.decaler(0, 1)).getTypeCase() == TypeCases.EAU));
         }
 
        
@@ -52,17 +52,17 @@ namespace Small_World
 
             switch (type)
             {
-                case (int)typeCases.DESERT:
-                    return FabriqueCase.obtenirCase(typeCases.DESERT);
-                case (int)typeCases.EAU:
-                    return FabriqueCase.obtenirCase(typeCases.EAU);
-                case (int)typeCases.FORET:
-                    return FabriqueCase.obtenirCase(typeCases.FORET);
-                case (int)typeCases.MONTAGNE:
-                    return FabriqueCase.obtenirCase(typeCases.MONTAGNE);
-                case (int)typeCases.PLAINE:
+                case (int)TypeCases.DESERT:
+                    return FabriqueCase.obtenirCase(TypeCases.DESERT);
+                case (int)TypeCases.EAU:
+                    return FabriqueCase.obtenirCase(TypeCases.EAU);
+                case (int)TypeCases.FORET:
+                    return FabriqueCase.obtenirCase(TypeCases.FORET);
+                case (int)TypeCases.MONTAGNE:
+                    return FabriqueCase.obtenirCase(TypeCases.MONTAGNE);
+                case (int)TypeCases.PLAINE:
                 default:
-                    return FabriqueCase.obtenirCase(typeCases.PLAINE);
+                    return FabriqueCase.obtenirCase(TypeCases.PLAINE);
             }
 
         }

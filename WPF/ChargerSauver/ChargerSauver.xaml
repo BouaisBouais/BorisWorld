@@ -1,0 +1,30 @@
+﻿<Window x:Class="WPF.ChargerSauver.ChargerSauver"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="ChargerSauver" Height="600" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="9*"/>
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="header" Grid.Column="0"/>
+            <Button x:Name="faireAction" Content="Charger/Sauvegarder" Grid.Column="1" Margin="5"/>
+            <Button x:Name="annuler" Content="Annuler" Click="clickAnnuler" Grid.Column="2" Margin="5"/>
+        </Grid>
+
+        <ListBox x:Name="listeFichiers" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Stretch">
+        </ListBox>
+    </Grid>
+
+</Window>

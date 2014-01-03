@@ -13,7 +13,7 @@ namespace Small_World
 
         public override int getPoints() {
 
-            if (Carte.getCase(coordonnees).getTypeCase() == typeCases.EAU) {
+            if (Carte.getCase(coordonnees).getTypeCase() == TypeCases.EAU) {
                 return 0;
             } else {
 

@@ -17,7 +17,7 @@ namespace Small_World
         public SmallWorld()
         {
             FabriqueAutre fabrique = new FabriqueAutre();
-            carte = fabrique.creerCarte(TypeCarte.Normale);
+            carte = fabrique.creerCarte(TypeCarte.NORMALE);
             carte.print();
 
             Case tile = Carte.getCase(new Coordonnee(1, 1));
@@ -28,7 +28,7 @@ namespace Small_World
         static void Main(string[] args)
         {
             FabriqueAutre fabrique = new FabriqueAutre();
-            Carte carte = fabrique.creerCarte(TypeCarte.Normale);
+            Carte carte = fabrique.creerCarte(TypeCarte.NORMALE);
             carte.print();
 
             //Case tile = Carte.getCase(Coordonnee.get(1,1));

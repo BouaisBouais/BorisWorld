@@ -39,19 +39,19 @@ namespace WPF
                 {
                     Coordonnee coords = new Coordonnee(x, y);
                     switch(Carte.getCase(coords).getTypeCase()){
-                        case typeCases.DESERT :
+                        case TypeCases.DESERT :
                             dc.DrawImage(desert, new Rect((x-1)*imgSize,(y-1)*imgSize,imgSize,imgSize));
                             break;
-                        case typeCases.PLAINE:
+                        case TypeCases.PLAINE:
                             dc.DrawImage(plaine, new Rect((x - 1) * imgSize, (y - 1) * imgSize, imgSize, imgSize));
                             break;
-                        case typeCases.MONTAGNE:
+                        case TypeCases.MONTAGNE:
                             dc.DrawImage(montagne, new Rect((x - 1) * imgSize, (y - 1) * imgSize, imgSize, imgSize));
                             break;
-                        case typeCases.EAU:
+                        case TypeCases.EAU:
                             dc.DrawImage(eau, new Rect((x - 1) * imgSize, (y - 1) * imgSize, imgSize, imgSize));
                             break;
-                        case typeCases.FORET:
+                        case TypeCases.FORET:
                             dc.DrawImage(foret, new Rect((x - 1) * imgSize, (y - 1) * imgSize, imgSize, imgSize));
                             break;
                     }

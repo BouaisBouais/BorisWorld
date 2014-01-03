@@ -17,7 +17,7 @@ namespace Small_World
         {
             fabAutre = new FabriqueAutre();
 
-            TypeCarte t = TypeCarte.Demo; // TODO : A récupérer
+            TypeCarte t = TypeCarte.DEMO; // TODO : A récupérer
 
             carte = fabAutre.creerCarte(t);
 

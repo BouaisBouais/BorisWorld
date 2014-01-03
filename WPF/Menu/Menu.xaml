@@ -1,0 +1,22 @@
+﻿<Window x:Class="WPF.Menu.Menu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Menu" Height="600" Width="800">
+    <Grid Background="Black">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <Button x:Name="nouvellePartie" Grid.Column="0" Grid.Row="1" Click="clickNouvellePartie" Content="Nouvelle Partie" Margin="30"/>
+        <Button x:Name="sauvegarder" Grid.Column="0" Grid.Row="2" Click="clickSauvegarder" Content="Sauvegarder" Margin="30"/>
+        <Button x:Name="charger" Grid.Column="0" Grid.Row="3" Click="clickCharger" Content="Charger" Margin="30"/>
+        <Button x:Name="quitter" Grid.Column="0" Grid.Row="4" Click="clickQuitter" Content="Quitter" Margin="30"/>
+    </Grid>
+</Window>
