@@ -14,36 +14,43 @@
   </Comment>
   <Class Name="Small_World.SmallWorld">
     <Position X="3" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="Small_World.SmallWorld.TypeAction" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>SmallWorld.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAUAAAAAAAQAAAAAAAAAAAACAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAIAAAAQAAQAAAAAIAAAAAAAEgAAAAAAAAAABAABABA=</HashCode>
       <FileName>SmallWorld.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Small_World.Unite">
     <Position X="1.75" Y="3" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>ACAAAAUAEAAAgABAAAAAAAAAAEAAAQAAQAAAAAEAACI=</HashCode>
+      <HashCode>AKAAAAUAAAAAgQBQAAAAAAAADAAAAAAAQAAAAgEAACI=</HashCode>
       <FileName>Unite.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Small_World.Gaulois" Collapsed="true">
     <Position X="2.25" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAACA=</HashCode>
       <FileName>Gaulois.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Small_World.Viking" Collapsed="true">
     <Position X="4" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAACA=</HashCode>
       <FileName>Viking.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Small_World.Nain" Collapsed="true">
     <Position X="0.5" Y="6.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAQAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAQAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAACA=</HashCode>
       <FileName>Nain.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -51,27 +58,27 @@
     <Position X="6" Y="2.25" Width="2.5" />
     <TypeIdentifier>
       <HashCode>AAAABAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>FabriqueJeu.cs</FileName>
+      <FileName>FabriqueAutre.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Small_World.Joueur">
     <Position X="9" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAAAgAAAgAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAgAAAkIAAAAAAAAQAQAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Joueur.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Small_World.Carte">
     <Position X="2.5" Y="8.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAgAAAAAAAAASAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAAAAAIAAAAQIACAgAAAAAAAIBAIAAAAAAAAAAA=</HashCode>
       <FileName>Carte.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Small_World.CasePlaine" Collapsed="true">
     <Position X="7" Y="9.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CasePlaine.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -79,7 +86,7 @@
   <Class Name="Small_World.CaseMontagne" Collapsed="true">
     <Position X="12.25" Y="9.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CaseMontagne.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -87,7 +94,7 @@
   <Class Name="Small_World.CaseForet" Collapsed="true">
     <Position X="8.75" Y="9.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CaseForet.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -95,7 +102,7 @@
   <Class Name="Small_World.CaseEau" Collapsed="true">
     <Position X="10.5" Y="9.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CaseEau.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -103,7 +110,7 @@
   <Class Name="Small_World.CaseDesert" Collapsed="true">
     <Position X="5.25" Y="9.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>CaseDesert.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -142,7 +149,7 @@
   <Class Name="Small_World.MonteurPartie">
     <Position X="1" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAEAAgEAAAAAAACAAAAAA=</HashCode>
       <FileName>MonteurPartie.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -156,7 +163,7 @@
   <Interface Name="Small_World.Case">
     <Position X="8.75" Y="8.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>IAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Case.cs</FileName>
     </TypeIdentifier>
   </Interface>

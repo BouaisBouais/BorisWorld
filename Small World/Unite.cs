@@ -17,26 +17,24 @@ namespace Small_World
 
     abstract public class Unite
     {
-        public Coordonnee coordonnees { get; set; }
+        public Coordonnee coordonnees { get; protected set; }
         public int attaque { get; set; }
         public int defense { get; set; }
         public int vie { get; set; }
         public double mouvement { get; set; }
-        public int idJoueur { get; set; }
 
         public const int MOUVEMENT_MAX = 1;
         public const int ATTAQUE_MAX = 2;
         public const int VIE_MAX = 2;
         public const int DEFENSE_MAX = 1;
 
-        public Unite(int id, Coordonnee coords)
+        public Unite(Coordonnee coords)
         {
             attaque = ATTAQUE_MAX;
             defense = DEFENSE_MAX;
             vie = VIE_MAX;
             mouvement = MOUVEMENT_MAX;
 
-            idJoueur = id;
             coordonnees.clone(coords);
         }
 

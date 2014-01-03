@@ -7,7 +7,7 @@ namespace Small_World
 {
     public class Nain : Unite
     {
-        public Nain(int id, Coordonnee coords) : base (id, coords)
+        public Nain(Coordonnee coords) : base (coords)
         {
         }
 

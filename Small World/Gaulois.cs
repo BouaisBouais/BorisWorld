@@ -8,7 +8,7 @@ namespace Small_World
     public class Gaulois : Unite
     {
 
-        public Gaulois(int id, Coordonnee coords) : base(id, coords)
+        public Gaulois(Coordonnee coords) : base(coords)
         {
         }
         

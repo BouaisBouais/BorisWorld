@@ -7,7 +7,7 @@ namespace Small_World
 {
     public class Viking : Unite
     {
-        public Viking(int id, Coordonnee coords) : base(id, coords)
+        public Viking(Coordonnee coords) : base(coords)
         {
         }
 
