@@ -9,7 +9,6 @@ namespace Small_World
 
     public class Joueur
     {
-        private TypeUnite peuple;
         public TypeUnite Peuple { get; private set; }
         public int idJoueur {get;   private set;}
         public int pointJoueur { get; set; }
@@ -18,7 +17,7 @@ namespace Small_World
 
         public Joueur(TypeUnite t, int id)
         {
-            peuple = t;
+            Peuple = t;
             idJoueur = id;
             pointJoueur = 0;
         }

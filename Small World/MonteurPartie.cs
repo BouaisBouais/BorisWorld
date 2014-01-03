@@ -18,21 +18,18 @@ namespace Small_World
             fabAutre = new FabriqueAutre();
         }
 
-        public void creerPartie()
+        public void nouvellePartie(TypeCarte taille, TypeUnite typeJ1, TypeUnite typeJ2)
         {
-            // TODO : A récupérer
-            TypeCarte t = TypeCarte.DEMO;
+            carteJeu = fabAutre.creerCarte(taille); //TODO: carte en paramètre ? Nécessaire ?
+            carteJeu.print();
 
-            carteJeu = fabAutre.creerCarte(t);
-   
-            // TODO : A récupérer
-            TypeUnite typeJ1 = TypeUnite.Nain;
-            TypeUnite typeJ2 = TypeUnite.Viking;
+            joueurs = new List<Joueur>();
 
             joueurs.Add(fabAutre.creerJoueur(typeJ1,0));
-            joueurs.Add(fabAutre.creerJoueur(typeJ2,1));
+            joueurs.Add(fabAutre.creerJoueur(typeJ2, 1));
+            Console.WriteLine(joueurs[0].Peuple + "," + joueurs[1].Peuple);
 
-            SmallWorld.joueurs = joueurs;
+            SmallWorld.joueurs = joueurs; //TODO: LISTE DE JOUEURS EN DOUBLE !!!!!
 
             int nombreUnites = Carte.getNombreUniteMax();
             List<Coordonnee> posDepartJoueurs = carteJeu.departJoueurs;

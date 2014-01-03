@@ -7,9 +7,9 @@ namespace Small_World
 {
     public class FabriqueNain : FabriqueUnite
     {
-        public Unite fabriquerUnite(int id, Coordonnee coords)
+        public Unite fabriquerUnite(Coordonnee coords)
         {
-            return new Nain(id, coords);
+            return new Nain(coords);
         }
     }
 }

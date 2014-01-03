@@ -24,10 +24,16 @@ namespace Small_World
             grid = wrapper.genererMap(taille);
             Carte.taille = taille;
 
+            departJoueurs = new List<Coordonnee>();
+
             int** depart = wrapper.posJoueurs();
+
             for (int i = 0; i < SmallWorld.NOMBRE_JOUEURS; i++)
             {
-                departJoueurs.Add(new Coordonnee(depart[i]));
+                int x = depart[i][0];
+                int y = depart[i][1];
+                Coordonnee coords = new Coordonnee(x, y);
+                departJoueurs.Add(coords);
             }
         }
 

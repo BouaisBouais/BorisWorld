@@ -30,6 +30,8 @@ namespace Small_World
 
         public Unite(Coordonnee coords)
         {
+            coordonnees = new Coordonnee();
+
             attaque = ATTAQUE_MAX;
             defense = DEFENSE_MAX;
             vie = VIE_MAX;

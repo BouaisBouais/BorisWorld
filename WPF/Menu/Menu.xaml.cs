@@ -24,6 +24,32 @@ namespace WPF.Menu
         public Menu()
         {
             InitializeComponent();
+
+            //TODO: doesn't work
+            ImageSource path = new BitmapImage(new Uri(@"Ressources/title.png", UriKind.RelativeOrAbsolute));
+            Image img = new Image();
+            img.Source = path;
+            gridMain.Children.Add(img);
+        }
+
+        public Menu(bool ingame)
+        {
+            InitializeComponent();
+            if (ingame)
+            {
+                Button retour = new Button();
+                retour.Content = "Retour";
+                retour.Background = Brushes.White;
+                retour.Click += clickRetour;
+
+                Grid.SetRow(retour, 0);
+                gridMain.Children.Add(retour);
+            }
+        }
+
+        private void clickRetour(object sender, RoutedEventArgs e)
+        {
+            //TODO: retour au jeu
         }
 
         private void clickNouvellePartie(object sender, RoutedEventArgs e)

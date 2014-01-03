@@ -12,7 +12,7 @@ namespace Small_World
         private Carte carte;
         static public List<Joueur> joueurs {get; set;}
         static public int joueurCourant {get; private set;}
-        static public const int NOMBRE_JOUEURS = 2;
+        static public int NOMBRE_JOUEURS = 2;
 
 
         private int nbTours = 0;
@@ -20,17 +20,14 @@ namespace Small_World
 
         enum TypeAction { DEPLACEMENT, PASSER_TOUR};
 
-
-        public SmallWorld()
+        public void nouvellePartie(TypeCarte tailleCarte, TypeUnite j1, TypeUnite j2)
         {
+            MonteurPartie monteur = new MonteurPartie();
+            monteur.nouvellePartie(tailleCarte, j1, j2);
+        }
 
-            FabriqueAutre fabrique = new FabriqueAutre();
-            carte = fabrique.creerCarte(TypeCarte.NORMALE);
-            carte.print();
-
-            MonteurPartie m = new MonteurPartie();
-            m.creerPartie();
-
+        public void boucle()
+        {
             nbTourMax = Carte.getNombreTours();
             TypeAction action;
 
@@ -69,16 +66,8 @@ namespace Small_World
             }
         }
 
-        static void Main(string[] args)
+        public SmallWorld()
         {
-            FabriqueAutre fabrique = new FabriqueAutre();
-            Carte carte = fabrique.creerCarte(TypeCarte.NORMALE);
-            carte.print();
-
-            //Case tile = Carte.getCase(Coordonnee.get(1,1));
-            //tile.print();
-            Case tile = Carte.getCase(new Coordonnee(1,1));
-            tile.print();
         }
 
 

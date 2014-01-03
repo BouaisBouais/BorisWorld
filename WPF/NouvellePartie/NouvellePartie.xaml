@@ -31,6 +31,7 @@
         <Button x:Name="j2Nain" Grid.Column="2" Grid.Row="2" Content="Nain" Click="j2Click" Background="White" IsEnabled="False"/>
         <Button x:Name="j2Viking" Grid.Column="2" Grid.Row="3" Content="Viking" Click="j2Click" Background="White" IsEnabled="False"/>
 
+        <Button x:Name="annuler" Grid.Column="0" Grid.Row="4" Content="Annuler" Click="annulerClick" Background="White"/>
         <Button x:Name="valider" Grid.Column="2" Grid.Row="4" Content="Valider" Click="validerClik" Background="White" IsEnabled="False"/>
     </Grid>
 </Window>

@@ -50,6 +50,9 @@ namespace WPF.NouvellePartie
                 case "tailleNoramle":
                     taille = TypeCarte.NORMALE;
                     break;
+                default:
+                    taille = TypeCarte.NORMALE;
+                    break;
             }
 
             j1ButtonsActivate();
@@ -138,8 +141,21 @@ namespace WPF.NouvellePartie
         private void validerClik(object sender, RoutedEventArgs e)
         {
             Button clicked = (Button)sender;
-            clicked.Content = "Validation...";
-            //TODO: transmit the chosen data to the program
+            clicked.Content = "Création en cours...";
+            clicked.IsEnabled = false;
+
+            App.gameEngine.nouvellePartie(taille, j1, j2);
+
+            Jeu.Jeu fenetre = new Jeu.Jeu();
+            fenetre.Show();
+            this.Close();
+        }
+
+        private void annulerClick(object sender, RoutedEventArgs e)
+        {
+            Menu.Menu fenetre = new Menu.Menu();
+            fenetre.Show();
+            this.Close();
         }
     }
 }
