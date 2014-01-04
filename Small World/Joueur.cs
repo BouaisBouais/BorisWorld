@@ -7,12 +7,13 @@ namespace Small_World
 {
     public enum TypeUnite {Viking,Gaulois,Nain};
 
+
+    [Serializable]
     public class Joueur
     {
         public TypeUnite Peuple { get; private set; }
         public int idJoueur {get;   private set;}
         public int pointJoueur { get; set; }
-
         private List<Unite> unites = new List<Unite>();
 
         public Joueur(TypeUnite t, int id)

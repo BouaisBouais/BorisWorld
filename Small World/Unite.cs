@@ -14,7 +14,7 @@ namespace Small_World
         AUCUN_MORT
     }
 
-
+    [Serializable]
     abstract public class Unite
     {
         public Coordonnee coordonnees { get; protected set; }
@@ -38,6 +38,7 @@ namespace Small_World
             mouvement = MOUVEMENT_MAX;
 
             coordonnees.clone(coords);
+  
         }
 
 

@@ -24,11 +24,10 @@
             </Grid.ColumnDefinitions>
 
             <TextBlock x:Name="header" Grid.Column="0"/>
-            <Button x:Name="faireAction" Content="Charger/Sauvegarder" Grid.Column="1" Margin="5"/>
+            <Button x:Name="faireAction" Content="Charger/Sauvegarder" Grid.Column="1" Margin="5" Click="faireAction_Click"/>
             <Button x:Name="annuler" Content="Annuler" Click="clickAnnuler" Grid.Column="2" Margin="5"/>
         </Grid>
 
-        <ListBox x:Name="listeFichiers" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Stretch">
-        </ListBox>
+        <ListBox x:Name="listeFichiers" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Stretch"/>
     </Grid>
 </Page>

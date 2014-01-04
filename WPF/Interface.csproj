@@ -83,7 +83,14 @@
     <Compile Include="ChargerSauver\ChargerSauver.xaml.cs">
       <DependentUpon>ChargerSauver.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InputBox\InputBox.xaml.cs">
+      <DependentUpon>InputBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Jeu\CanvasCarte.cs" />
+    <Page Include="InputBox\InputBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Jeu\Jeu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -97,6 +104,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NouvellePartie\NouvellePartie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OkCancelDialog\OKCancelDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -117,6 +128,9 @@
     </Compile>
     <Compile Include="NouvellePartie\NouvellePartie.xaml.cs">
       <DependentUpon>NouvellePartie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OkCancelDialog\OKCancelDialog.xaml.cs">
+      <DependentUpon>OKCancelDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

@@ -36,6 +36,7 @@ namespace WPF.Jeu
         {
             drawBack(dc);
             drawUnits(dc);
+            GestionFichiers.sauvegarder("sauvegarde.lol"); // TODO : A virer;
         }
 
         private void drawBack(DrawingContext dc)

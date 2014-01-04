@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Small_World;
+using WPF.InputBox;
+using WPF.OkCancelDialog;
+
 
 namespace WPF.ChargerSauver
 {
@@ -22,15 +25,18 @@ namespace WPF.ChargerSauver
     public partial class ChargerSauver : Page
     {
         private MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+        private bool charger;
+
 
         public ChargerSauver()
         {
             InitializeComponent();
         }
 
-        public ChargerSauver(bool charger)
+        public ChargerSauver(bool c)
         {
             InitializeComponent();
+            charger = c;
             if (charger)
             {
                 header.Text = "Choisissez le fichier à charger :";
@@ -42,12 +48,6 @@ namespace WPF.ChargerSauver
                 header.Text = "Choisissez le fichier de sauvegarde :";
                 Title = "Sauvegarder une partie";
                 faireAction.Content = "Sauvegarder";
-
-                Button newFile = new Button();
-                newFile.Content = "Nouvelle Sauvegarde";
-                newFile.Height = 100;
-
-                listeFichiers.Items.Add(newFile);
             }
 
             listerFichiers();
@@ -55,6 +55,18 @@ namespace WPF.ChargerSauver
 
         private void listerFichiers()
         {
+
+            if (!charger)
+            {
+                Button newFile = new Button();
+                newFile.Content = "Nouvelle Sauvegarde";
+                newFile.Height = 100;
+                newFile.Click += newsave_Click;
+
+                listeFichiers.Items.Add(newFile);
+            }
+
+
             List<String> fichiers = new List<String>();
             fichiers = GestionFichiers.getFichiers();
 
@@ -65,13 +77,86 @@ namespace WPF.ChargerSauver
                 buttonFichier.Height = 100;
                 buttonFichier.Name = "button" + fichier;
 
+                buttonFichier.Click += fichierSauvegarde_Click;
+               
+
                 listeFichiers.Items.Add(buttonFichier);
             }
         }
 
+
+
         private void clickAnnuler(object sender, RoutedEventArgs e)
         {
             mainWindow.afficherMenu(false);
+        }
+
+        private void newsave_Click(object sender, RoutedEventArgs e)
+        {
+
+            string nomSession = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            nomSession = nomSession.Split('\\')[1];
+            string date = DateTime.Now.ToFileTime().ToString();
+
+            string nom_defaut = nomSession + "_" + date;
+
+            CustomInputBox dialog = new CustomInputBox("Entrez un nom pour la sauvegarde :",nom_defaut);
+            dialog.ShowDialog();
+            if (!dialog.Canceled)
+                doAction(dialog.InputText);
+
+            
+        }
+
+
+        private void fichierSauvegarde_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = sender as Button;
+            string nomSauvegarde = b.Content as String;
+
+            string message;
+            if (charger)
+            {
+                message = "Charger la partie " + nomSauvegarde + " ?";
+            } else {
+                message = "Remplacer la sauvegarde " + nomSauvegarde + " ?";
+            }
+
+            OKCancelDialog dialog = new OKCancelDialog(message);
+            dialog.ShowDialog();
+            if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
+                doAction(nomSauvegarde);
+
+                
+        }
+
+
+
+        private void doAction(string n)
+        {
+            if (charger) {
+                GestionFichiers.charger(n);
+            } else {
+                GestionFichiers.sauvegarder(n);
+            }
+
+            refreshListeFichiers();
+        }
+
+
+  
+
+        private void refreshListeFichiers()
+        {
+            listeFichiers.Items.Clear();
+            listerFichiers();
+        }
+
+
+
+       
+        private void faireAction_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

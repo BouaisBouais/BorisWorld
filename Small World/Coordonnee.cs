@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace Small_World
 {
+    [Serializable]
     public class Coordonnee
     {
         private int X;

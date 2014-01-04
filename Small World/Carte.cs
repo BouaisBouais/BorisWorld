@@ -12,8 +12,7 @@ namespace Small_World
     {
         public static int[,] grid { get; private set; }
         static int taille;
-        WrapperMap wrapper;
-
+        [NonSerialized] WrapperMap wrapper; // TODO : Utile de le mettre ici ?
         public List<Coordonnee> departJoueurs { get; private set; }
         
 
