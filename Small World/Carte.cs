@@ -7,9 +7,10 @@ using Wrapper;
 namespace Small_World
 {
 
-    unsafe public class Carte
+    [Serializable]
+    public class Carte
     {
-        static int** grid;
+        public static int[,] grid { get; private set; }
         static int taille;
         WrapperMap wrapper;
 
@@ -20,12 +21,23 @@ namespace Small_World
         unsafe public Carte(int taille)
         {
             Coordonnee.initialiser(taille);
-            wrapper = new WrapperMap();
-            grid = wrapper.genererMap(taille);
             Carte.taille = taille;
 
-            departJoueurs = new List<Coordonnee>();
+            wrapper = new WrapperMap();
+            int** gridTemp = wrapper.genererMap(taille);
 
+
+            grid = new int[taille, taille];
+            for (int i = 0; i < taille; i++)
+            {
+                for (int j = 0; j < taille; j++)
+                {
+                    grid[i, j] = gridTemp[i][j];
+                }
+            }
+
+
+            departJoueurs = new List<Coordonnee>();
             int** depart = wrapper.posJoueurs();
 
             for (int i = 0; i < SmallWorld.NOMBRE_JOUEURS; i++)
@@ -37,7 +49,7 @@ namespace Small_World
             }
         }
 
-        unsafe public Carte(int taille, int** g)
+        public Carte(int taille, int[,] g)
         {
             grid = g;
             Carte.taille = taille;
@@ -92,7 +104,7 @@ namespace Small_World
        
         static public Case getCase(Coordonnee coord)
         {
-            int type = grid[coord.getX()-1][coord.getY()-1];
+            int type = grid[coord.getX()-1,coord.getY()-1];
 
             switch (type)
             {
@@ -111,13 +123,14 @@ namespace Small_World
 
         }
 
+
         unsafe public void print()
         {
             for (int i = 0; i < taille; i++)
             {
                 for (int j = 0; j < taille; j++)
                 {
-                    Console.Write(grid[i][j]);
+                    Console.Write(grid[i,j]);
                 }
                 Console.WriteLine();
             }
