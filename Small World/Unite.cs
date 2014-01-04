@@ -11,7 +11,10 @@ namespace Small_World
         ATTAQUANT_MORT = 0,
         DEFENSEUR_MORT,
         DEUX_MORTS,
-        AUCUN_MORT
+        AUCUN_MORT,
+        DEPLACEMENT_BATAILLE,
+        DEPLACEMENT_SIMPLE,
+        DEPLACEMENT_IMPOSSIBLE
     }
 
 
@@ -49,7 +52,7 @@ namespace Small_World
         /// Regarde en fonction de la case si l'unité peut se déplacer ou pas
         /// </summary>
 
-        public abstract bool deplacement(Coordonnee coords);
+        public abstract resultatCombat deplacement(Coordonnee coords);
         public abstract bool deplacementPossible(Coordonnee coords);
         public abstract int getPoints();
 
@@ -58,80 +61,80 @@ namespace Small_World
         {
         }
 
-        // Renvoie le résultat du combat
-        public resultatCombat combattre(Unite @unite, bool uniteSeule)
+        /**
+         * Renvoie le résultat du combat
+         * Detruit l'unité ennemie si elle doit être détruite
+         */
+        public resultatCombat combattre(Unite @unite, bool uniteSeule, Joueur ennemi)
         {
 
             Random r = new Random();
             double rapportForce = 0;
             int nombreTire = 0;
 
-
-            // choix de l'unité fait avant par monteur partie ou autre (celui qui à accès aux joueurs)
-            if (deplacementPossible(@unite.coordonnees))
+            if (@unite.defense != 0)
             {
-                if (@unite.defense != 0)
+                int nombreCombats = r.Next(3, Math.Max(this.vie, @unite.vie) + 2);
+                int attaqueAtt;
+                int defenseDef;
+
+                while (nombreCombats > 0 && this.vie > 0 && @unite.vie > 0)
                 {
-                    int nombreCombats = r.Next(3, Math.Max(this.vie, @unite.vie) + 2);
-                    int attaqueAtt;
-                    int defenseDef;
+                    attaqueAtt = (this.vie / VIE_MAX) * this.attaque;
+                    defenseDef = (this.vie / VIE_MAX) * @unite.defense;
+                    nombreTire = r.Next(0, 100);
 
-                    while (nombreCombats > 0 && this.vie > 0 && @unite.vie > 0)
+
+                    if (attaqueAtt == @unite.attaque)
                     {
-                        attaqueAtt = (this.vie / VIE_MAX) * this.attaque;
-                        defenseDef = (this.vie / VIE_MAX) * @unite.defense;
-                        nombreTire = r.Next(0, 100);
+                        rapportForce = 50;
+                    }
+                    else
+                    {
+                        rapportForce = Math.Round(((attaqueAtt / defenseDef) * 0.5 + 0.5) * 100, 0);
+                    }
 
 
-                        if (attaqueAtt == @unite.attaque)
-                        {
-                            rapportForce = 50;
-                        }
-                        else
-                        {
-                            rapportForce = Math.Round(((attaqueAtt / defenseDef) * 0.5 + 0.5) * 100, 0);
-                        }
-
-
-                        if (nombreTire < rapportForce)
-                        {
-                            @unite.vie--;
-                        }
-                        else
-                        {
-                            this.vie--;
-                        }
+                    if (nombreTire < rapportForce)
+                    {
+                        @unite.vie--;
+                    }
+                    else
+                    {
+                        this.vie--;
                     }
                 }
-                else
-                {
-                    @unite.vie = 0;
-                }
-
-                if (uniteSeule && @unite.vie == 0 && this.vie > 0)
-                    deplacement(@unite.coordonnees);
-
-
-                if (@unite.vie == 0 && this.vie == 0)
-                {
-                    return resultatCombat.DEUX_MORTS;
-                }
-                else if (@unite.vie == 0)
-                {
-                    return resultatCombat.DEFENSEUR_MORT;
-                }
-                else if (this.vie == 0)
-                {
-                    return resultatCombat.ATTAQUANT_MORT;
-                }
-                else
-                {
-                    return resultatCombat.AUCUN_MORT;
-                }
-
+            }
+            else
+            {
+                @unite.vie = 0;
             }
 
-            return resultatCombat.AUCUN_MORT;
+            if (uniteSeule && @unite.vie == 0 && this.vie > 0)
+            {
+                ennemi.getUnites().Remove(@unite);
+                return resultatCombat.DEPLACEMENT_BATAILLE;
+            }
+
+            if (@unite.vie == 0 && this.vie == 0)
+            {
+                ennemi.getUnites().Remove(@unite);
+                return resultatCombat.DEUX_MORTS;
+            }
+            else if (@unite.vie == 0)
+            {
+                ennemi.getUnites().Remove(@unite);
+                return resultatCombat.DEFENSEUR_MORT;
+            }
+            else if (this.vie == 0)
+            {
+                return resultatCombat.ATTAQUANT_MORT;
+            }
+            else
+            {
+                return resultatCombat.AUCUN_MORT;
+            }
+
           
         }
 
@@ -140,11 +143,12 @@ namespace Small_World
          * Le cas échéant, lance une attaque contre l'unité ayant le plus de défense
          * Sinon, déplace l'unité voulant se déplacer
          */
-        protected void verifUniteCase(Coordonnee coords)
+        protected resultatCombat verifUniteCase(Coordonnee coords)
         {
 
             int defMax = 0;
             Unite choisie = null;
+            Joueur ennemi = null;
             bool uniteSeule = true;
             foreach (Joueur j in SmallWorld.joueurs)
             {
@@ -157,17 +161,33 @@ namespace Small_World
                             if (choisie != null) uniteSeule = false;
                             choisie = u;
                             defMax = u.defense;
+                            ennemi = j;
                         }
                     }
                 }
             }
             if (choisie != null)
             {
-                combattre(choisie, uniteSeule);
+                return combattre(choisie, uniteSeule, ennemi);
             }
             else
             {
-                coordonnees = coords;
+                return resultatCombat.DEPLACEMENT_SIMPLE;
+            }
+        }
+
+        protected void makeResultatCombat(resultatCombat result, Coordonnee coords)
+        {
+            switch (result)
+            {
+                case resultatCombat.ATTAQUANT_MORT:
+                case resultatCombat.DEUX_MORTS:
+                    SmallWorld.getJoueurCourant().getUnites().Remove(this);
+                    break;
+                case resultatCombat.DEPLACEMENT_BATAILLE:
+                case resultatCombat.DEPLACEMENT_SIMPLE:
+                    coordonnees = coords;
+                    break;
             }
         }
 

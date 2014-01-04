@@ -25,7 +25,7 @@ namespace Small_World
 
             joueurs = new List<Joueur>();
 
-            joueurs.Add(fabAutre.creerJoueur(typeJ1,0));
+            joueurs.Add(fabAutre.creerJoueur(typeJ1, 0));
             joueurs.Add(fabAutre.creerJoueur(typeJ2, 1));
             Console.WriteLine(joueurs[0].Peuple + "," + joueurs[1].Peuple);
 

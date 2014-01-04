@@ -23,14 +23,16 @@ namespace Small_World
             }
         }
 
-        public override bool deplacement(Coordonnee coords)
+        public override resultatCombat deplacement(Coordonnee coords)
         {
-            if (!deplacementPossible(coords)) return false;
+            if (!deplacementPossible(coords)) return resultatCombat.DEPLACEMENT_IMPOSSIBLE;
 
-            verifUniteCase(coords);
+            resultatCombat retour = verifUniteCase(coords);
 
             mouvement -= 1.0;
-            return true;
+            makeResultatCombat(retour, coords);
+
+            return retour;
         }
 
         public override bool deplacementPossible(Coordonnee coords)

@@ -35,17 +35,18 @@ namespace Small_World
             return (mouvement >= 1);
         }
 
-        public override bool deplacement(Coordonnee coords)
+        public override resultatCombat deplacement(Coordonnee coords)
         {
-            if (!deplacementPossible(coords)) return false;
+            if (!deplacementPossible(coords)) return resultatCombat.DEPLACEMENT_IMPOSSIBLE;
 
-            verifUniteCase(coords);
+            resultatCombat retour = verifUniteCase(coords);
 
             Case c = Carte.getCase(coords);
             if (c.getTypeCase() == TypeCases.PLAINE) mouvement -= 0.5;
             else mouvement -= 1.0;
+            makeResultatCombat(retour, coords);
 
-            return true;
+            return retour;
         }
 
 

@@ -16,6 +16,28 @@
         <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="Black">
             <local:CanvasCarte x:Name="canvasCarte" Background="Black"/>
         </ScrollViewer>
-        <Rectangle Fill="#FFF4F4F5" Grid.Row="1" Stroke="Black" />
+        <Grid Background="#FFF4F4F5" Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Margin="10">Joueur 1 : <TextBlock x:Name="peupleJ1"></TextBlock></TextBlock>
+                <TextBlock Margin="10">Nombre de points : <TextBlock x:Name="ptsJ1"></TextBlock></TextBlock>
+                <TextBlock Margin="10">Nombre d'unités restantes : <TextBlock x:Name="unitesJ1"></TextBlock></TextBlock>
+                <TextBlock Margin="10" x:Name="tourJ1"></TextBlock>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1">
+                <TextBlock Margin="10">Joueur 2 : <TextBlock x:Name="peupleJ2"></TextBlock></TextBlock>
+                <TextBlock Margin="10">Nombre de points : <TextBlock x:Name="ptsJ2"></TextBlock></TextBlock>
+                <TextBlock Margin="10">Nombre d'unités restantes : <TextBlock x:Name="unitesJ2"></TextBlock></TextBlock>
+                <TextBlock Margin="10" x:Name="tourJ2"></TextBlock>
+            </StackPanel>
+                
+            <TextBlock Grid.Column="2" Margin="10">Nombre de tours restants : <TextBlock x:Name="nbToursRestants"></TextBlock></TextBlock>
+            
+        </Grid>
     </Grid>
 </Page>

@@ -11,70 +11,111 @@ namespace Small_World
     {
         private Carte carte;
         static public List<Joueur> joueurs {get; set;}
-        static public int joueurCourant {get; private set;}
+        static public int joueurCourant { get; private set; }
+        static public int uniteCourante { get; private set; }
         static public int NOMBRE_JOUEURS = 2;
 
 
         private int nbTours = 0;
         private int nbTourMax;
 
-        enum TypeAction { DEPLACEMENT, PASSER_TOUR};
-
-        public void nouvellePartie(TypeCarte tailleCarte, TypeUnite j1, TypeUnite j2)
-        {
-            MonteurPartie monteur = new MonteurPartie();
-            monteur.nouvellePartie(tailleCarte, j1, j2);
-        }
-
-        public void boucle()
-        {
-            nbTourMax = Carte.getNombreTours();
-            TypeAction action;
-
-            while (checkFinJeu())
-            {
-
-                foreach (Joueur j in joueurs)
-                {
-                    joueurCourant = j.idJoueur;
-                    if (checkFinJeu()) break;
-
-                    foreach (Unite u in j.getUnites())
-                    {
-                        // TODO : Recuperer l'action
-                        action = TypeAction.DEPLACEMENT;
-
-                        switch (action)
-                        {
-                            case TypeAction.DEPLACEMENT:
-                                // TODO : Recupérer les coordonnées
-                                Coordonnee c = new Coordonnee(1, 1);
-                                u.deplacement(c);
-                                goto case TypeAction.PASSER_TOUR;
-                            case TypeAction.PASSER_TOUR:
-                                j.pointJoueur += u.getPoints();
-                                break;
-                            default:
-                                throw new Exception("Action inconnue");
-                        }
-
-                        if (checkFinJeu()) break;
-                    }
-
-                }
-                nbTours++;
-            }
-        }
+        enum TypeAction { DEPLACEMENT, PASSER_TOUR };
 
         public SmallWorld()
         {
         }
 
+        /**
+         * Lance une nouvelle partie
+         */
+        public void nouvellePartie(TypeCarte tailleCarte, TypeUnite j1, TypeUnite j2)
+        {
+            MonteurPartie monteur = new MonteurPartie();
+            monteur.nouvellePartie(tailleCarte, j1, j2);
+            nbTourMax = Carte.getNombreTours();
+        }
 
+        /**
+         * Demande à une unité de se déplacer sur la case visée
+         */
+        public void deplacement(Coordonnee c)
+        {
+            resultatCombat result = getUniteCourante().deplacement(c);
+            if (result == resultatCombat.ATTAQUANT_MORT || getUniteCourante().mouvement == 0)
+            {
+                int nextUnite = getJoueurCourant().getFirstMovementAbleUnit();
+                if (nextUnite == -1)
+                    passerTour();
+                else
+                    uniteCourante = nextUnite;
+            }
+            checkFinJeu();
+        }
+
+        /**
+         * Fais passer l'unité courante en fin de tableau d'unité du joueur
+         */
+        public void passerUnite()
+        {
+            getJoueurCourant().getUnites().Remove(getUniteCourante());
+            getJoueurCourant().addUnite(getUniteCourante());
+            uniteCourante = getJoueurCourant().getFirstMovementAbleUnit();
+        }
+
+        /**
+         * Passe le tour d'un joueur.
+         * Si tous les joueurs ont joué pendant ce tour, lance un nouveau tour
+         */
+        public void passerTour()
+        {
+            joueurCourant++;
+            if (joueurCourant >= NOMBRE_JOUEURS)
+            {
+                joueurCourant = 0;
+                nouveauTour();
+            }
+        }
+
+        /**
+         * Lance un nouveau tour de jeu
+         */
+        public void nouveauTour()
+        {
+            nbTours++;
+            checkFinJeu();
+            foreach (Joueur j in joueurs)
+            {
+                j.nouveauTour();
+            }
+        }
+
+        /**
+         * Rend le nombre de tours restants
+         */
+        public int getToursRestants()
+        {
+            return nbTourMax - nbTours;
+        }
+
+        /**
+         * Rend le joueur courant
+         */
         public static Joueur getJoueurCourant(){
             return joueurs[joueurCourant];
         }
 
+        /**
+         * Rend l'unité courante
+         */
+        public static Unite getUniteCourante(){
+            return getJoueurCourant().getUnites()[uniteCourante];
+        }
+
+        /**
+         * Regarde si la fin du jeu est arrivée
+         * Le cas échéant, lance une action ?
+         * TODO: lancer l'action
+         */
         bool checkFinJeu()
         {
             if (nbTourMax == nbTours) return true;

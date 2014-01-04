@@ -11,7 +11,6 @@ namespace Small_World
     {
         public TypeUnite Peuple { get; private set; }
         public int idJoueur {get;   private set;}
-        public int pointJoueur { get; set; }
 
         private List<Unite> unites = new List<Unite>();
 
@@ -19,7 +18,6 @@ namespace Small_World
         {
             Peuple = t;
             idJoueur = id;
-            pointJoueur = 0;
         }
 
         public void addUnite(Unite unite)
@@ -32,7 +30,46 @@ namespace Small_World
             return unites;
         }
 
- 
-   
+        /**
+         * Retourne le nombre total de points du joueur
+         */
+        public int getPoints()
+        {
+            int total = 0;
+            foreach (Unite u in unites)
+            {
+                total += u.getPoints();
+            }
+            return total;
+        }
+
+        /**
+         * Mets à jour les unités pour un nouveau tour
+         */
+        public void nouveauTour()
+        {
+            foreach (Unite u in unites)
+            {
+                u.mouvement = Unite.MOUVEMENT_MAX;
+            }
+        }
+
+        /**
+         * Retourne l'index de la première unité pouvant se déplacer.
+         * Si aucune unité ne peut se déplacer, retourne -1
+         */
+        public int getFirstMovementAbleUnit()
+        {
+            int index = -1;
+            for (int i = 0; i < unites.Count; i++)
+            {
+                if (unites[i].mouvement > 0)
+                {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
     }
 }
