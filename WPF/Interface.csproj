@@ -83,7 +83,14 @@
     <Compile Include="ChargerSauver\ChargerSauver.xaml.cs">
       <DependentUpon>ChargerSauver.xaml</DependentUpon>
     </Compile>
+    <Compile Include="InputBox\InputBox.xaml.cs">
+      <DependentUpon>InputBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Jeu\CanvasCarte.cs" />
+    <Page Include="InputBox\InputBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Jeu\Jeu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -99,6 +106,10 @@
     <Page Include="NouvellePartie\NouvellePartie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="OkCancelDialog\OkCancelDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -117,6 +128,9 @@
     </Compile>
     <Compile Include="NouvellePartie\NouvellePartie.xaml.cs">
       <DependentUpon>NouvellePartie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OkCancelDialog\OkCancelDialog.xaml.cs">
+      <DependentUpon>OkCancelDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -176,6 +190,7 @@
   <ItemGroup>
     <Resource Include="Ressources\title.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

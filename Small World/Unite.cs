@@ -17,7 +17,7 @@ namespace Small_World
         DEPLACEMENT_IMPOSSIBLE
     }
 
-
+    [Serializable]
     abstract public class Unite
     {
         public Coordonnee coordonnees { get; protected set; }

@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Small_World
 {
+    [Serializable]
     public class Nain : Unite
     {
         public Nain(Coordonnee coords) : base (coords)
