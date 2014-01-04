@@ -27,7 +27,7 @@ namespace WPF.Jeu
         {
             InitializeComponent();
 
-            this.PreviewKeyDown += new KeyEventHandler(HandleEsc);
+            this.PreviewKeyDown += new KeyEventHandler(HandleKeys);
 
             actualiserDonnées();
 
@@ -88,10 +88,35 @@ namespace WPF.Jeu
             }
         }
 
-        private void HandleEsc(object sender, KeyEventArgs e)
+        private void HandleKeys(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Escape)
                 mainWindow.afficherMenu(true);
+            if (e.Key == Key.Left)
+            {
+                Coordonnee left = SmallWorld.getUniteCourante().coordonnees.decaler(-1, 0);
+                App.gameEngine.deplacement(left);
+                actualiserDonnées();
+            }
+            if (e.Key == Key.Right)
+            {
+                Coordonnee right = SmallWorld.getUniteCourante().coordonnees.decaler(1, 0);
+                App.gameEngine.deplacement(right);
+                actualiserDonnées();
+            }
+            if (e.Key == Key.Up)
+            {
+                Coordonnee up = SmallWorld.getUniteCourante().coordonnees.decaler(0, -1);
+                App.gameEngine.deplacement(up);
+                actualiserDonnées();
+            }
+            if (e.Key == Key.Down)
+            {
+                Coordonnee down = SmallWorld.getUniteCourante().coordonnees.decaler(0, 1);
+                App.gameEngine.deplacement(down);
+                actualiserDonnées();
+            }
+            canvasCarte.InvalidateVisual();
         }
     }
 }

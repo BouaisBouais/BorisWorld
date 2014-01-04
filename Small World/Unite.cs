@@ -65,9 +65,9 @@ namespace Small_World
          * Renvoie le résultat du combat
          * Detruit l'unité ennemie si elle doit être détruite
          */
-        public resultatCombat combattre(Unite @unite, bool uniteSeule, Joueur ennemi)
+        public resultatCombat combattre(int indexUnite, bool uniteSeule, Joueur ennemi)
         {
-
+            Unite @unite = ennemi.getUnites()[indexUnite];
             Random r = new Random();
             double rapportForce = 0;
             int nombreTire = 0;
@@ -75,8 +75,8 @@ namespace Small_World
             if (@unite.defense != 0)
             {
                 int nombreCombats = r.Next(3, Math.Max(this.vie, @unite.vie) + 2);
-                int attaqueAtt;
-                int defenseDef;
+                double attaqueAtt;
+                double defenseDef;
 
                 while (nombreCombats > 0 && this.vie > 0 && @unite.vie > 0)
                 {
@@ -109,21 +109,23 @@ namespace Small_World
             {
                 @unite.vie = 0;
             }
+            ennemi.getUnites()[indexUnite] = @unite;
+            SmallWorld.getJoueurCourant().getUnites()[SmallWorld.uniteCourante] = this;
 
             if (uniteSeule && @unite.vie == 0 && this.vie > 0)
             {
-                ennemi.getUnites().Remove(@unite);
+                ennemi.getUnites().RemoveAt(indexUnite);
                 return resultatCombat.DEPLACEMENT_BATAILLE;
             }
 
             if (@unite.vie == 0 && this.vie == 0)
             {
-                ennemi.getUnites().Remove(@unite);
+                ennemi.getUnites().RemoveAt(indexUnite);
                 return resultatCombat.DEUX_MORTS;
             }
             else if (@unite.vie == 0)
             {
-                ennemi.getUnites().Remove(@unite);
+                ennemi.getUnites().RemoveAt(indexUnite);
                 return resultatCombat.DEFENSEUR_MORT;
             }
             else if (this.vie == 0)
@@ -147,26 +149,30 @@ namespace Small_World
         {
 
             int defMax = 0;
-            Unite choisie = null;
+            int choisie = -1;
             Joueur ennemi = null;
             bool uniteSeule = true;
             foreach (Joueur j in SmallWorld.joueurs)
             {
                 if (j != SmallWorld.getJoueurCourant())
                 {
-                    foreach (Unite u in j.getUnites())
+                    for (int i = 0; i < j.getUnites().Count; i++)
                     {
-                        if (u.defense > defMax && u.coordonnees == coords)
+                        Unite u = j.getUnites()[i];
+                        if (u.coordonnees.Equals(coords))
                         {
-                            if (choisie != null) uniteSeule = false;
-                            choisie = u;
-                            defMax = u.defense;
-                            ennemi = j;
+                            if (choisie != -1) uniteSeule = false;
+                            if (u.defense > defMax)
+                            {
+                                choisie = i;
+                                defMax = u.defense;
+                                ennemi = j;
+                            }
                         }
                     }
                 }
             }
-            if (choisie != null)
+            if (choisie != -1)
             {
                 return combattre(choisie, uniteSeule, ennemi);
             }

@@ -70,13 +70,18 @@ namespace WPF.Jeu
 
         private void drawUnits(DrawingContext dc)
         {
+
+            Coordonnee currentUnit = SmallWorld.getUniteCourante().coordonnees;
+            SolidColorBrush scb = Brushes.Red;
+            int x = (currentUnit.getX() - 1) * imgSize + 25;
+            int y = (currentUnit.getY() - 1) * imgSize + 25;
+            dc.DrawEllipse(scb, null, new Point(x, y), 14, 14);
+
             foreach (Joueur joueur in SmallWorld.joueurs)
             {
-                Console.WriteLine("Peuple : " + joueur.Peuple);
                 foreach (Unite unite in joueur.getUnites())
                 {
                     Coordonnee coords = unite.coordonnees;
-                    Ellipse ellipse = new Ellipse();
                     SolidColorBrush color = new SolidColorBrush();
                     switch (joueur.Peuple)
                     {

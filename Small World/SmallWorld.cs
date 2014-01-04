@@ -69,6 +69,7 @@ namespace Small_World
         public void passerTour()
         {
             joueurCourant++;
+            uniteCourante = 0;
             if (joueurCourant >= NOMBRE_JOUEURS)
             {
                 joueurCourant = 0;
@@ -108,6 +109,7 @@ namespace Small_World
          * Rend l'unité courante
          */
         public static Unite getUniteCourante(){
+            Console.WriteLine("Joueur Courant "+joueurCourant+", Unite Courante "+uniteCourante);
             return getJoueurCourant().getUnites()[uniteCourante];
         }
 

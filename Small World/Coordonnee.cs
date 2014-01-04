@@ -81,5 +81,15 @@ namespace Small_World
 
             return newX + newY;
         }
+
+        public override string ToString()
+        {
+            return "X:" + X + ",Y:" + Y;
+        }
+
+        public bool Equals(Coordonnee obj)
+        {
+            return (X == obj.X && Y == obj.Y);
+        }
     }
 }
