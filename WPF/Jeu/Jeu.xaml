@@ -1,9 +1,14 @@
-﻿<Window x:Class="WPF.Jeu.Jeu"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:local="clr-namespace:WPF.Jeu"
-        Title="Boris World" Height="600" Width="800">
-    <Grid Name="mainGrid">
+﻿<Page x:Class="WPF.Jeu.Jeu"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WPF.Jeu"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+	Title="Boris World">
+
+    <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="400*" />
             <RowDefinition Height="170*" />
@@ -13,4 +18,4 @@
         </ScrollViewer>
         <Rectangle Fill="#FFF4F4F5" Grid.Row="1" Stroke="Black" />
     </Grid>
-</Window>
+</Page>

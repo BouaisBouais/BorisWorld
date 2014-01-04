@@ -20,7 +20,7 @@ namespace WPF
         void App_startup(Object sender, StartupEventArgs e)
         {
 
-            Menu.Menu window = new Menu.Menu();
+            MainWindow window = new MainWindow();
             window.Show();
 
 

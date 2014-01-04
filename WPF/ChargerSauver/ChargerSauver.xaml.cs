@@ -10,16 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Small_World;
 
 namespace WPF.ChargerSauver
 {
     /// <summary>
-    /// Interaction logic for ChargerSauver.xaml
+    /// Interaction logic for ChargerSauver1.xaml
     /// </summary>
-    public partial class ChargerSauver : Window
+    public partial class ChargerSauver : Page
     {
+        private MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+
         public ChargerSauver()
         {
             InitializeComponent();
@@ -68,9 +71,7 @@ namespace WPF.ChargerSauver
 
         private void clickAnnuler(object sender, RoutedEventArgs e)
         {
-            Menu.Menu fenetre = new Menu.Menu();
-            fenetre.Show();
-            this.Close();
+            mainWindow.afficherMenu(false);
         }
     }
 }

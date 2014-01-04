@@ -10,16 +10,19 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Small_World;
 
 namespace WPF.NouvellePartie
 {
     /// <summary>
-    /// Interaction logic for NouvellePartie.xaml
+    /// Interaction logic for NouvellePartie1.xaml
     /// </summary>
-    public partial class NouvellePartie : Window
+    public partial class NouvellePartie : Page
     {
+        private MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+
         private TypeCarte taille;
         private TypeUnite j1;
         private TypeUnite j2;
@@ -146,16 +149,12 @@ namespace WPF.NouvellePartie
 
             App.gameEngine.nouvellePartie(taille, j1, j2);
 
-            Jeu.Jeu fenetre = new Jeu.Jeu();
-            fenetre.Show();
-            this.Close();
+            mainWindow.afficherJeu();
         }
 
         private void annulerClick(object sender, RoutedEventArgs e)
         {
-            Menu.Menu fenetre = new Menu.Menu();
-            fenetre.Show();
-            this.Close();
+            mainWindow.afficherMenu(false);
         }
     }
 }

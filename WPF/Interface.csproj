@@ -76,21 +76,22 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Jeu\Jeu.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Jeu\CanvasCarte.cs" />
     <Compile Include="ChargerSauver\ChargerSauver.xaml.cs">
       <DependentUpon>ChargerSauver.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Jeu\Jeu.xaml.cs">
-      <DependentUpon>Jeu.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="Jeu\CanvasCarte.cs" />
+    <Page Include="Jeu\Jeu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Menu\Menu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -105,6 +106,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Jeu\Jeu.xaml.cs">
+      <DependentUpon>Jeu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Menu\Menu.xaml.cs">
       <DependentUpon>Menu.xaml</DependentUpon>
     </Compile>

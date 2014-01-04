@@ -10,17 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using WPF.NouvellePartie;
-using WPF.ChargerSauver;
 
 namespace WPF.Menu
 {
     /// <summary>
-    /// Interaction logic for Menu.xaml
+    /// Interaction logic for Menu1.xaml
     /// </summary>
-    public partial class Menu : Window
+    public partial class Menu : Page
     {
+        private MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
         public Menu()
         {
             InitializeComponent();
@@ -38,8 +38,8 @@ namespace WPF.Menu
             if (ingame)
             {
                 Button retour = new Button();
-                retour.Content = "Retour";
-                retour.Background = Brushes.White;
+                retour.Content = "Retour à la partie";
+                retour.Margin = new Thickness(30);
                 retour.Click += clickRetour;
 
                 Grid.SetRow(retour, 0);
@@ -49,28 +49,22 @@ namespace WPF.Menu
 
         private void clickRetour(object sender, RoutedEventArgs e)
         {
-            //TODO: retour au jeu
+            mainWindow.afficherJeu();
         }
 
         private void clickNouvellePartie(object sender, RoutedEventArgs e)
         {
-            NouvellePartie.NouvellePartie fenetre = new NouvellePartie.NouvellePartie();
-            fenetre.Show();
-            this.Close();
+            mainWindow.afficherNouvellePartie();
         }
 
         private void clickSauvegarder(object sender, RoutedEventArgs e)
         {
-            ChargerSauver.ChargerSauver fenetre = new ChargerSauver.ChargerSauver(false);
-            fenetre.Show();
-            this.Close();
+            mainWindow.afficherChargerSauver(false);
         }
 
         private void clickCharger(object sender, RoutedEventArgs e)
         {
-            ChargerSauver.ChargerSauver fenetre = new ChargerSauver.ChargerSauver(true);
-            fenetre.Show();
-            this.Close();
+            mainWindow.afficherChargerSauver(true);
         }
 
         private void clickQuitter(object sender, RoutedEventArgs e)
