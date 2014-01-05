@@ -12,7 +12,7 @@ namespace Small_World
     {
         public static int[,] grid { get; set; }
         public static int taille { get; set; }
-        [NonSerialized] WrapperMap wrapper; // TODO : Warper utile ici ?
+        [NonSerialized] static WrapperMap wrapper = new WrapperMap();
 
         public List<Coordonnee> departJoueurs { get; private set; }
 
@@ -20,7 +20,6 @@ namespace Small_World
         {
             Carte.taille = t;
 
-            wrapper = new WrapperMap();
             int** gridTemp = wrapper.genererMap(t);
 
 
@@ -146,6 +145,32 @@ namespace Small_World
                 }
             }
             return nb;
+        }
+
+        /**
+         * Retourne des suggestions de déplacement pour l'unité courante
+         * Return List<Coordonnee> liste de coordonnées de cases suggérées
+         */
+        unsafe static public List<Coordonnee> getSuggestions()
+        {
+            int x = SmallWorld.Instance.getUniteCourante().coordonnees.getX();
+            int y = SmallWorld.Instance.getUniteCourante().coordonnees.getY();
+
+            int** suggestions = wrapper.suggestions((int) SmallWorld.Instance.getJoueurCourant().Peuple, x, y);
+
+            List<Coordonnee> retour = new List<Coordonnee>();
+
+            for (int i = 0; i < 3; i++)//3 suggestions. TODO: Changement automatique en fonction du nombre reçu
+            {
+                int suggx = suggestions[i][0];
+                int suggy = suggestions[i][1];
+                if (suggx != 0 && suggy != 0)
+                {
+                    Coordonnee suggestion = new Coordonnee(suggx, suggy);
+                    retour.Add(suggestion);
+                }
+            }
+            return retour;
         }
 
     }

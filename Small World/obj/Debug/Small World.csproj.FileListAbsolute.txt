@@ -5,10 +5,10 @@ H:\Small World\Small World\Small World\bin\Debug\Wrapper.dll
 H:\Small World\Small World\Small World\bin\Debug\Wrapper.pdb
 H:\Small World\Small World\Small World\bin\Debug\Small World.exe
 H:\Small World\Small World\Small World\obj\Debug\Small World.exe
+C:\Users\Camille\Documents\GitHub\BorisWorld\Small World\obj\Debug\Small World.csprojResolveAssemblyReference.cache
+C:\Users\Camille\Documents\GitHub\BorisWorld\Small World\bin\Debug\Small World.dll
 C:\Users\Camille\Documents\GitHub\BorisWorld\Small World\bin\Debug\Small World.pdb
 C:\Users\Camille\Documents\GitHub\BorisWorld\Small World\bin\Debug\Wrapper.dll
 C:\Users\Camille\Documents\GitHub\BorisWorld\Small World\bin\Debug\Wrapper.pdb
-C:\Users\Camille\Documents\GitHub\BorisWorld\Small World\obj\Debug\Small World.csprojResolveAssemblyReference.cache
-C:\Users\Camille\Documents\GitHub\BorisWorld\Small World\obj\Debug\Small World.pdb
-C:\Users\Camille\Documents\GitHub\BorisWorld\Small World\bin\Debug\Small World.dll
 C:\Users\Camille\Documents\GitHub\BorisWorld\Small World\obj\Debug\Small World.dll
+C:\Users\Camille\Documents\GitHub\BorisWorld\Small World\obj\Debug\Small World.pdb

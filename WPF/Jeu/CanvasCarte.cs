@@ -38,6 +38,7 @@ namespace WPF.Jeu
             try
             {
                 drawBack(dc);
+                drawSuggestions(dc);
                 drawUnits(dc);
             }
             catch (NullReferenceException ex)
@@ -73,6 +74,18 @@ namespace WPF.Jeu
                             break;
                     }
                 }
+            }
+        }
+
+        private void drawSuggestions(DrawingContext dc)
+        {
+            foreach (Coordonnee c in Carte.getSuggestions())
+            {
+                int x = c.getX();
+                int y = c.getY();
+                Brush sugg = Brushes.Green.Clone();
+                sugg.Opacity = 0.35;
+                dc.DrawRectangle(sugg, null, new Rect((x - 1) * imgSize, (y - 1) * imgSize, imgSize, imgSize));
             }
         }
 

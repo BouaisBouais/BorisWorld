@@ -105,7 +105,7 @@ int** MapLib::posJoueurs(){
 }
 
 //En fonction du peuple de l'unité et de sa position actuelle, voir si elle ne serait pas mieux à proximité
-int** MapLib::suggestions(int peuple, int* coords){
+int** MapLib::suggestions(int peuple, int x, int y){
 	int** suggestions = NULL;
 	int precision = 1; //A une case de la case actuelle
 	suggestions = new int* [3]; //Jusqu'à 3 propositions
@@ -114,11 +114,8 @@ int** MapLib::suggestions(int peuple, int* coords){
 		for(int j=0; j<2; j++)
 			suggestions[i][j] = 0;
 	}
-	
-	int x = coords[0];
-	int y = coords[1];
 
-	Coordonnee coordonnees = Coordonnee(coords);
+	Coordonnee coordonnees = Coordonnee(x, y);
 
 	//On commence par vérifier que l'on n'est pas sur une case au max de nos points
 	switch(peuple){
@@ -161,19 +158,20 @@ int** MapLib::suggestions(int peuple, int* coords){
 			//Si la case est intéressante et moins loin que les autres, on la prend !
 			if(interesting){
 				int testDistance = std::abs(i) + std::abs(j);
-				for(int i=0; i<3; i++){
-					int tempX = suggestions[i][0];
-					int tempY = suggestions[i][1];
+				for(int a=0; a<3; a++){
+					int tempX = suggestions[a][0];
+					int tempY = suggestions[a][1];
 					int distance = std::abs(tempX - x) + std::abs(tempY - y);
 					if(testDistance < distance){
-						for(int j=2; j>i; j--){ //On décale les suggestions
-							suggestions[j] = suggestions[j-1];
+						for(int b=2; b>a; b--){ //On décale les suggestions
+							suggestions[b] = suggestions[b-1];
 						}
 						//On mets celle-ci à la place
-						suggestions[i] = testCoords.toArray();
+						suggestions[a] = testCoords.toArray();
+						break;
 					}
 				}
-			} //endif(interesting)
+			} //end if(interesting)
 		}
 	}
 	return suggestions;
@@ -195,4 +193,4 @@ void MapLib_delete(MapLib* maplib) { delete maplib; }
 
 int** MapLib_genererMap(MapLib* maplib, int taille){ return maplib->genererMap(taille); }
 int** MapLib_posJoueurs(MapLib* maplib){ return maplib->posJoueurs(); }
-int** MapLib_suggestions(MapLib* maplib, int peuple, int* coords){ return maplib->suggestions(peuple, coords); }
+int** MapLib_suggestions(MapLib* maplib, int peuple, int x, int y){ return maplib->suggestions(peuple, x, y); }

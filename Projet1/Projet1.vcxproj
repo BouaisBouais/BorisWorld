@@ -75,6 +75,11 @@
   <ItemGroup>
     <ClCompile Include="WrapperMap.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MapLib\MapLib.vcxproj">
+      <Project>{5cc7fd23-bd7d-4e91-bbc4-0186ffff20ef}</Project>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
