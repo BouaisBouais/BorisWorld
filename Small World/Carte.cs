@@ -10,27 +10,24 @@ namespace Small_World
     [Serializable]
     public class Carte
     {
-        public static int[,] grid { get; private set; }
-        static int taille;
-        [NonSerialized] WrapperMap wrapper;
+        public static int[,] grid { get; set; }
+        public static int taille { get; set; }
+        [NonSerialized] WrapperMap wrapper; // TODO : Warper utile ici ?
 
         public List<Coordonnee> departJoueurs { get; private set; }
 
-
-
-        unsafe public Carte(int taille)
+        unsafe public Carte(int t)
         {
-            Coordonnee.initialiser(taille);
-            Carte.taille = taille;
+            Carte.taille = t;
 
             wrapper = new WrapperMap();
-            int** gridTemp = wrapper.genererMap(taille);
+            int** gridTemp = wrapper.genererMap(t);
 
 
-            grid = new int[taille, taille];
-            for (int i = 0; i < taille; i++)
+            grid = new int[t, t];
+            for (int i = 0; i < t; i++)
             {
-                for (int j = 0; j < taille; j++)
+                for (int j = 0; j < t; j++)
                 {
                     grid[i, j] = gridTemp[i][j];
                 }
@@ -49,16 +46,12 @@ namespace Small_World
             }
         }
 
-        public Carte(int taille, int[,] g)
+        public Carte(int t, int[,] g)
         {
             grid = g;
-            Carte.taille = taille;
+            Carte.taille = t;
         }
 
-        static public int getTaille()
-        {
-            return taille;
-        }
 
         // Renvoie le nombre d'unité de la carte en fonction de sa taille
         static public int getNombreUniteMax()

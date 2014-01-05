@@ -136,16 +136,16 @@ namespace WPF.ChargerSauver
 
         private void doAction(string n)
         {
+            GestionFichiers.action(n, charger);
+
             if (charger)
             {
-                GestionFichiers.charger(n);
+                mainWindow.afficherJeu();
             }
             else
             {
-                GestionFichiers.sauvegarder(n);
+                refreshListeFichiers();
             }
-
-            refreshListeFichiers();
         }
 
 

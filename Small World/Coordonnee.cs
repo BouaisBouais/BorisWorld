@@ -11,7 +11,7 @@ namespace Small_World
     {
         private int X;
         private int Y;
-        static public int tailleMax = 0;
+        //static public int tailleMax = 0;
 
         public Coordonnee()
         {
@@ -21,16 +21,16 @@ namespace Small_World
 
         public Coordonnee(int x, int y)
         {
-            X = (x < 1) ? 1 : ((x > tailleMax) ? tailleMax : x);
-            Y = (y < 1) ? 1 : ((y > tailleMax) ? tailleMax : y);
+            X = (x < 1) ? 1 : ((x > Carte.taille) ? Carte.taille : x);
+            Y = (y < 1) ? 1 : ((y > Carte.taille) ? Carte.taille : y);
         }
 
         unsafe public Coordonnee(int* array)
         {
 	        int x = array[0];
 	        int y = array[1];
-            X = (x < 1) ? 1 : ((x > tailleMax) ? tailleMax : x);
-            Y = (y < 1) ? 1 : ((y > tailleMax) ? tailleMax : y);
+            X = (x < 1) ? 1 : ((x > Carte.taille) ? Carte.taille : x);
+            Y = (y < 1) ? 1 : ((y > Carte.taille) ? Carte.taille : y);
         }
 
         static public Coordonnee get(int x, int y)
@@ -38,11 +38,12 @@ namespace Small_World
             return new Coordonnee(x, y);
         }
 
+        /*
         static public void initialiser(int tailleMaximale)
         {
             tailleMax = tailleMaximale;
         }
-
+        */
         public int getX()
         {
             return X;
@@ -50,7 +51,7 @@ namespace Small_World
 
         public void setX(int x)
         {
-            X = (x < 1) ? 1 : ((x > tailleMax) ? tailleMax : x);
+            X = (x < 1) ? 1 : ((x > Carte.taille) ? Carte.taille : x);
         }
 
         public int getY()
@@ -60,7 +61,7 @@ namespace Small_World
 
         public void setY(int y)
         {
-            Y = (y < 1) ? 1 : ((y > tailleMax) ? tailleMax : y);
+            Y = (y < 1) ? 1 : ((y > Carte.taille) ? Carte.taille : y);
         }
 
         public void clone(Coordonnee coords)

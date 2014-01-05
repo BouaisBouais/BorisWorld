@@ -15,7 +15,7 @@ namespace WPF
     /// </summary>
     public partial class App : Application
     {
-        public static SmallWorld gameEngine = new SmallWorld();
+        
 
         void App_startup(Object sender, StartupEventArgs e)
         {

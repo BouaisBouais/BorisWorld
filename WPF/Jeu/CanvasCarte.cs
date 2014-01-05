@@ -27,20 +27,27 @@ namespace WPF.Jeu
 
         public CanvasCarte() : base()
         {
-            int taille = Carte.getTaille();
+            int taille = Carte.taille;
             this.Height = taille * imgSize;
             this.Width = taille * imgSize;
         }
 
         protected override void OnRender(DrawingContext dc)
         {
-            drawBack(dc);
-            drawUnits(dc);
+            try
+            {
+                drawBack(dc);
+                drawUnits(dc);
+            }
+            catch (NullReferenceException ex)
+            {
+                Console.WriteLine("Processor Usage" + ex.Message);
+            }
         }
 
         private void drawBack(DrawingContext dc)
         {
-            int taille = Carte.getTaille();
+            int taille = Carte.taille;
             for (int x = 1; x <= taille; x++)
             {
                 for (int y = 1; y <= taille; y++)
@@ -71,13 +78,13 @@ namespace WPF.Jeu
         private void drawUnits(DrawingContext dc)
         {
 
-            Coordonnee currentUnit = SmallWorld.getUniteCourante().coordonnees;
+            Coordonnee currentUnit = SmallWorld.Instance.getUniteCourante().coordonnees;
             SolidColorBrush scb = Brushes.Red;
             int x = (currentUnit.getX() - 1) * imgSize + 25;
             int y = (currentUnit.getY() - 1) * imgSize + 25;
             dc.DrawEllipse(scb, null, new Point(x, y), 14, 14);
 
-            foreach (Joueur joueur in SmallWorld.joueurs)
+            foreach (Joueur joueur in SmallWorld.Instance.joueurs)
             {
                 foreach (Unite unite in joueur.getUnites())
                 {

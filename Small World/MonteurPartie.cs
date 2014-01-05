@@ -10,9 +10,6 @@ namespace Small_World
         private FabriqueAutre fabAutre;
         private FabriqueUnite fabUnit;
 
-        public Carte carteJeu { get; private set; }
-        public List<Joueur> joueurs { get; private set; }
-
         public MonteurPartie()
         {
             fabAutre = new FabriqueAutre();
@@ -20,20 +17,20 @@ namespace Small_World
 
         public void nouvellePartie(TypeCarte taille, TypeUnite typeJ1, TypeUnite typeJ2)
         {
-            carteJeu = fabAutre.creerCarte(taille); //TODO: carte en paramètre ? Nécessaire ?
-            carteJeu.print();
+            SmallWorld.Instance.carte = fabAutre.creerCarte(taille);
+            SmallWorld.Instance.carte.print();
 
-            joueurs = new List<Joueur>();
+            List<Joueur> joueurs = new List<Joueur>();
 
             joueurs.Add(fabAutre.creerJoueur(typeJ1, 0));
             joueurs.Add(fabAutre.creerJoueur(typeJ2, 1));
             Console.WriteLine(joueurs[0].Peuple + "," + joueurs[1].Peuple);
 
-            SmallWorld.joueurs = joueurs; //TODO: LISTE DE JOUEURS EN DOUBLE !!!!!
+            SmallWorld.Instance.joueurs = joueurs;
 
             int nombreUnites = Carte.getNombreUniteMax();
-            List<Coordonnee> posDepartJoueurs = carteJeu.departJoueurs;
-            foreach(Joueur j in SmallWorld.joueurs)
+            List<Coordonnee> posDepartJoueurs = SmallWorld.Instance.carte.departJoueurs;
+            foreach (Joueur j in SmallWorld.Instance.joueurs)
             {
 
                 switch (j.Peuple)

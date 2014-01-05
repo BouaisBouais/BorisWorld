@@ -147,7 +147,7 @@ namespace WPF.NouvellePartie
             clicked.Content = "Création en cours...";
             clicked.IsEnabled = false;
 
-            App.gameEngine.nouvellePartie(taille, j1, j2);
+            SmallWorld.Instance.nouvellePartie(taille, j1, j2);
 
             mainWindow.afficherJeu();
         }

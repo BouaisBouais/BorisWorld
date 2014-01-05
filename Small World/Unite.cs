@@ -110,7 +110,7 @@ namespace Small_World
                 @unite.vie = 0;
             }
             ennemi.getUnites()[indexUnite] = @unite;
-            SmallWorld.getJoueurCourant().getUnites()[SmallWorld.uniteCourante] = this;
+            SmallWorld.Instance.getJoueurCourant().getUnites()[SmallWorld.Instance.uniteCourante] = this;
 
             if (uniteSeule && @unite.vie == 0 && this.vie > 0)
             {
@@ -152,9 +152,9 @@ namespace Small_World
             int choisie = -1;
             Joueur ennemi = null;
             bool uniteSeule = true;
-            foreach (Joueur j in SmallWorld.joueurs)
+            foreach (Joueur j in SmallWorld.Instance.joueurs)
             {
-                if (j != SmallWorld.getJoueurCourant())
+                if (j != SmallWorld.Instance.getJoueurCourant())
                 {
                     for (int i = 0; i < j.getUnites().Count; i++)
                     {
@@ -188,7 +188,7 @@ namespace Small_World
             {
                 case resultatCombat.ATTAQUANT_MORT:
                 case resultatCombat.DEUX_MORTS:
-                    SmallWorld.getJoueurCourant().getUnites().Remove(this);
+                    SmallWorld.Instance.getJoueurCourant().getUnites().Remove(this);
                     break;
                 case resultatCombat.DEPLACEMENT_BATAILLE:
                 case resultatCombat.DEPLACEMENT_SIMPLE:

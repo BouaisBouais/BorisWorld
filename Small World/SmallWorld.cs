@@ -6,23 +6,37 @@ using Wrapper;
 
 namespace Small_World
 {
+    enum TypeAction { DEPLACEMENT, PASSER_TOUR };
 
-    public class SmallWorld
+    [Serializable]
+    public sealed class SmallWorld
     {
-        private Carte carte;
-        static public List<Joueur> joueurs {get; set;}
-        static public int joueurCourant { get; private set; }
-        static public int uniteCourante { get; private set; }
-        static public int NOMBRE_JOUEURS = 2;
+        public Carte carte { get; set; }
+        public List<Joueur> joueurs {get; set;}
+        public int joueurCourant { get; set; }
+        public int uniteCourante { get; set; }
+        public const int NOMBRE_JOUEURS = 2;
 
+        public int nbTours { get; set; }
+        public int nbTourMax { get; set; }
 
-        private int nbTours = 0;
-        private int nbTourMax;
-
-        enum TypeAction { DEPLACEMENT, PASSER_TOUR };
-
-        public SmallWorld()
+        private static SmallWorld instance = new SmallWorld();
+        public static SmallWorld Instance
         {
+             get 
+             {
+                 return instance; 
+             }
+
+             set 
+             {
+                instance = value;
+             }
+        }
+
+        private SmallWorld()
+        {
+            nbTours = 0;
         }
 
         /**
@@ -47,7 +61,7 @@ namespace Small_World
                 if (nextUnite == -1)
                     passerTour();
                 else
-                    uniteCourante = nextUnite;
+                    instance.uniteCourante = nextUnite;
             }
             checkFinJeu();
         }
@@ -59,7 +73,7 @@ namespace Small_World
         {
             getJoueurCourant().getUnites().Remove(getUniteCourante());
             getJoueurCourant().addUnite(getUniteCourante());
-            uniteCourante = getJoueurCourant().getFirstMovementAbleUnit();
+            instance.uniteCourante = getJoueurCourant().getFirstMovementAbleUnit();
         }
 
         /**
@@ -101,15 +115,15 @@ namespace Small_World
         /**
          * Rend le joueur courant
          */
-        public static Joueur getJoueurCourant(){
+        public Joueur getJoueurCourant(){
             return joueurs[joueurCourant];
         }
 
         /**
          * Rend l'unité courante
          */
-        public static Unite getUniteCourante(){
-            Console.WriteLine("Joueur Courant "+joueurCourant+", Unite Courante "+uniteCourante);
+        public Unite getUniteCourante(){
+            Console.WriteLine("Joueur Courant " + joueurCourant + ", Unite Courante " + uniteCourante);
             return getJoueurCourant().getUnites()[uniteCourante];
         }
 

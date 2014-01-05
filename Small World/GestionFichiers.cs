@@ -49,11 +49,6 @@ namespace Small_World
 
         }
 
-        private static string ajouterExtention(string nom)
-        {
-            nom += extentionSauvegarde;
-            return nom;
-        }
 
 
         /*
@@ -98,27 +93,69 @@ Console.WriteLine("j1res.pointJoueur: {0} // j2res.pointJoueur: {1}", j1res.poin
 Console.WriteLine("j1res.getUnites()[0].coordonnees.getX(): {0} // j2res.getUnites()[0].coordonnees.getX() {1}", j1res.getUnites()[0].coordonnees.getX(), j2res.getUnites()[0].coordonnees.getX());
 */
 
-        public static void sauvegarder(string nomFichier)
+
+        /*
+         *   Console.WriteLine("j1.peuple: {0} // j2.peuble: {1}", SmallWorld.Instance.joueurs[0].Peuple, SmallWorld.Instance.joueurs[1].Peuple);
+            Console.WriteLine("j1.pointJoueur: {0} // j2.pointJoueur: {1}", SmallWorld.Instance.joueurs[0].getPoints(), SmallWorld.Instance.joueurs[1].getPoints());
+            Console.WriteLine("j1.getUnites()[0].coordonnees.getX(): {0} // j2.getUnites()[0].coordonnees.getX()", SmallWorld.Instance.joueurs[0].getUnites()[0].coordonnees.getX(), SmallWorld.Instance.joueurs[1].getUnites()[0].coordonnees.getX());
+        */
+       
+
+        // Charge ou sauvegarde suivant la valeur de charger
+        public static void action(string nomFichier, bool charger)
         {
             checkDossierSauvegarde();
-            nomFichier = ajouterExtention(nomFichier);
 
-            //BinaryFormatter formatter = new BinaryFormatter();
-            Stream stream = new FileStream(path + Path.DirectorySeparatorChar + nomFichier, FileMode.Create, FileAccess.Write, FileShare.None);
-            // formatter.Serialize(stream, SmallWorld.getInstance());
+            BinaryFormatter formatter = new BinaryFormatter();
+            FileAccess fa;
+
+            if (charger)
+            {
+                fa = FileAccess.Read;
+            }
+            else
+            {
+                fa = FileAccess.Write;
+            }
+
+            Stream stream = new FileStream(getPathComplet(nomFichier), FileMode.OpenOrCreate, fa);
+
+            try
+            {
+                if (charger)
+                {
+                    SmallWorld.Instance = ((SmallWorld)formatter.Deserialize(stream));
+                    Carte.grid = (int[,]) formatter.Deserialize(stream);
+                    Carte.taille = (int) formatter.Deserialize(stream);
+                }
+                else
+                {
+                    formatter.Serialize(stream, SmallWorld.Instance);
+                    formatter.Serialize(stream, Carte.grid);
+                    formatter.Serialize(stream, Carte.taille);
+                }
+            }
+            catch (SerializationException e)
+            {
+                string msg = "de la sauvegarde dans le fichier";
+                if (charger)
+                    msg = "du chargement du fichier";
+
+                Console.WriteLine("Erreur lors {0} \'{1}\' : {2}", msg, getPathComplet(nomFichier), e.Message);
+            }
+
+            Console.WriteLine("j1.peuple: {0} // j2.peuble: {1}", SmallWorld.Instance.joueurs[0].Peuple, SmallWorld.Instance.joueurs[1].Peuple);
+            Console.WriteLine(Carte.grid[1,1]);
+            Console.WriteLine("j1.pointJoueur: {0} // j2.pointJoueur: {1}", SmallWorld.Instance.joueurs[0].getPoints(), SmallWorld.Instance.joueurs[1].getPoints());
+            Console.WriteLine("j1.getUnites()[0].coordonnees.getX(): {0} // j2.getUnites()[0].coordonnees.getX() : {1}", SmallWorld.Instance.joueurs[0].getUnites()[0].coordonnees.getX(), SmallWorld.Instance.joueurs[1].getUnites()[0].coordonnees.getX());
+            Console.WriteLine(SmallWorld.Instance.nbTours);
             stream.Close();
-
+        
         }
+     
 
-        public static void charger(string nomFichier)
-        {
-            /*
-nomFichier = ajouterExtention(nomFichier);
-BinaryFormatter formatter = new BinaryFormatter();
-Stream stream = new FileStream(nomFichier, FileMode.Create, FileAccess.Write, FileShare.None);
-SmallWorld.remplacerInstance( (SmallWorld) formatter.Deserialize(stream2) );
-stream.Close();
-*/
+        private static string getPathComplet(string nomFichier) {
+               return path + Path.DirectorySeparatorChar + nomFichier + extentionSauvegarde;
         }
     }
 }

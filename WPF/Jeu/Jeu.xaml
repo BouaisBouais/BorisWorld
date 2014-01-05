@@ -36,7 +36,10 @@
                 <TextBlock Margin="10" x:Name="tourJ2"></TextBlock>
             </StackPanel>
 
-            <TextBlock Grid.Column="2" Margin="10">Nombre de tours restants : <TextBlock x:Name="nbToursRestants"></TextBlock></TextBlock>
+            <TextBlock Grid.Column="2" Margin="10"><Run Text="N"/><Run Text="ombre de tours res"/><Run Text="tants :"/><Run Text=" "/><InlineUIContainer>
+            		<TextBlock x:Name="nbToursRestants"/>
+            	</InlineUIContainer></TextBlock>
+            <Button Content="Menu" Grid.Column="2" Margin="171,135,21,22" Click="popMenu_Click"/>
 
         </Grid>
     </Grid>

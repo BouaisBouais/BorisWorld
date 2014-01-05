@@ -34,7 +34,7 @@ namespace WPF.Jeu
             tourJ1.Foreground = Brushes.Red;
             tourJ2.Foreground = Brushes.Red;
 
-            TypeUnite j1 = SmallWorld.joueurs[0].Peuple;
+            TypeUnite j1 = SmallWorld.Instance.joueurs[0].Peuple;
             switch (j1)
             {
                 case TypeUnite.Gaulois:
@@ -50,7 +50,7 @@ namespace WPF.Jeu
                     peupleJ1.Text = "Viking";
                     break;
             }
-            TypeUnite j2 = SmallWorld.joueurs[1].Peuple;
+            TypeUnite j2 = SmallWorld.Instance.joueurs[1].Peuple;
             switch (j2)
             {
                 case TypeUnite.Gaulois:
@@ -70,13 +70,14 @@ namespace WPF.Jeu
 
         public void actualiserDonnées()
         {
-            nbToursRestants.Text = App.gameEngine.getToursRestants().ToString();
-            ptsJ1.Text = SmallWorld.joueurs[0].getPoints().ToString();
-            ptsJ2.Text = SmallWorld.joueurs[1].getPoints().ToString();
-            unitesJ1.Text = SmallWorld.joueurs[0].getUnites().Count.ToString();
-            unitesJ2.Text = SmallWorld.joueurs[1].getUnites().Count.ToString();
+            // TODO : IDée => Gérer ca avec un tableau pas possible ?
+            nbToursRestants.Text = SmallWorld.Instance.getToursRestants().ToString();
+            ptsJ1.Text = SmallWorld.Instance.joueurs[0].getPoints().ToString();
+            ptsJ2.Text = SmallWorld.Instance.joueurs[1].getPoints().ToString();
+            unitesJ1.Text = SmallWorld.Instance.joueurs[0].getUnites().Count.ToString();
+            unitesJ2.Text = SmallWorld.Instance.joueurs[1].getUnites().Count.ToString();
 
-            if (SmallWorld.joueurCourant == 0)
+            if (SmallWorld.Instance.joueurCourant == 0)
             {
                 tourJ1.Text = "A ton tour !";
                 tourJ2.Text = "";
@@ -94,29 +95,35 @@ namespace WPF.Jeu
                 mainWindow.afficherMenu(true);
             if (e.Key == Key.Left)
             {
-                Coordonnee left = SmallWorld.getUniteCourante().coordonnees.decaler(-1, 0);
-                App.gameEngine.deplacement(left);
+                Coordonnee left = SmallWorld.Instance.getUniteCourante().coordonnees.decaler(-1, 0);
+                SmallWorld.Instance.deplacement(left);
                 actualiserDonnées();
             }
             if (e.Key == Key.Right)
             {
-                Coordonnee right = SmallWorld.getUniteCourante().coordonnees.decaler(1, 0);
-                App.gameEngine.deplacement(right);
+                Coordonnee right = SmallWorld.Instance.getUniteCourante().coordonnees.decaler(1, 0);
+                SmallWorld.Instance.deplacement(right);
                 actualiserDonnées();
             }
             if (e.Key == Key.Up)
             {
-                Coordonnee up = SmallWorld.getUniteCourante().coordonnees.decaler(0, -1);
-                App.gameEngine.deplacement(up);
+                Coordonnee up = SmallWorld.Instance.getUniteCourante().coordonnees.decaler(0, -1);
+                SmallWorld.Instance.deplacement(up);
                 actualiserDonnées();
             }
             if (e.Key == Key.Down)
             {
-                Coordonnee down = SmallWorld.getUniteCourante().coordonnees.decaler(0, 1);
-                App.gameEngine.deplacement(down);
+                Coordonnee down = SmallWorld.Instance.getUniteCourante().coordonnees.decaler(0, 1);
+                SmallWorld.Instance.deplacement(down);
                 actualiserDonnées();
             }
             canvasCarte.InvalidateVisual();
+        }
+
+
+        private void popMenu_Click(object sender, RoutedEventArgs e)
+        {
+            mainWindow.afficherMenu(true);
         }
     }
 }
