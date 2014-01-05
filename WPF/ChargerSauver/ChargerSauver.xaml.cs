@@ -26,6 +26,7 @@ namespace WPF.ChargerSauver
     {
         private MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
         private bool charger;
+        private bool inGame;
 
 
         public ChargerSauver()
@@ -33,21 +34,20 @@ namespace WPF.ChargerSauver
             InitializeComponent();
         }
 
-        public ChargerSauver(bool c)
+        public ChargerSauver(bool c, bool ingame)
         {
             InitializeComponent();
             charger = c;
+            inGame = ingame;
             if (charger)
             {
                 header.Text = "Choisissez le fichier à charger :";
                 Title = "Charger une partie";
-                faireAction.Content = "Charger";
             }
             else
             {
                 header.Text = "Choisissez le fichier de sauvegarde :";
                 Title = "Sauvegarder une partie";
-                faireAction.Content = "Sauvegarder";
             }
 
             listerFichiers();
@@ -84,11 +84,9 @@ namespace WPF.ChargerSauver
             }
         }
 
-
-
         private void clickAnnuler(object sender, RoutedEventArgs e)
         {
-            mainWindow.afficherMenu(false);
+            mainWindow.afficherMenu(inGame);
         }
 
         private void newsave_Click(object sender, RoutedEventArgs e)
@@ -132,8 +130,6 @@ namespace WPF.ChargerSauver
 
         }
 
-
-
         private void doAction(string n)
         {
             GestionFichiers.action(n, charger);
@@ -144,24 +140,14 @@ namespace WPF.ChargerSauver
             }
             else
             {
-                refreshListeFichiers();
+                mainWindow.afficherJeu();
             }
         }
-
-
-
 
         private void refreshListeFichiers()
         {
             listeFichiers.Items.Clear();
             listerFichiers();
-        }
-
-
-
-
-        private void faireAction_Click(object sender, RoutedEventArgs e)
-        {
         }
     }
 }

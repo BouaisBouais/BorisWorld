@@ -83,10 +83,17 @@
     <Compile Include="ChargerSauver\ChargerSauver.xaml.cs">
       <DependentUpon>ChargerSauver.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FinJeu\FinJeu.xaml.cs">
+      <DependentUpon>FinJeu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="InputBox\InputBox.xaml.cs">
       <DependentUpon>InputBox.xaml</DependentUpon>
     </Compile>
     <Compile Include="Jeu\CanvasCarte.cs" />
+    <Page Include="FinJeu\FinJeu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="InputBox\InputBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

@@ -23,6 +23,7 @@ namespace WPF
         private Page chargerSauver;
         private Page jeu;
         private Page nouvellePartie;
+        private Page finJeu;
 
         public MainWindow()
         {
@@ -38,9 +39,9 @@ namespace WPF
             this.Content = menu;
         }
 
-        public void afficherChargerSauver(bool charger)
+        public void afficherChargerSauver(bool charger, bool ingame)
         {
-            chargerSauver = new ChargerSauver.ChargerSauver(charger);
+            chargerSauver = new ChargerSauver.ChargerSauver(charger, ingame);
             this.Content = chargerSauver;
         }
 
@@ -54,6 +55,12 @@ namespace WPF
         {
             nouvellePartie = new NouvellePartie.NouvellePartie();
             this.Content = nouvellePartie;
+        }
+
+        public void afficherFinJeu()
+        {
+            finJeu = new FinJeu.FinJeu();
+            this.Content = finJeu;
         }
     }
 }

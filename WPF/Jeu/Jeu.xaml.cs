@@ -35,37 +35,11 @@ namespace WPF.Jeu
             tourJ2.Foreground = Brushes.Red;
 
             TypeUnite j1 = SmallWorld.Instance.joueurs[0].Peuple;
-            switch (j1)
-            {
-                case TypeUnite.Gaulois:
-                    peupleJ1.Foreground = Brushes.Yellow;
-                    peupleJ1.Text = "Gaulois";
-                    break;
-                case TypeUnite.Nain:
-                    peupleJ1.Foreground = Brushes.SlateGray;
-                    peupleJ1.Text = "Nain";
-                    break;
-                case TypeUnite.Viking:
-                    peupleJ1.Foreground = Brushes.Purple;
-                    peupleJ1.Text = "Viking";
-                    break;
-            }
+            peupleJ1.Foreground = App.getColorFromPeuple(j1);
+            peupleJ1.Text = App.getNameFromPeuple(j1);
             TypeUnite j2 = SmallWorld.Instance.joueurs[1].Peuple;
-            switch (j2)
-            {
-                case TypeUnite.Gaulois:
-                    peupleJ2.Foreground = Brushes.Yellow;
-                    peupleJ2.Text = "Gaulois";
-                    break;
-                case TypeUnite.Nain:
-                    peupleJ2.Foreground = Brushes.SlateGray;
-                    peupleJ2.Text = "Nain";
-                    break;
-                case TypeUnite.Viking:
-                    peupleJ2.Foreground = Brushes.Purple;
-                    peupleJ2.Text = "Viking";
-                    break;
-            }
+            peupleJ2.Foreground = App.getColorFromPeuple(j2);
+            peupleJ2.Text = App.getNameFromPeuple(j2);
         }
 
         public void actualiserDonnées()
@@ -91,33 +65,48 @@ namespace WPF.Jeu
 
         private void HandleKeys(object sender, KeyEventArgs e)
         {
+            bool finJeu = false;
             if (e.Key == Key.Escape)
                 mainWindow.afficherMenu(true);
             if (e.Key == Key.Left)
             {
                 Coordonnee left = SmallWorld.Instance.getUniteCourante().coordonnees.decaler(-1, 0);
-                SmallWorld.Instance.deplacement(left);
+                finJeu = SmallWorld.Instance.deplacement(left);
                 actualiserDonnées();
             }
             if (e.Key == Key.Right)
             {
                 Coordonnee right = SmallWorld.Instance.getUniteCourante().coordonnees.decaler(1, 0);
-                SmallWorld.Instance.deplacement(right);
+                finJeu = SmallWorld.Instance.deplacement(right);
                 actualiserDonnées();
             }
             if (e.Key == Key.Up)
             {
                 Coordonnee up = SmallWorld.Instance.getUniteCourante().coordonnees.decaler(0, -1);
-                SmallWorld.Instance.deplacement(up);
+                finJeu = SmallWorld.Instance.deplacement(up);
                 actualiserDonnées();
             }
             if (e.Key == Key.Down)
             {
                 Coordonnee down = SmallWorld.Instance.getUniteCourante().coordonnees.decaler(0, 1);
-                SmallWorld.Instance.deplacement(down);
+                finJeu = SmallWorld.Instance.deplacement(down);
+                actualiserDonnées();
+            }
+            if (e.Key == Key.Space)
+            {
+                SmallWorld.Instance.passerUnite();
+                actualiserDonnées();
+            }
+            if (e.Key == Key.Enter)
+            {
+                finJeu = SmallWorld.Instance.passerTour();
                 actualiserDonnées();
             }
             canvasCarte.InvalidateVisual();
+            if (finJeu)
+            {
+                mainWindow.afficherFinJeu();
+            }
         }
 
 

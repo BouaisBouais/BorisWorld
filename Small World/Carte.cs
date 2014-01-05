@@ -135,5 +135,18 @@ namespace Small_World
             }
         }
 
+        static public int getNombreUnites(Coordonnee coord){
+            int nb = 0;
+            foreach (Joueur j in SmallWorld.Instance.joueurs)
+            {
+                foreach (Unite u in j.getUnites())
+                {
+                    if(u.coordonnees.Equals(coord))
+                        nb++;
+                }
+            }
+            return nb;
+        }
+
     }
 }

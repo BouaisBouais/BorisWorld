@@ -51,8 +51,9 @@ namespace Small_World
 
         /**
          * Demande à une unité de se déplacer sur la case visée
+         * Return true si fin du jeu
          */
-        public void deplacement(Coordonnee c)
+        public bool deplacement(Coordonnee c)
         {
             resultatCombat result = getUniteCourante().deplacement(c);
             if (result == resultatCombat.ATTAQUANT_MORT || getUniteCourante().mouvement == 0)
@@ -63,7 +64,7 @@ namespace Small_World
                 else
                     instance.uniteCourante = nextUnite;
             }
-            checkFinJeu();
+            return checkFinJeu();
         }
 
         /**
@@ -71,37 +72,41 @@ namespace Small_World
          */
         public void passerUnite()
         {
-            getJoueurCourant().getUnites().Remove(getUniteCourante());
-            getJoueurCourant().addUnite(getUniteCourante());
+            Unite u = getUniteCourante();
+            getJoueurCourant().getUnites().Remove(u);
+            getJoueurCourant().addUnite(u);
             instance.uniteCourante = getJoueurCourant().getFirstMovementAbleUnit();
         }
 
         /**
          * Passe le tour d'un joueur.
          * Si tous les joueurs ont joué pendant ce tour, lance un nouveau tour
+         * Return true si fin du jeu
          */
-        public void passerTour()
+        public bool passerTour()
         {
             joueurCourant++;
             uniteCourante = 0;
             if (joueurCourant >= NOMBRE_JOUEURS)
             {
                 joueurCourant = 0;
-                nouveauTour();
+                return nouveauTour();
             }
+            return false;
         }
 
         /**
          * Lance un nouveau tour de jeu
+         * Return true si fin du jeu
          */
-        public void nouveauTour()
+        public bool nouveauTour()
         {
             nbTours++;
-            checkFinJeu();
             foreach (Joueur j in joueurs)
             {
                 j.nouveauTour();
             }
+            return checkFinJeu();
         }
 
         /**
@@ -129,8 +134,7 @@ namespace Small_World
 
         /**
          * Regarde si la fin du jeu est arrivée
-         * Le cas échéant, lance une action ?
-         * TODO: lancer l'action
+         * Return true si fin du jeu
          */
         bool checkFinJeu()
         {
@@ -142,6 +146,21 @@ namespace Small_World
 
             return false;
 
+        }
+
+        public Joueur getVainqueur()
+        {
+            Joueur vainqueur = null;
+
+            foreach (Joueur j in joueurs)
+            {
+                if (vainqueur == null || vainqueur.getPoints() < j.getPoints())
+                {
+                    vainqueur = j;
+                }
+            }
+
+            return vainqueur;
         }
     }
 }

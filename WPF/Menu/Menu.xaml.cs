@@ -21,6 +21,7 @@ namespace WPF.Menu
     public partial class Menu : Page
     {
         private MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+        private bool inGame = false;
         public Menu()
         {
             InitializeComponent();
@@ -30,6 +31,8 @@ namespace WPF.Menu
             Image img = new Image();
             img.Source = path;
             gridMain.Children.Add(img);
+
+            sauvegarder.IsEnabled = false;
         }
 
         public Menu(bool ingame)
@@ -44,6 +47,7 @@ namespace WPF.Menu
 
                 Grid.SetRow(retour, 0);
                 gridMain.Children.Add(retour);
+                inGame = true;
             }
         }
 
@@ -59,12 +63,12 @@ namespace WPF.Menu
 
         private void clickSauvegarder(object sender, RoutedEventArgs e)
         {
-            mainWindow.afficherChargerSauver(false);
+            mainWindow.afficherChargerSauver(false, inGame);
         }
 
         private void clickCharger(object sender, RoutedEventArgs e)
         {
-            mainWindow.afficherChargerSauver(true);
+            mainWindow.afficherChargerSauver(true, inGame);
         }
 
         private void clickQuitter(object sender, RoutedEventArgs e)

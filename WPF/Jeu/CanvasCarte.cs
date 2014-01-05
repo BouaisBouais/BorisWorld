@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -89,22 +90,24 @@ namespace WPF.Jeu
                 foreach (Unite unite in joueur.getUnites())
                 {
                     Coordonnee coords = unite.coordonnees;
-                    SolidColorBrush color = new SolidColorBrush();
-                    switch (joueur.Peuple)
-                    {
-                        case TypeUnite.Gaulois:
-                            color = Brushes.Yellow;
-                            break;
-                        case TypeUnite.Nain:
-                            color = Brushes.SlateGray;
-                            break;
-                        case TypeUnite.Viking:
-                            color = Brushes.Purple;
-                            break;
-                    }
+                    SolidColorBrush color = App.getColorFromPeuple(joueur.Peuple);
                     int ellipseX = (coords.getX() - 1) * imgSize + 25;
                     int ellipseY = (coords.getY() - 1) * imgSize + 25;
                     dc.DrawEllipse(color, null, new Point(ellipseX, ellipseY), 12, 12);
+
+                    int nb = Carte.getNombreUnites(coords);
+                    if (nb > 1)
+                    {
+                        FormattedText text = new FormattedText(nb.ToString(),
+                            CultureInfo.GetCultureInfo("fr-fr"),
+                            FlowDirection.LeftToRight,
+                            new Typeface("Verdana"),
+                            15,
+                            Brushes.White);
+                        Geometry border = text.BuildGeometry(new Point(ellipseX - 5, ellipseY - 10));
+                        dc.DrawGeometry(null, new Pen(Brushes.Black, 3), border);
+                        dc.DrawText(text, new Point(ellipseX - 5, ellipseY - 10));
+                    }
                 }
             }
         }
