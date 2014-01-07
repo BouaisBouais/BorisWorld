@@ -99,7 +99,35 @@ Console.WriteLine("j1res.getUnites()[0].coordonnees.getX(): {0} // j2res.getUnit
             Console.WriteLine("j1.pointJoueur: {0} // j2.pointJoueur: {1}", SmallWorld.Instance.joueurs[0].getPoints(), SmallWorld.Instance.joueurs[1].getPoints());
             Console.WriteLine("j1.getUnites()[0].coordonnees.getX(): {0} // j2.getUnites()[0].coordonnees.getX()", SmallWorld.Instance.joueurs[0].getUnites()[0].coordonnees.getX(), SmallWorld.Instance.joueurs[1].getUnites()[0].coordonnees.getX());
         */
-       
+
+
+
+        private static unsafe void testerCettePutainDeDLLQuiMePeteBienLesBurnes(int t, int** m)
+        {
+            
+            int[,] map = new int[t, t];
+            for (int i = 0; i < t; i++)
+            {
+                for (int j = 0; j < t; j++)
+                {
+                    map[i, j] = m[i][j];
+                }
+            }
+
+
+            Console.WriteLine("TAILLE : {0}",t);
+            Console.WriteLine("MAP(0,0) : {0}", map[0,0]);
+            Console.WriteLine("M[0][0] : {0}", m[0][0]);
+
+            for (int i = 0; i < t; i++)
+            {
+                for (int j = 0; j < t; j++)
+                {
+                    Console.Write(map[i, j]);
+                }
+                Console.WriteLine();
+            }
+        }
 
         // Charge ou sauvegarde suivant la valeur de charger
         public static void action(string nomFichier, bool charger)
@@ -127,12 +155,34 @@ Console.WriteLine("j1res.getUnites()[0].coordonnees.getX(): {0} // j2res.getUnit
                     SmallWorld.Instance = ((SmallWorld)formatter.Deserialize(stream));
                     Carte.grid = (int[,]) formatter.Deserialize(stream);
                     Carte.taille = (int) formatter.Deserialize(stream);
+                    int tailleCarte = Carte.taille;
+
+
+                    Carte.wrapper.initializeLoad(tailleCarte);
+
+                    for(int x=0;x < tailleCarte;x++) {
+                        for (int y=0;y<tailleCarte;y++) {
+                            Carte.wrapper.chargerMap(Carte.grid[x, y]);
+                        }
+                    }
+
+                    unsafe
+                    {
+                        testerCettePutainDeDLLQuiMePeteBienLesBurnes(Carte.taille, Carte.wrapper.getMap());
+                    }
+                   
                 }
                 else
                 {
                     formatter.Serialize(stream, SmallWorld.Instance);
                     formatter.Serialize(stream, Carte.grid);
                     formatter.Serialize(stream, Carte.taille);
+
+                    unsafe
+                    {
+                        testerCettePutainDeDLLQuiMePeteBienLesBurnes(Carte.taille, Carte.wrapper.getMap());
+                    }
+
                 }
             }
             catch (SerializationException e)

@@ -20,6 +20,9 @@ namespace Wrapper {
 			int** genererMap(int taille) { return MapLib_genererMap(map,taille);}
 			int** posJoueurs() { return MapLib_posJoueurs(map);}
 			int** suggestions(int peuple, int x, int y) { return MapLib_suggestions(map, peuple, x, y);}
+			void initializeLoad(int taille) {return MapLib_initializeLoad(map,taille);}
+			void chargerMap(int value) {return MapLib_chargerMap(map,value);}
+			int** getMap() {return MapLib_getMap(map);}
 	};
 }
 #endif
