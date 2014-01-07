@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 using Small_World;
 
 namespace WPF.Jeu
@@ -26,11 +27,22 @@ namespace WPF.Jeu
         private BitmapImage foret = new BitmapImage(new Uri(@"Ressources/terrains/forest.gif", UriKind.RelativeOrAbsolute));
         private const int imgSize = 50;
 
+
+        private Dictionary<Point,Coordonnee> points;
+        private const int radiusPoints = 12;
+        StackPanel s = new StackPanel();
+        private List<Unite> selectionCourrante = new List<Unite>();
+
+
         public CanvasCarte() : base()
         {
             int taille = Carte.taille;
             this.Height = taille * imgSize;
             this.Width = taille * imgSize;
+            this.points = new Dictionary<Point,Coordonnee>();
+
+            this.Children.Add(s);
+            s.Visibility = System.Windows.Visibility.Hidden;
         }
 
         protected override void OnRender(DrawingContext dc)
@@ -91,26 +103,38 @@ namespace WPF.Jeu
 
         private void drawUnits(DrawingContext dc)
         {
-
+            points.Clear();
             Coordonnee currentUnit = SmallWorld.Instance.getUniteCourante().coordonnees;
             SolidColorBrush scb = Brushes.Red;
             int x = (currentUnit.getX() - 1) * imgSize + 25;
             int y = (currentUnit.getY() - 1) * imgSize + 25;
-            dc.DrawEllipse(scb, null, new Point(x, y), 14, 14);
+            dc.DrawEllipse(scb, null, new Point(x, y), radiusPoints + 2, radiusPoints +2);
 
+
+            
             foreach (Joueur joueur in SmallWorld.Instance.joueurs)
             {
                 foreach (Unite unite in joueur.getUnites())
                 {
                     Coordonnee coords = unite.coordonnees;
+                    
                     SolidColorBrush color = App.getColorFromPeuple(joueur.Peuple);
                     int ellipseX = (coords.getX() - 1) * imgSize + 25;
                     int ellipseY = (coords.getY() - 1) * imgSize + 25;
-                    dc.DrawEllipse(color, null, new Point(ellipseX, ellipseY), 12, 12);
+                    
+                    Point p = new Point(ellipseX, ellipseY);
+                   
+                    dc.DrawEllipse(color, null, p, radiusPoints, radiusPoints);
 
                     int nb = Carte.getNombreUnites(coords);
+                    if (!points.ContainsKey(p) && joueur == SmallWorld.Instance.getJoueurCourant())
+                        points.Add(p, coords);
+
                     if (nb > 1)
                     {
+                        
+
+
                         FormattedText text = new FormattedText(nb.ToString(),
                             CultureInfo.GetCultureInfo("fr-fr"),
                             FlowDirection.LeftToRight,
@@ -124,5 +148,88 @@ namespace WPF.Jeu
                 }
             }
         }
+
+
+        protected override void OnMouseDown(MouseButtonEventArgs e)
+        {
+            Point click = e.GetPosition(this);
+            bool panelAffiche = false;
+
+            foreach (Point p in points.Keys)
+            {
+                Vector v = Point.Subtract(p, click);
+                int x = Math.Abs((int) v.X);
+                int y = Math.Abs((int) v.Y);
+
+                // SI l'utilisateur à cliqué sur une unitée
+                if (x < radiusPoints && y < radiusPoints)
+                {
+                    
+                    Coordonnee c = points[p];
+                    Dictionary<Unite,int> dUnite = Carte.getUnites(c);
+
+                    // Appartition d'un menu si plusieurs unitées
+                    if (dUnite.Count > 1)
+                    {
+                        s.Children.Clear();
+                        foreach (Unite u in dUnite.Keys)
+                        {
+                            Button b = new Button();
+                            b.Content = "Unité n°" + dUnite[u];
+                            b.Click += changerUniteCourante_Click;
+
+                            if (u.mouvement == 0)
+                                b.IsEnabled = false;
+
+                            b.Name = "x" + dUnite[u];
+                            s.Children.Add(b);
+                        }
+
+                        s.Arrange(new Rect(click, new Size(200, 150)));
+                        s.Visibility = System.Windows.Visibility.Visible;
+                        panelAffiche = true;
+                    }
+                    else
+                    {
+                        if (dUnite.Keys.ElementAt(0).mouvement > 0)
+                            changeUniteCourante(dUnite.Values.ElementAt(0));
+                    }
+                }
+            }
+
+            if (!panelAffiche)
+                s.Visibility = System.Windows.Visibility.Hidden;
+            
+        }
+
+
+        public void changerUniteCourante_Click(object sender, RoutedEventArgs e)
+        {
+            Button b = (Button)sender;
+            try
+            {
+                string nom = b.Name.Substring(1);
+                int id = int.Parse(nom);
+                changeUniteCourante(id);
+            }
+            catch
+            {
+                    Console.WriteLine("Erreur de parsing lors de la selection d'une unitée courante");
+            }
+            
+
+
+        }
+
+        public void changeUniteCourante(int id)
+        {
+
+            SmallWorld.Instance.uniteCourante = id;
+            s.Visibility = System.Windows.Visibility.Hidden;
+            Console.WriteLine("Changement d'unité courrante : {0}", SmallWorld.Instance.uniteCourante);
+
+            this.InvalidateVisual();
+        }
+
     }
 }

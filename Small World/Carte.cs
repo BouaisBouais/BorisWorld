@@ -147,6 +147,30 @@ namespace Small_World
             return nb;
         }
 
+        static public Dictionary<Unite,int> getUnites(Coordonnee coord)
+        {
+            Dictionary<Unite, int> listeUnite = new Dictionary<Unite, int>();
+            bool joueurTrouve = false; // Optimisation de la boucle
+
+
+            foreach (Joueur j in SmallWorld.Instance.joueurs)
+            {
+                int i = 0; // ID dans le tableau des unitées
+                foreach (Unite u in j.getUnites())
+                {
+                    if (u.coordonnees.Equals(coord))
+                    {
+                        listeUnite.Add(u, i);
+                        joueurTrouve = true;
+                    }
+                    i++;
+                }
+                if (joueurTrouve)
+                    break;
+            }
+            return listeUnite;
+        }
+
         /**
          * Retourne des suggestions de déplacement pour l'unité courante
          * Return List<Coordonnee> liste de coordonnées de cases suggérées
