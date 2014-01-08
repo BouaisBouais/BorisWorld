@@ -28,18 +28,21 @@ namespace WPF.Jeu
         private const int imgSize = 50;
 
 
-        private Dictionary<Point,Coordonnee> points;
+        private Dictionary<Point,Coordonnee> pointsCourrants;
         private const int radiusPoints = 12;
         StackPanel s = new StackPanel();
         private List<Unite> selectionCourrante = new List<Unite>();
 
+
+        private Coordonnee caseSurvolee = null;
+        private Coordonnee lastCaseSurvolee = null;
 
         public CanvasCarte() : base()
         {
             int taille = Carte.taille;
             this.Height = taille * imgSize;
             this.Width = taille * imgSize;
-            this.points = new Dictionary<Point,Coordonnee>();
+            this.pointsCourrants = new Dictionary<Point,Coordonnee>();
 
             this.Children.Add(s);
             s.Visibility = System.Windows.Visibility.Hidden;
@@ -52,6 +55,7 @@ namespace WPF.Jeu
                 drawBack(dc);
                 drawSuggestions(dc);
                 drawUnits(dc);
+                drawDeplacement(dc);
             }
             catch (NullReferenceException ex)
             {
@@ -93,17 +97,15 @@ namespace WPF.Jeu
         {
             foreach (Coordonnee c in Carte.getSuggestions())
             {
-                int x = c.getX();
-                int y = c.getY();
-                Brush sugg = Brushes.Green.Clone();
-                sugg.Opacity = 0.35;
-                dc.DrawRectangle(sugg, null, new Rect((x - 1) * imgSize, (y - 1) * imgSize, imgSize, imgSize));
+                drawCase(c, Brushes.Green.Clone(), 0.35, dc);
             }
         }
 
+       
+
         private void drawUnits(DrawingContext dc)
         {
-            points.Clear();
+            pointsCourrants.Clear();
             Coordonnee currentUnit = SmallWorld.Instance.getUniteCourante().coordonnees;
             SolidColorBrush scb = Brushes.Red;
             int x = (currentUnit.getX() - 1) * imgSize + 25;
@@ -126,15 +128,15 @@ namespace WPF.Jeu
                    
                     dc.DrawEllipse(color, null, p, radiusPoints, radiusPoints);
 
+
                     int nb = Carte.getNombreUnites(coords);
-                    if (!points.ContainsKey(p) && joueur == SmallWorld.Instance.getJoueurCourant())
-                        points.Add(p, coords);
+
+                    if (!pointsCourrants.ContainsKey(p) && joueur == SmallWorld.Instance.getJoueurCourant())
+                        pointsCourrants.Add(p, coords);
+                    
 
                     if (nb > 1)
                     {
-                        
-
-
                         FormattedText text = new FormattedText(nb.ToString(),
                             CultureInfo.GetCultureInfo("fr-fr"),
                             FlowDirection.LeftToRight,
@@ -150,24 +152,131 @@ namespace WPF.Jeu
         }
 
 
+
+        private void drawDeplacement(DrawingContext dc)
+        {
+            if (caseSurvolee != null) {
+                drawCase(caseSurvolee, Brushes.Blue.Clone(), 0.35, dc);
+                caseSurvolee = null;
+            }
+            
+
+        }
+
+
+
+
+        private void drawCase(Coordonnee c, Brush couleur, double opacity, DrawingContext dc)
+        {
+            int x = c.getX();
+            int y = c.getY();
+            Brush sugg = couleur;
+            sugg.Opacity = opacity;
+            dc.DrawRectangle(sugg, null, new Rect((x - 1) * imgSize, (y - 1) * imgSize, imgSize, imgSize));
+        }
+
+
+        private bool checkPreventRefresh()
+        {
+            if (s.Visibility == System.Windows.Visibility.Visible)
+                return true;
+
+            return false;
+        }
+
+        protected override void OnMouseLeave(MouseEventArgs e)
+        {
+
+            if (checkPreventRefresh())
+                return;
+
+            caseSurvolee = null;
+            this.InvalidateVisual();
+        }
+
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             Point click = e.GetPosition(this);
+
+            if (e.LeftButton == MouseButtonState.Pressed) {
+                verifierActionSelectionUnite(click);
+            }
+            else if (e.RightButton == MouseButtonState.Pressed)
+            {
+                verifierActionDeplacement(click);
+            }
+            
+        }
+
+        protected override void OnMouseMove(MouseEventArgs e)
+        {
+
+            if (checkPreventRefresh())
+                return;
+            
+
+            Point click = e.GetPosition(this);
+            Coordonnee tempCaseSurvol = pointToCoordonne(click);
+            Unite uCourrante = SmallWorld.Instance.getUniteCourante();
+
+
+            if (lastCaseSurvolee == null || (!(tempCaseSurvol.Equals(lastCaseSurvolee))))
+            {
+                // Affichage d'une case déplacable
+                if (!(tempCaseSurvol.Equals(uCourrante.coordonnees)) &&
+                uCourrante.deplacementPossible(tempCaseSurvol))
+                {
+                    caseSurvolee = tempCaseSurvol;
+                }
+                else
+                {
+                    caseSurvolee = null;
+                }
+                lastCaseSurvolee = tempCaseSurvol;
+
+                // Survol d'une unitée
+
+
+                this.InvalidateVisual();
+            }
+
+         }
+            
+
+        public void verifierActionDeplacement(Point click)
+        {
+
+            Coordonnee arrivee = pointToCoordonne(click);         
+            bool finJeu = SmallWorld.Instance.deplacement(arrivee);
+            this.InvalidateVisual();
+            if (finJeu) {
+                MainWindow m = (MainWindow)Application.Current.MainWindow;
+                m.afficherFinJeu();
+            }
+
+
+
+        }
+
+
+
+        // Verifie si une unitée est sur la case ou non.
+        public void verifierActionSelectionUnite(Point click)
+        {
             bool panelAffiche = false;
 
-            foreach (Point p in points.Keys)
+            foreach (Point p in pointsCourrants.Keys)
             {
                 Vector v = Point.Subtract(p, click);
-                int x = Math.Abs((int) v.X);
-                int y = Math.Abs((int) v.Y);
+                int x = Math.Abs((int)v.X);
+                int y = Math.Abs((int)v.Y);
 
                 // SI l'utilisateur à cliqué sur une unitée
                 if (x < radiusPoints && y < radiusPoints)
                 {
+                    Coordonnee c = pointsCourrants[p];
+                    Dictionary<Unite, int> dUnite = Carte.getUnites(c);
                     
-                    Coordonnee c = points[p];
-                    Dictionary<Unite,int> dUnite = Carte.getUnites(c);
-
                     // Appartition d'un menu si plusieurs unitées
                     if (dUnite.Count > 1)
                     {
@@ -199,8 +308,8 @@ namespace WPF.Jeu
 
             if (!panelAffiche)
                 s.Visibility = System.Windows.Visibility.Hidden;
-            
         }
+
 
 
         public void changerUniteCourante_Click(object sender, RoutedEventArgs e)
@@ -231,5 +340,27 @@ namespace WPF.Jeu
             this.InvalidateVisual();
         }
 
+
+        public Coordonnee pointToCoordonne(Point p)
+        {
+            Point temp = p;
+            int x= 1 , y = 1;
+
+            while (p.X - imgSize > 0)
+            {
+                p.X -= imgSize;
+                x++;
+            }
+
+            while (p.Y - imgSize > 0)
+            {
+                p.Y -= imgSize;
+                y++;
+            }
+
+
+
+            return new Coordonnee(x,y);
+        }
     }
 }

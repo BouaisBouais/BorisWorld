@@ -92,5 +92,7 @@ namespace Small_World
         {
             return (X == obj.X && Y == obj.Y);
         }
+
+
     }
 }

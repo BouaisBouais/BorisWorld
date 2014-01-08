@@ -128,7 +128,6 @@ namespace Small_World
          * Rend l'unité courante
          */
         public Unite getUniteCourante(){
-            Console.WriteLine("Joueur Courant " + joueurCourant + ", Unite Courante " + uniteCourante);
             return getJoueurCourant().getUnites()[uniteCourante];
         }
 

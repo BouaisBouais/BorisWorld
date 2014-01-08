@@ -114,5 +114,10 @@ namespace WPF.Jeu
         {
             mainWindow.afficherMenu(true);
         }
+
+        private void canvasCarte_MouseLeave_1(object sender, MouseEventArgs e)
+        {
+
+        }
     }
 }
