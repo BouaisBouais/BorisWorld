@@ -56,7 +56,7 @@ namespace Small_World
         public bool deplacement(Coordonnee c)
         {
             resultatCombat result = getUniteCourante().deplacement(c);
-            if (result == resultatCombat.ATTAQUANT_MORT || getUniteCourante().mouvement == 0)
+            if (result == resultatCombat.ATTAQUANT_MORT || getUniteCourante().mouvement < 1)
             {
                 int nextUnite = getJoueurCourant().getFirstMovementAbleUnit();
                 if (nextUnite == -1)
@@ -73,9 +73,18 @@ namespace Small_World
         public void passerUnite()
         {
             Unite u = getUniteCourante();
-            getJoueurCourant().getUnites().Remove(u);
-            getJoueurCourant().addUnite(u);
-            instance.uniteCourante = getJoueurCourant().getFirstMovementAbleUnit();
+            u.mouvement = 0;
+            // TODO : Utile ?
+            //getJoueurCourant().getUnites().Remove(u);
+            //getJoueurCourant().addUnite(u);
+
+            int id_next = getJoueurCourant().getFirstMovementAbleUnit();
+
+            if (id_next != -1) {
+                instance.uniteCourante = id_next;
+            } else {
+                passerTour();
+            }
         }
 
         /**

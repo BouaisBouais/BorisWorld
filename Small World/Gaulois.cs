@@ -27,6 +27,9 @@ namespace Small_World
 
         public override bool deplacementPossible(Coordonnee coords)
         {
+            if (this.coordonnees.Equals(coords))
+                return false;
+
             Case c = Carte.getCase(coords);
             int distance = coordonnees.distance(coords);
             if (distance > 1 || c.getTypeCase() == TypeCases.EAU) return false;

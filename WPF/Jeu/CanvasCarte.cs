@@ -28,7 +28,6 @@ namespace WPF.Jeu
         private const int imgSize = 50;
 
 
-        private Dictionary<Point,Coordonnee> pointsCourrants;
         private const int radiusPoints = 12;
         StackPanel s = new StackPanel();
         private List<Unite> selectionCourrante = new List<Unite>();
@@ -42,7 +41,7 @@ namespace WPF.Jeu
             int taille = Carte.taille;
             this.Height = taille * imgSize;
             this.Width = taille * imgSize;
-            this.pointsCourrants = new Dictionary<Point,Coordonnee>();
+
 
             this.Children.Add(s);
             s.Visibility = System.Windows.Visibility.Hidden;
@@ -105,7 +104,6 @@ namespace WPF.Jeu
 
         private void drawUnits(DrawingContext dc)
         {
-            pointsCourrants.Clear();
             Coordonnee currentUnit = SmallWorld.Instance.getUniteCourante().coordonnees;
             SolidColorBrush scb = Brushes.Red;
             int x = (currentUnit.getX() - 1) * imgSize + 25;
@@ -130,10 +128,6 @@ namespace WPF.Jeu
 
 
                     int nb = Carte.getNombreUnites(coords);
-
-                    if (!pointsCourrants.ContainsKey(p) && joueur == SmallWorld.Instance.getJoueurCourant())
-                        pointsCourrants.Add(p, coords);
-                    
 
                     if (nb > 1)
                     {
@@ -203,7 +197,18 @@ namespace WPF.Jeu
             }
             else if (e.RightButton == MouseButtonState.Pressed)
             {
-                verifierActionDeplacement(click);
+               
+                if (s.Visibility == System.Windows.Visibility.Hidden)
+                {
+                    verifierActionDeplacement(click);
+                }
+                else  // Si jamais le menu est ouvert on le ferme juste et on déplace pas
+                {
+                    s.Visibility = System.Windows.Visibility.Hidden;
+                    this.InvalidateVisual();
+                }
+                
+          
             }
             
         }
@@ -223,8 +228,7 @@ namespace WPF.Jeu
             if (lastCaseSurvolee == null || (!(tempCaseSurvol.Equals(lastCaseSurvolee))))
             {
                 // Affichage d'une case déplacable
-                if (!(tempCaseSurvol.Equals(uCourrante.coordonnees)) &&
-                uCourrante.deplacementPossible(tempCaseSurvol))
+                if (uCourrante.deplacementPossible(tempCaseSurvol))
                 {
                     caseSurvolee = tempCaseSurvol;
                 }
@@ -235,8 +239,6 @@ namespace WPF.Jeu
                 lastCaseSurvolee = tempCaseSurvol;
 
                 // Survol d'une unitée
-
-
                 this.InvalidateVisual();
             }
 
@@ -246,7 +248,7 @@ namespace WPF.Jeu
         public void verifierActionDeplacement(Point click)
         {
 
-            Coordonnee arrivee = pointToCoordonne(click);         
+            Coordonnee arrivee = pointToCoordonne(click);
             bool finJeu = SmallWorld.Instance.deplacement(arrivee);
             this.InvalidateVisual();
             if (finJeu) {
@@ -263,51 +265,41 @@ namespace WPF.Jeu
         // Verifie si une unitée est sur la case ou non.
         public void verifierActionSelectionUnite(Point click)
         {
-            bool panelAffiche = false;
+            Coordonnee caseClique = pointToCoordonne(click);
 
-            foreach (Point p in pointsCourrants.Keys)
-            {
-                Vector v = Point.Subtract(p, click);
-                int x = Math.Abs((int)v.X);
-                int y = Math.Abs((int)v.Y);
+            Dictionary<Unite,int> unites = Carte.getUnites(caseClique);
 
-                // SI l'utilisateur à cliqué sur une unitée
-                if (x < radiusPoints && y < radiusPoints)
-                {
-                    Coordonnee c = pointsCourrants[p];
-                    Dictionary<Unite, int> dUnite = Carte.getUnites(c);
-                    
-                    // Appartition d'un menu si plusieurs unitées
-                    if (dUnite.Count > 1)
-                    {
-                        s.Children.Clear();
-                        foreach (Unite u in dUnite.Keys)
-                        {
-                            Button b = new Button();
-                            b.Content = "Unité n°" + dUnite[u];
-                            b.Click += changerUniteCourante_Click;
-
-                            if (u.mouvement == 0)
-                                b.IsEnabled = false;
-
-                            b.Name = "x" + dUnite[u];
-                            s.Children.Add(b);
-                        }
-
-                        s.Arrange(new Rect(click, new Size(200, 150)));
-                        s.Visibility = System.Windows.Visibility.Visible;
-                        panelAffiche = true;
-                    }
-                    else
-                    {
-                        if (dUnite.Keys.ElementAt(0).mouvement > 0)
-                            changeUniteCourante(dUnite.Values.ElementAt(0));
-                    }
-                }
-            }
-
-            if (!panelAffiche)
+            if (unites.Count == 1)
+            { 
+                if (unites.Keys.First().mouvement > 0)
+                    changeUniteCourante(unites.Values.First());
                 s.Visibility = System.Windows.Visibility.Hidden;
+
+            }
+            else if (unites.Count > 1)
+            {
+                s.Children.Clear();
+
+                foreach (Unite u in unites.Keys)
+                {
+                    Button b = new Button();
+                    b.Content = "Unité n°" + unites[u];
+                    b.Click += changerUniteCourante_Click;
+
+                    if (u.mouvement == 0)
+                        b.IsEnabled = false;
+
+                    b.Name = "x" + unites[u];
+                    s.Children.Add(b);
+                }
+
+                s.Arrange(new Rect(click, new Size(200, 150)));
+                s.Visibility = System.Windows.Visibility.Visible;
+            }
+            else
+            {
+                s.Visibility = System.Windows.Visibility.Hidden;
+            }
         }
 
 

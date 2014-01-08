@@ -38,6 +38,9 @@ namespace Small_World
 
         public override bool deplacementPossible(Coordonnee coords)
         {
+            if (this.coordonnees.Equals(coords))
+                return false;
+
             int distance = coordonnees.distance(coords);
             Case c = Carte.getCase(coords);
 

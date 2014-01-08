@@ -33,6 +33,9 @@ namespace Small_World
 
         public override bool deplacementPossible(Coordonnee coords)
         {
+            if (this.coordonnees.Equals(coords))
+                return false;
+
             int distance = coordonnees.distance(coords);
             if (distance > 1) return false;
             return (mouvement >= 1);

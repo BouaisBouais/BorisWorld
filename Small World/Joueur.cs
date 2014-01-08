@@ -64,7 +64,7 @@ namespace Small_World
             int index = -1;
             for (int i = 0; i < unites.Count; i++)
             {
-                if (unites[i].mouvement > 0)
+                if (unites[i].peutSeDeplacer())
                 {
                     index = i;
                     break;

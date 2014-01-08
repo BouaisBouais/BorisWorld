@@ -54,6 +54,7 @@ namespace Small_World
 
         public abstract resultatCombat deplacement(Coordonnee coords);
         public abstract bool deplacementPossible(Coordonnee coords);
+
         public abstract int getPoints();
 
 
@@ -197,7 +198,22 @@ namespace Small_World
             }
         }
 
+        public bool peutSeDeplacer()
+        {
 
+            if (this.deplacementPossible(this.coordonnees.decaler(1, 0)) ||
+                this.deplacementPossible(this.coordonnees.decaler(0, 1)) ||
+                this.deplacementPossible(this.coordonnees.decaler(-1, 0)) ||
+                this.deplacementPossible(this.coordonnees.decaler(0, -1))
+                )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
     }
 }
