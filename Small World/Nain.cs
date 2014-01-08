@@ -18,6 +18,7 @@ namespace Small_World
                 case TypeCases.FORET:
                     return 2;
                 case TypeCases.PLAINE:
+                case TypeCases.EAU:
                     return 0;
                 default:
                     return 1;
