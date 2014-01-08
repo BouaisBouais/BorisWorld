@@ -10,18 +10,16 @@ namespace Small_World
     [Serializable]
     public class Carte
     {
-        public static int[,] grid { get; set; }
-        public static int taille { get; set; }
+        public int[,] grid { get; set; }
+        public int taille { get; set; }
         [NonSerialized] public static WrapperMap wrapper = new WrapperMap();
 
-        public List<Coordonnee> departJoueurs { get; private set; }
+        private List<Coordonnee> departJoueurs;
 
         unsafe public Carte(int t)
         {
-            Carte.taille = t;
-
+            this.taille = t;
             int** gridTemp = wrapper.genererMap(t);
-
 
             grid = new int[t, t];
             for (int i = 0; i < t; i++)
@@ -32,28 +30,38 @@ namespace Small_World
                 }
             }
 
-
             departJoueurs = new List<Coordonnee>();
-            int** depart = wrapper.posJoueurs();
-
-            for (int i = 0; i < SmallWorld.NOMBRE_JOUEURS; i++)
-            {
-                int x = depart[i][0];
-                int y = depart[i][1];
-                Coordonnee coords = new Coordonnee(x, y);
-                departJoueurs.Add(coords);
-            }
         }
 
         public Carte(int t, int[,] g)
         {
             grid = g;
-            Carte.taille = t;
+            this.taille = t;
+        }
+
+        public List<Coordonnee> getDepartJoueurs()
+        {
+            // On le crée quand on le demande(permet le temps à coordonnee de récupérer la taille de la carte)
+            if (departJoueurs.Count == 0)
+            {
+                unsafe
+                {
+                    int** depart = wrapper.posJoueurs();
+                    for (int i = 0; i < SmallWorld.NOMBRE_JOUEURS; i++)
+                    {
+                        int x = depart[i][0];
+                        int y = depart[i][1];
+                        Coordonnee coords = new Coordonnee(x, y);
+                        departJoueurs.Add(coords);
+                    }
+                }
+            }
+            return departJoueurs;
         }
 
 
         // Renvoie le nombre d'unité de la carte en fonction de sa taille
-        static public int getNombreUniteMax()
+        public int getNombreUniteMax()
         {
             switch (taille)
             {
@@ -70,7 +78,7 @@ namespace Small_World
 
 
         // Renvoie le nombre de tour de la carte en fonction de sa taille
-        static public int getNombreTours()
+        public int getNombreTours()
         {
             switch (taille)
             {
@@ -86,7 +94,7 @@ namespace Small_World
         }
 
 
-        static public bool bordEau(Coordonnee coords)
+        public bool bordEau(Coordonnee coords)
         {
             return ((coords.getX() > 1 && getCase(coords.decaler(-1, 0)).getTypeCase() == TypeCases.EAU) ||
             (coords.getY() > 1 && getCase(coords.decaler(0, -1)).getTypeCase() == TypeCases.EAU) ||
@@ -95,7 +103,7 @@ namespace Small_World
         }
 
 
-        static public Case getCase(Coordonnee coord)
+        public Case getCase(Coordonnee coord)
         {
             int type = grid[coord.getX() - 1, coord.getY() - 1];
 
@@ -130,11 +138,11 @@ namespace Small_World
 
             for (int i = 0; i < SmallWorld.NOMBRE_JOUEURS; i++)
             {
-                Console.WriteLine("Depart J" + i + " : (" + departJoueurs[i].getX() + "," + departJoueurs[i].getY() + ")");
+                Console.WriteLine("Depart J" + i + " : (" + getDepartJoueurs()[i].getX() + "," + getDepartJoueurs()[i].getY() + ")");
             }
         }
 
-        static public int getNombreUnites(Coordonnee coord){
+        public int getNombreUnites(Coordonnee coord){
             int nb = 0;
             foreach (Joueur j in SmallWorld.Instance.joueurs)
             {
@@ -147,7 +155,7 @@ namespace Small_World
             return nb;
         }
 
-        static public Dictionary<Unite,int> getUnites(Coordonnee coord)
+        public Dictionary<Unite,int> getUnites(Coordonnee coord)
         {
             Dictionary<Unite, int> listeUnite = new Dictionary<Unite, int>();
             bool joueurTrouve = false; // Optimisation de la boucle
@@ -175,7 +183,7 @@ namespace Small_World
          * Retourne des suggestions de déplacement pour l'unité courante
          * Return List<Coordonnee> liste de coordonnées de cases suggérées
          */
-        unsafe static public List<Coordonnee> getSuggestions()
+        unsafe public List<Coordonnee> getSuggestions()
         {
             int x = SmallWorld.Instance.getUniteCourante().coordonnees.getX();
             int y = SmallWorld.Instance.getUniteCourante().coordonnees.getY();

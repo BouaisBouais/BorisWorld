@@ -13,11 +13,11 @@ namespace Small_World
         }
 
         public override int getPoints() {
-            if (Carte.getCase(coordonnees).getTypeCase() == TypeCases.EAU)
+            if (SmallWorld.Instance.carte.getCase(coordonnees).getTypeCase() == TypeCases.EAU)
                 return 0;
-            if (Carte.bordEau(coordonnees))
+            if (SmallWorld.Instance.carte.bordEau(coordonnees))
                 return 2;
-            if(Carte.getCase(coordonnees).getTypeCase() == TypeCases.DESERT)
+            if (SmallWorld.Instance.carte.getCase(coordonnees).getTypeCase() == TypeCases.DESERT)
                 return 0;
             return 1;
         }

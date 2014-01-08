@@ -13,7 +13,7 @@ namespace Small_World
         }
 
         public override int getPoints() {
-            switch (Carte.getCase(coordonnees).getTypeCase())
+            switch (SmallWorld.Instance.carte.getCase(coordonnees).getTypeCase())
             {
                 case TypeCases.FORET:
                     return 2;
@@ -43,11 +43,11 @@ namespace Small_World
                 return false;
 
             int distance = coordonnees.distance(coords);
-            Case c = Carte.getCase(coords);
+            Case c = SmallWorld.Instance.carte.getCase(coords);
 
             if (c.getTypeCase() == TypeCases.EAU) return false;
 
-            Case currentCase = Carte.getCase(coordonnees);
+            Case currentCase = SmallWorld.Instance.carte.getCase(coordonnees);
             if (currentCase.getTypeCase() == TypeCases.MONTAGNE && c.getTypeCase() == TypeCases.MONTAGNE && mouvement >= 1) return true;
 
             if (distance > 1) return false;

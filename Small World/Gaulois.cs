@@ -14,7 +14,7 @@ namespace Small_World
         }
         
         public override int getPoints() {
-            switch (Carte.getCase(coordonnees).getTypeCase())
+            switch (SmallWorld.Instance.carte.getCase(coordonnees).getTypeCase())
             {
                 case TypeCases.PLAINE:
                     return 2;
@@ -31,7 +31,7 @@ namespace Small_World
             if (this.coordonnees.Equals(coords))
                 return false;
 
-            Case c = Carte.getCase(coords);
+            Case c = SmallWorld.Instance.carte.getCase(coords);
             int distance = coordonnees.distance(coords);
             if (distance > 1 || c.getTypeCase() == TypeCases.EAU) return false;
 
@@ -46,7 +46,7 @@ namespace Small_World
 
             resultatCombat retour = verifUniteCase(coords);
 
-            Case c = Carte.getCase(coords);
+            Case c = SmallWorld.Instance.carte.getCase(coords);
             if (c.getTypeCase() == TypeCases.PLAINE) mouvement -= 0.5;
             else mouvement -= 1.0;
             makeResultatCombat(retour, coords);

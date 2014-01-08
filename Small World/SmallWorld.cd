@@ -72,7 +72,7 @@
     <Position X="2.5" Y="8.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAQAAAAAAAIAAAAQIACAgAAAAAAAIBAIAAAAAAAAAAA=</HashCode>
-      <FileName>Carte.cs</FileName>
+      <FileName>cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Small_World.CasePlaine" Collapsed="true">

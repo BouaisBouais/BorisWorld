@@ -189,7 +189,7 @@ namespace UnitTests
         {
             SmallWorld.Instance.nouvellePartie(TypeCarte.DEMO, TypeUnite.Viking, TypeUnite.Nain);
             Unite testUnite = SmallWorld.Instance.getUniteCourante();
-            Case testCase = Carte.getCase(new Coordonnee(1, 1));
+            Case testCase = SmallWorld.Instance.carte.getCase(new Coordonnee(1, 1));
             int testNbTours = SmallWorld.Instance.nbTours;
 
             //On sauvegarde
@@ -204,7 +204,7 @@ namespace UnitTests
 
             //On vérifie
             Assert.IsTrue(testUnite.coordonnees.Equals(SmallWorld.Instance.getUniteCourante().coordonnees));
-            Assert.AreEqual(testCase, Carte.getCase(new Coordonnee(1, 1)));
+            Assert.AreEqual(testCase, SmallWorld.Instance.carte.getCase(new Coordonnee(1, 1)));
             Assert.AreEqual(testNbTours, SmallWorld.Instance.nbTours);
         }
     }

@@ -46,7 +46,7 @@ namespace Small_World
         {
             MonteurPartie monteur = new MonteurPartie();
             monteur.nouvellePartie(tailleCarte, j1, j2);
-            nbTourMax = Carte.getNombreTours();
+            nbTourMax = SmallWorld.Instance.carte.getNombreTours();
         }
 
         /**

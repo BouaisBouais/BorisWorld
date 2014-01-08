@@ -28,8 +28,8 @@ namespace Small_World
             SmallWorld.Instance.joueurs = joueurs;
             SmallWorld.Instance.nbTours = 0;
 
-            int nombreUnites = Carte.getNombreUniteMax();
-            List<Coordonnee> posDepartJoueurs = SmallWorld.Instance.carte.departJoueurs;
+            int nombreUnites = SmallWorld.Instance.carte.getNombreUniteMax();
+            List<Coordonnee> posDepartJoueurs = SmallWorld.Instance.carte.getDepartJoueurs();
             foreach (Joueur j in SmallWorld.Instance.joueurs)
             {
 

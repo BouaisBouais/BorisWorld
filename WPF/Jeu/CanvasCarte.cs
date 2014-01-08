@@ -30,7 +30,6 @@ namespace WPF.Jeu
 
         private const int radiusPoints = 12;
         StackPanel s = new StackPanel();
-        private List<Unite> selectionCourrante = new List<Unite>();
 
         private Coordonnee caseSurvolee = null;
         private Coordonnee lastCaseSurvolee = null;
@@ -39,7 +38,7 @@ namespace WPF.Jeu
 
         public CanvasCarte() : base()
         {
-            int taille = Carte.taille;
+            int taille = SmallWorld.Instance.carte.taille;
             this.Height = taille * imgSize;
             this.Width = taille * imgSize;
             this.Children.Add(s);
@@ -74,13 +73,13 @@ namespace WPF.Jeu
    
         private void drawBack(DrawingContext dc)
         {
-            int taille = Carte.taille;
+            int taille = SmallWorld.Instance.carte.taille;
             for (int x = 1; x <= taille; x++)
             {
                 for (int y = 1; y <= taille; y++)
                 {
                     Coordonnee coords = new Coordonnee(x, y);
-                    switch (Carte.getCase(coords).getTypeCase())
+                    switch (SmallWorld.Instance.carte.getCase(coords).getTypeCase())
                     {
                         case TypeCases.DESERT:
                             dc.DrawImage(desert, new Rect((x - 1) * imgSize, (y - 1) * imgSize, imgSize, imgSize));
@@ -104,7 +103,7 @@ namespace WPF.Jeu
 
         private void drawSuggestions(DrawingContext dc)
         {
-            foreach (Coordonnee c in Carte.getSuggestions())
+            foreach (Coordonnee c in SmallWorld.Instance.carte.getSuggestions())
             {
                 drawCase(c, Brushes.Green.Clone(), 0.35, dc);
             }
@@ -137,7 +136,7 @@ namespace WPF.Jeu
                     dc.DrawEllipse(color, null, p, radiusPoints, radiusPoints);
 
 
-                    int nb = Carte.getNombreUnites(coords);
+                    int nb = SmallWorld.Instance.carte.getNombreUnites(coords);
 
                     if (nb > 1)
                     {
@@ -250,7 +249,7 @@ namespace WPF.Jeu
 
                 // Survol d'une unité
                 // TODO : rendre la classe carte plus propre
-                Dictionary<Unite, int> d = Carte.getUnites(tempCaseSurvol);
+                Dictionary<Unite, int> d = SmallWorld.Instance.carte.getUnites(tempCaseSurvol);
                 Console.WriteLine("COUNT : {0}", d.Count);
                 if (d.Count == 1)
                 {
@@ -298,7 +297,7 @@ namespace WPF.Jeu
         {
             Coordonnee caseClique = pointToCoordonne(click);
 
-            Dictionary<Unite,int> unites = Carte.getUnites(caseClique);
+            Dictionary<Unite, int> unites = SmallWorld.Instance.carte.getUnites(caseClique);
 
             if (unites.Count == 1)
             { 

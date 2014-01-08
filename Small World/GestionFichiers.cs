@@ -155,34 +155,30 @@ Console.WriteLine("j1res.getUnites()[0].coordonnees.getX(): {0} // j2res.getUnit
                 if (charger)
                 {
                     SmallWorld.Instance = ((SmallWorld)formatter.Deserialize(stream));
-                    Carte.grid = (int[,]) formatter.Deserialize(stream);
-                    Carte.taille = (int) formatter.Deserialize(stream);
-                    int tailleCarte = Carte.taille;
+                    int tailleCarte = SmallWorld.Instance.carte.taille;
 
 
                     Carte.wrapper.initializeLoad(tailleCarte);
 
                     for(int x=0;x < tailleCarte;x++) {
                         for (int y=0;y<tailleCarte;y++) {
-                            Carte.wrapper.chargerMap(Carte.grid[x, y]);
+                            Carte.wrapper.chargerMap(SmallWorld.Instance.carte.grid[x, y]);
                         }
                     }
 
                     unsafe
                     {
-                        testerCettePutainDeDLLQuiMePeteBienLesBurnes(Carte.taille, Carte.wrapper.getMap());
+                        testerCettePutainDeDLLQuiMePeteBienLesBurnes(SmallWorld.Instance.carte.taille, Carte.wrapper.getMap());
                     }
                    
                 }
                 else
                 {
                     formatter.Serialize(stream, SmallWorld.Instance);
-                    formatter.Serialize(stream, Carte.grid);
-                    formatter.Serialize(stream, Carte.taille);
 
                     unsafe
                     {
-                        testerCettePutainDeDLLQuiMePeteBienLesBurnes(Carte.taille, Carte.wrapper.getMap());
+                        testerCettePutainDeDLLQuiMePeteBienLesBurnes(SmallWorld.Instance.carte.taille, Carte.wrapper.getMap());
                     }
 
                 }
@@ -197,7 +193,7 @@ Console.WriteLine("j1res.getUnites()[0].coordonnees.getX(): {0} // j2res.getUnit
             }
 
             Console.WriteLine("j1.peuple: {0} // j2.peuble: {1}", SmallWorld.Instance.joueurs[0].Peuple, SmallWorld.Instance.joueurs[1].Peuple);
-            Console.WriteLine(Carte.grid[1,1]);
+            Console.WriteLine(SmallWorld.Instance.carte.grid[1, 1]);
             Console.WriteLine("j1.pointJoueur: {0} // j2.pointJoueur: {1}", SmallWorld.Instance.joueurs[0].getPoints(), SmallWorld.Instance.joueurs[1].getPoints());
             Console.WriteLine("j1.getUnites()[0].coordonnees.getX(): {0} // j2.getUnites()[0].coordonnees.getX() : {1}", SmallWorld.Instance.joueurs[0].getUnites()[0].coordonnees.getX(), SmallWorld.Instance.joueurs[1].getUnites()[0].coordonnees.getX());
             Console.WriteLine(SmallWorld.Instance.nbTours);
