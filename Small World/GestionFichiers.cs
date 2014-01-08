@@ -129,7 +129,9 @@ Console.WriteLine("j1res.getUnites()[0].coordonnees.getX(): {0} // j2res.getUnit
             }
         }
 
-        // Charge ou sauvegarde suivant la valeur de charger
+        /**
+         * Charge ou sauvegarde un fichier suivant la valeur de charger
+         */
         public static void action(string nomFichier, bool charger)
         {
             checkDossierSauvegarde();

@@ -13,22 +13,13 @@ namespace Small_World
         }
 
         public override int getPoints() {
-
-            if (Carte.getCase(coordonnees).getTypeCase() == TypeCases.EAU) {
+            if (Carte.getCase(coordonnees).getTypeCase() == TypeCases.EAU)
                 return 0;
-            } else {
-
-                if (Carte.bordEau(coordonnees))
-                {
-                    return 2;
-                }
-                else
-                {
-                    return 1;
-                }
-            }
-
-        
+            if (Carte.bordEau(coordonnees))
+                return 2;
+            if(Carte.getCase(coordonnees).getTypeCase() == TypeCases.DESERT)
+                return 0;
+            return 1;
         }
 
         public override bool deplacementPossible(Coordonnee coords)
