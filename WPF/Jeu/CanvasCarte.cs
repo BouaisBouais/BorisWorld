@@ -32,19 +32,23 @@ namespace WPF.Jeu
         StackPanel s = new StackPanel();
         private List<Unite> selectionCourrante = new List<Unite>();
 
-
         private Coordonnee caseSurvolee = null;
         private Coordonnee lastCaseSurvolee = null;
+
+        private Jeu fenetreParent = null;
 
         public CanvasCarte() : base()
         {
             int taille = Carte.taille;
             this.Height = taille * imgSize;
             this.Width = taille * imgSize;
-
-
             this.Children.Add(s);
             s.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        public void setFenetreParent(Jeu j)
+        {
+            fenetreParent = j;
         }
 
         protected override void OnRender(DrawingContext dc)
@@ -55,6 +59,10 @@ namespace WPF.Jeu
                 drawSuggestions(dc);
                 drawUnits(dc);
                 drawDeplacement(dc);
+                if (fenetreParent != null)
+                {
+                    fenetreParent.refreshStatUniteCourante();
+                }
             }
             catch (NullReferenceException ex)
             {
@@ -62,6 +70,8 @@ namespace WPF.Jeu
             }
         }
 
+
+   
         private void drawBack(DrawingContext dc)
         {
             int taille = Carte.taille;
@@ -236,9 +246,30 @@ namespace WPF.Jeu
                 {
                     caseSurvolee = null;
                 }
-                lastCaseSurvolee = tempCaseSurvol;
+                
 
-                // Survol d'une unitée
+                // Survol d'une unité
+                // TODO : rendre la classe carte plus propre
+                Dictionary<Unite, int> d = Carte.getUnites(tempCaseSurvol);
+                Console.WriteLine("COUNT : {0}", d.Count);
+                if (d.Count == 1)
+                {
+                    if (fenetreParent != null)
+                        fenetreParent.setInfoUniteSurvole(d.Keys.First(), d.Values.First());
+                }
+                else if (d.Count > 1)
+                {
+                    if (fenetreParent != null)
+                        fenetreParent.setInfoUniteSurvole(d.Count);
+                }
+                else
+                {
+                    if (fenetreParent != null)
+                     fenetreParent.hideInfoUniteSurvole();
+                }
+
+
+                lastCaseSurvolee = tempCaseSurvol;
                 this.InvalidateVisual();
             }
 
@@ -285,6 +316,8 @@ namespace WPF.Jeu
                     Button b = new Button();
                     b.Content = "Unité n°" + unites[u];
                     b.Click += changerUniteCourante_Click;
+                    b.MouseMove += setDetailUnit;
+                    b.MouseLeave += hideDetailUnit;
 
                     if (u.mouvement == 0)
                         b.IsEnabled = false;
@@ -302,24 +335,41 @@ namespace WPF.Jeu
             }
         }
 
+        public void setDetailUnit(object sender, RoutedEventArgs e)
+        {
+            int id = recupererIDUnite((Button)sender);
+            if (id != -1)
+            {
+                if (fenetreParent != null)
+                    fenetreParent.setInfoUniteSurvole(SmallWorld.Instance.getJoueurCourant().getUnites().ElementAt(id), id);
+            }
+        }
 
+        public void hideDetailUnit(object sender, RoutedEventArgs e)
+        {
+            if (fenetreParent != null)
+                fenetreParent.hideInfoUniteSurvole();
+        }
 
         public void changerUniteCourante_Click(object sender, RoutedEventArgs e)
         {
-            Button b = (Button)sender;
+            changeUniteCourante(recupererIDUnite((Button)sender));
+        }
+
+
+        public int  recupererIDUnite(Button b)
+        {
             try
             {
                 string nom = b.Name.Substring(1);
-                int id = int.Parse(nom);
-                changeUniteCourante(id);
+                return int.Parse(nom);
             }
             catch
             {
-                    Console.WriteLine("Erreur de parsing lors de la selection d'une unitée courante");
+                Console.WriteLine("Erreur de parsing lors de la selection d'une unitée courante");
+                return -1;
             }
             
-
-
         }
 
         public void changeUniteCourante(int id)
@@ -327,8 +377,6 @@ namespace WPF.Jeu
 
             SmallWorld.Instance.uniteCourante = id;
             s.Visibility = System.Windows.Visibility.Hidden;
-            Console.WriteLine("Changement d'unité courrante : {0}", SmallWorld.Instance.uniteCourante);
-
             this.InvalidateVisual();
         }
 

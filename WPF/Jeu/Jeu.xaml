@@ -45,6 +45,7 @@
         <Grid Grid.Row="2" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="4*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
@@ -55,21 +56,41 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Name="ID_Unit" TextWrapping="Wrap" Grid.Row="0" Text="Aucune unité survolée"/>
+                <TextBlock x:Name="ID_UnitCourr" TextWrapping="Wrap" Grid.Row="0" Text="Aucune unité active"/>
 
-                <Grid Grid.Row="1" Visibility="Hidden" >
+                <Grid Grid.Row="1" Visibility="Hidden" Name="GridUniteActive" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="atk_unitLabel" TextWrapping="Wrap" Grid.Column="0"><Run Language="fr-fr" Text="Attaque :"/><TextBlock x:Name="atkUnit"> </TextBlock></TextBlock>
-                    <TextBlock x:Name="def_unitLabel" TextWrapping="Wrap" Grid.Column="1"><Run Language="fr-fr" Text="Def :"/> <TextBlock x:Name="defUnit"></TextBlock></TextBlock>
-                    <TextBlock x:Name="vie_unitLabel" TextWrapping="Wrap" Grid.Column="2"><Run Language="fr-fr" Text="Vie :"/> <TextBlock x:Name="vieUnit"></TextBlock></TextBlock>
+                    <TextBlock x:Name="atk_unitLabelCourr" TextWrapping="Wrap" Grid.Column="0"><Run Language="fr-fr" Text="Attaque :"/><TextBlock x:Name="atkUnitCourr"></TextBlock></TextBlock>
+                    <TextBlock x:Name="def_unitLabelCourr" TextWrapping="Wrap" Grid.Column="1"><Run Language="fr-fr" Text="Def :"/> <TextBlock x:Name="defUnitCourr"></TextBlock></TextBlock>
+                    <TextBlock x:Name="vie_unitLabelCourr" TextWrapping="Wrap" Grid.Column="2"><Run Language="fr-fr" Text="Vie :"/> <TextBlock x:Name="vieUnitCourr"></TextBlock></TextBlock>
                 </Grid>
             </Grid>
 
-            <Button Content="Menu" Click="popMenu_Click" Grid.Column="2"/>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock x:Name="ID_UnitSurv" TextWrapping="Wrap" Grid.Row="0" Text="Aucune unité survolée"/>
+
+                <Grid Grid.Row="1" Visibility="Hidden" Name="GridUniteSurv">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBlock x:Name="atk_unitLabelSurv" TextWrapping="Wrap" Grid.Column="0"><Run Language="fr-fr" Text="Attaque :"/><TextBlock x:Name="atkUnitSurv"> </TextBlock></TextBlock>
+                    <TextBlock x:Name="def_unitLabelSurv" TextWrapping="Wrap" Grid.Column="1"><Run Language="fr-fr" Text="Def :"/> <TextBlock x:Name="defUnitSurv"></TextBlock></TextBlock>
+                    <TextBlock x:Name="vie_unitLabelSurv" TextWrapping="Wrap" Grid.Column="2"><Run Language="fr-fr" Text="Vie :"/> <TextBlock x:Name="vieUnitSurv"></TextBlock></TextBlock>
+                </Grid>
+            </Grid>
+
+            <Button Content="Menu" Click="popMenu_Click" Grid.Column="3"/>
         </Grid>
     </Grid>
 </Page>

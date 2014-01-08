@@ -40,6 +40,8 @@ namespace WPF.Jeu
             TypeUnite j2 = SmallWorld.Instance.joueurs[1].Peuple;
             peupleJ2.Foreground = App.getColorFromPeuple(j2);
             peupleJ2.Text = App.getNameFromPeuple(j2);
+
+            this.canvasCarte.setFenetreParent(this);
         }
 
         public void actualiserDonnées()
@@ -61,6 +63,53 @@ namespace WPF.Jeu
                 tourJ2.Text = "A ton tour !";
                 tourJ1.Text = "";
             }
+
+
+
+        }
+
+
+        public void refreshStatUniteCourante()
+        {
+            if (SmallWorld.Instance.uniteCourante != -1)
+            {
+                Unite u = SmallWorld.Instance.getUniteCourante();
+
+                ID_UnitCourr.Text = "Unité n°" + SmallWorld.Instance.uniteCourante;
+                atkUnitCourr.Text = u.attaque.ToString();
+                defUnitCourr.Text = u.defense.ToString();
+                vieUnitCourr.Text = u.vie.ToString();
+                GridUniteActive.Visibility = System.Windows.Visibility.Visible;
+
+            } else {
+                ID_UnitCourr.Text = "Aucune unité selectionée";
+                GridUniteActive.Visibility = System.Windows.Visibility.Hidden;
+            }
+            
+        }
+
+
+        public void setInfoUniteSurvole(Unite u, int id)
+        {
+            ID_UnitSurv.Text = "Unité n°" + id;
+            atkUnitSurv.Text = u.attaque.ToString();
+            defUnitSurv.Text = u.defense.ToString();
+            vieUnitSurv.Text = u.vie.ToString();
+
+            GridUniteSurv.Visibility = System.Windows.Visibility.Visible;
+        }
+
+
+        public void setInfoUniteSurvole(int s)
+        {
+            ID_UnitSurv.Text = s + " unités survolées";
+            GridUniteSurv.Visibility = System.Windows.Visibility.Hidden;
+        }
+
+        public void hideInfoUniteSurvole()
+        {
+            ID_UnitSurv.Text = "";
+            GridUniteSurv.Visibility = System.Windows.Visibility.Hidden;
         }
 
         private void HandleKeys(object sender, KeyEventArgs e)
