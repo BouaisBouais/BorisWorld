@@ -4,33 +4,28 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="WPF.OkCancelDialog.OKCancelDialog"
     Title="Confirmation"
     WindowStartupLocation="CenterOwner"
-    WindowStyle="ToolWindow"
     ResizeMode="NoResize"
     UseLayoutRounding="True"
-    TextOptions.TextFormattingMode="Display" Height="102" Width="360">
+    TextOptions.TextFormattingMode="Display" Height="106" Width="400" WindowStyle="None" Topmost="True">
+    <Window.Background>
+        <ImageBrush ImageSource="/WPF;component/Ressources/fondBox.png"/>
+    </Window.Background>
 
     <Grid Margin="0,0,0,-1">
         <Button
             x:Name="OKButton"
             Content="OK"
-            Height="23"
-            HorizontalAlignment="Right"
-            Margin="0,0,93,12"
-            VerticalAlignment="Bottom"
-            Width="75"
+            Margin="90,67,170,10"
             Click="OKButton_Click"
             IsDefault="True"
-            Command="{Binding OKButtonCommand}" />
+            Command="{Binding OKButtonCommand}" Style="{StaticResource smallButton}" />
 
         <Button
             x:Name="CancelButton"
             Content="Cancel"
-            Height="23"
-            HorizontalAlignment="Right"
-            Margin="0,0,12,12"
-            VerticalAlignment="Bottom"
-            Width="75"
-            IsCancel="True" />
-        <TextBlock x:Name="LabelInfo" Margin="10,10,12,0" VerticalAlignment="Top" Height="23"/>
+            IsCancel="True"  Style="{StaticResource smallButton}" Margin="235,67,25,10"/>
+        
+        
+        <TextBlock x:Name="LabelInfo" Margin="22,22,25,0" VerticalAlignment="Top" Height="40" Style="{StaticResource texte}" FontSize="12"/>
     </Grid>
 </Window>

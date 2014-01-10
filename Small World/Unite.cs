@@ -28,7 +28,7 @@ namespace Small_World
 
         public const int MOUVEMENT_MAX = 1;
         public const int ATTAQUE_MAX = 2;
-        public const int VIE_MAX = 2;
+        public const int VIE_MAX = 5;
         public const int DEFENSE_MAX = 1;
 
         public Unite(Coordonnee coords)

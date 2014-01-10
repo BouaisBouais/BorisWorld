@@ -28,6 +28,7 @@ namespace WPF
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         public void afficherMenu(bool ingame)

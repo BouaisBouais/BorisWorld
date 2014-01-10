@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Media;
+
 
 namespace WPF.Menu
 {
@@ -21,23 +23,20 @@ namespace WPF.Menu
     public partial class Menu : Page
     {
         private MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+        private SoundPlayer sound = new SoundPlayer(@"Ressources/SmallWorldIntro.wav");
         private bool inGame = false;
         public Menu()
         {
             InitializeComponent();
 
-            //TODO: doesn't work
-            ImageSource path = new BitmapImage(new Uri(@"Ressources/title.png", UriKind.RelativeOrAbsolute));
-            Image img = new Image();
-            img.Source = path;
-            gridMain.Children.Add(img);
-
+            sound.PlayLooping();
             sauvegarder.IsEnabled = false;
         }
 
         public Menu(bool ingame)
         {
             InitializeComponent();
+            sauvegarder.IsEnabled = false;
             if (ingame)
             {
                 Button retour = new Button();
@@ -46,9 +45,13 @@ namespace WPF.Menu
                 retour.Click += clickRetour;
 
                 Grid.SetRow(retour, 0);
-                gridMain.Children.Add(retour);
+                retour.Style = this.FindResource("SimpleButton") as Style;
+                gridMenu.Children.Add(retour);
+                
+                sauvegarder.IsEnabled = true;
                 inGame = true;
             }
+            
         }
 
         private void clickRetour(object sender, RoutedEventArgs e)
@@ -59,6 +62,7 @@ namespace WPF.Menu
         private void clickNouvellePartie(object sender, RoutedEventArgs e)
         {
             mainWindow.afficherNouvellePartie();
+            sound.Stop();
         }
 
         private void clickSauvegarder(object sender, RoutedEventArgs e)

@@ -4,28 +4,46 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      d:DesignHeight="600" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="800" Width="1027" Height="720"
         Title="ChargerSauver1">
-
-    <Grid Background="Black">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+    <Page.Background>
+        <ImageBrush ImageSource="/WPF;component/Ressources/background.png"/>
+    </Page.Background>
+    
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="9*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
 
-        <Grid>
+        <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="6*"/>
                 <ColumnDefinition Width="4*"/>
             </Grid.ColumnDefinitions>
 
-            <TextBlock x:Name="header" Grid.Column="0"/>
-            <Button x:Name="annuler" Content="Annuler" Click="clickAnnuler" Grid.Column="1" Margin="5"/>
+            
         </Grid>
 
-        <ListBox x:Name="listeFichiers" Grid.Column="0" Grid.Row="1" HorizontalContentAlignment="Stretch"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock x:Name="header" Grid.Column="1" Margin="97,55,95,504" FontFamily="Charlemagne Std" FontSize="14" Text="Chargement" Foreground="#FFAE9B47" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" Width="424" TextAlignment="Center"/> 
+            
+            <Image Grid.Column="1" Height="500" Width="458" Source="/WPF;component/Ressources/SauvegardeLOL.png" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80,21,78,55"/>
+
+            <ListBox x:Name="listeFichiers" Grid.Column="1"  HorizontalContentAlignment="Stretch" Background="{x:Null}" Margin="97,100,95,111" Panel.ZIndex="1" BorderBrush="{x:Null}">
+            </ListBox>
+
+            <Button x:Name="annuler" Content="Annuler" Click="clickAnnuler" Grid.Column="1" Margin="221,470,95,66" Style="{StaticResource SimpleButton}"/>
+            
+        </Grid>
+       
+           
+        
     </Grid>
 </Page>

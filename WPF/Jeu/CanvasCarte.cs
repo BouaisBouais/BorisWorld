@@ -33,8 +33,8 @@ namespace WPF.Jeu
 
         private Coordonnee caseSurvolee = null;
         private Coordonnee lastCaseSurvolee = null;
-
         private Jeu fenetreParent = null;
+
 
         public CanvasCarte() : base()
         {
@@ -183,7 +183,6 @@ namespace WPF.Jeu
         {
             if (s.Visibility == System.Windows.Visibility.Visible)
                 return true;
-
             return false;
         }
 
@@ -193,7 +192,7 @@ namespace WPF.Jeu
             if (checkPreventRefresh())
                 return;
 
-            caseSurvolee = null;
+            lastCaseSurvolee = null;
             this.InvalidateVisual();
         }
 
@@ -209,7 +208,12 @@ namespace WPF.Jeu
                
                 if (s.Visibility == System.Windows.Visibility.Hidden)
                 {
+                    
                     verifierActionDeplacement(click);
+
+                    lastCaseSurvolee = null; // Permet de refresh l'interface
+                    MouseEventArgs mouse1 = new MouseEventArgs(Mouse.PrimaryDevice, 0) { RoutedEvent = Mouse.MouseMoveEvent };
+                    this.RaiseEvent(mouse1);
                 }
                 else  // Si jamais le menu est ouvert on le ferme juste et on déplace pas
                 {
@@ -239,6 +243,7 @@ namespace WPF.Jeu
                 // Affichage d'une case déplacable
                 if (uCourrante.deplacementPossible(tempCaseSurvol))
                 {
+
                     caseSurvolee = tempCaseSurvol;
                 }
                 else

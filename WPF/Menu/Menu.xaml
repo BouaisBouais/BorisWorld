@@ -4,24 +4,37 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       mc:Ignorable="d"
-      d:DesignHeight="600" d:DesignWidth="800"
-        Title="Menu">
+        Title="Menu" d:DesignWidth="1152.94" d:DesignHeight="807.104" Width="1027" Height="720">
+    <Page.Background>
+        <ImageBrush ImageSource="/WPF;component/Ressources/background.png"/>
+    </Page.Background>
 
-    <Grid x:Name="gridMain" Background="Black">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
+    <Grid x:Name="grid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
 
-        <Button x:Name="nouvellePartie" Grid.Column="0" Grid.Row="1" Click="clickNouvellePartie" Content="Nouvelle Partie" Margin="30"/>
-        <Button x:Name="sauvegarder" Grid.Column="0" Grid.Row="2" Click="clickSauvegarder" Content="Sauvegarder" Margin="30"/>
-        <Button x:Name="charger" Grid.Column="0" Grid.Row="3" Click="clickCharger" Content="Charger" Margin="30"/>
-        <Button x:Name="quitter" Grid.Column="0" Grid.Row="4" Click="clickQuitter" Content="Quitter" Margin="30"/>
+        <Grid x:Name="gridMenu" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="nouvellePartie" Grid.Row="1" Click="clickNouvellePartie" Margin="15" Content="Nouvelle Partie" Grid.ColumnSpan="2" Style="{StaticResource SimpleButton}"/>
+            <Button x:Name="sauvegarder"  Grid.Row="2" Click="clickSauvegarder" Margin="15" Content="Sauvegarder" Grid.ColumnSpan="2" Style="{StaticResource SimpleButton}" IsEnabled="False"/>
+            <Button x:Name="charger"  Grid.Row="3" Click="clickCharger" Margin="5,15"  Content="Charger" Grid.ColumnSpan="2" Style="{StaticResource SimpleButton}"/>
+            <Button x:Name="quitter" Grid.Row="4" Click="clickQuitter" Margin="15"  Content="Quitter" Grid.ColumnSpan="2" Style="{StaticResource SimpleButton}"/>
+            <Image HorizontalAlignment="Left" Height="100" Margin="-16,-138,0,0" VerticalAlignment="Top" Width="100"/>
+
+        </Grid>
+        <Image Height="100" Margin="209,22,190,22" Grid.Row="0" Source="/WPF;component/Ressources/logoSmallWorld.png"/>
+
     </Grid>
+  
+    
 </Page>

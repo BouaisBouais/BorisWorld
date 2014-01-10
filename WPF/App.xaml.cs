@@ -29,6 +29,7 @@ namespace WPF
 
         public static SolidColorBrush getColorFromPeuple(TypeUnite peuple)
         {
+            
             SolidColorBrush color = Brushes.Black;
             switch (peuple)
             {

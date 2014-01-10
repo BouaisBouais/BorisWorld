@@ -4,5 +4,147 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
 
+        <Style x:Key="SimpleButton" TargetType="{x:Type Button}">
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            
+            <Setter Property="Height" Value="40" />
+            <Setter Property="Width" Value="300" />
+            <Setter Property="FontFamily" Value="Charlemagne Std"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            
+
+            <Setter Property="Foreground" >
+                <Setter.Value>
+                    <SolidColorBrush Color="#FFAE9B47"/>
+                </Setter.Value>
+            </Setter>
+            <Setter Property="Background" >
+                    <Setter.Value>
+                        <ImageBrush ImageSource="Ressources/Boutton.png"/>
+                    </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="BorderBrush" Value="{x:Null}"/>
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="Ressources/bouttonHover.png"/>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Setter Property="Foreground" >
+                        <Setter.Value>
+                            <SolidColorBrush Color="#FFFFFF"/>
+                        </Setter.Value>
+                    </Setter>
+
+                </Trigger>
+
+
+                <Trigger Property="IsEnabled" Value="false">
+                    <Setter Property="Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Gray"/>
+                        </Setter.Value>
+                    </Setter>
+                    <Setter Property="Opacity" Value="0.5"/>
+                </Trigger>
+
+
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="BorderBrush" Value="{x:Null}"/>
+
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="Ressources/boutton.png"/>
+                        </Setter.Value>
+                    </Setter>
+
+                    <Setter Property="Foreground">
+                        <Setter.Value>
+                            <SolidColorBrush Color="Gray"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+
+                <Trigger Property="IsMouseDirectlyOver" Value="true">
+                    <Setter Property="BorderBrush" Value="{x:Null}"/>
+                </Trigger>
+
+
+                <Trigger Property="IsFocused" Value="true">
+                    <Setter Property="BorderBrush" Value="{x:Null}"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+
+        <Style x:Key="smallButton" BasedOn="{StaticResource SimpleButton}" TargetType="{x:Type Button}">
+            <Setter Property="Height" Value="30" />
+            <Setter Property="Width" Value="140" />
+            <Setter Property="FontSize" Value="12"/>
+            <Setter Property="Background">
+                <Setter.Value>
+                    <ImageBrush ImageSource="Ressources/bouttonPetit.png"/>
+                </Setter.Value>
+            </Setter>
+
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="Ressources/bouttonPetitHover.png"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+
+                <Trigger Property="IsPressed" Value="true">
+                    <Setter Property="Background">
+                        <Setter.Value>
+                            <ImageBrush ImageSource="Ressources/bouttonPetit.png"/>
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+                
+            </Style.Triggers>
+
+        </Style>
+
+
+        <Style x:Key="texte" TargetType="{x:Type TextBlock}">
+            <Setter Property="FontFamily" Value="Charlemagne Std"/>
+            <Setter Property="Foreground">
+                <Setter.Value>
+                    <SolidColorBrush Color="#FFAE9B47"/>
+                </Setter.Value>
+            </Setter>
+
+        </Style>
+
+        <Style x:Key="input" TargetType="{x:Type TextBox}">
+            <Setter Property="Height" Value="26" />
+            <Setter Property="Width" Value="254" />
+            
+            <Setter Property="FontFamily" Value="Charlemagne Std"/>
+            <Setter Property="Foreground" >
+                <Setter.Value>
+                    <SolidColorBrush Color="#FFAE9B47"/>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="Background" >
+                <Setter.Value>
+                     <ImageBrush ImageSource="/WPF;component/Ressources/inputBox.png"/>
+                </Setter.Value>
+            </Setter>
+
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            
+        </Style>
+        
+        
     </Application.Resources>
 </Application>

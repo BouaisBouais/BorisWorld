@@ -42,6 +42,7 @@ namespace WPF.Jeu
             peupleJ2.Text = App.getNameFromPeuple(j2);
 
             this.canvasCarte.setFenetreParent(this);
+            
         }
 
         public void actualiserDonnées()

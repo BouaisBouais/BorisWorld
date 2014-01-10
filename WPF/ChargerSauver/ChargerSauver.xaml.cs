@@ -60,7 +60,7 @@ namespace WPF.ChargerSauver
             {
                 Button newFile = new Button();
                 newFile.Content = "Nouvelle Sauvegarde";
-                newFile.Height = 100;
+                newFile.Style = this.FindResource("SimpleButton") as Style;
                 newFile.Click += newsave_Click;
 
                 listeFichiers.Items.Add(newFile);
@@ -74,9 +74,8 @@ namespace WPF.ChargerSauver
             {
                 Button buttonFichier = new Button();
                 buttonFichier.Content = fichier;
-                buttonFichier.Height = 100;
                 buttonFichier.Name = "button" + fichier;
-
+                buttonFichier.Style = this.FindResource("SimpleButton") as Style;
                 buttonFichier.Click += fichierSauvegarde_Click;
 
 
@@ -99,6 +98,7 @@ namespace WPF.ChargerSauver
             string nom_defaut = nomSession + "_" + date;
 
             CustomInputBox dialog = new CustomInputBox("Entrez un nom pour la sauvegarde :", nom_defaut);
+            dialog.Owner = mainWindow;
             dialog.ShowDialog();
             if (!dialog.Canceled)
                 doAction(dialog.InputText);
@@ -123,7 +123,9 @@ namespace WPF.ChargerSauver
             }
 
             OKCancelDialog dialog = new OKCancelDialog(message);
+            dialog.Owner = mainWindow;
             dialog.ShowDialog();
+            
             if (dialog.DialogResult.HasValue && dialog.DialogResult.Value)
                 doAction(nomSauvegarde);
 
@@ -133,15 +135,7 @@ namespace WPF.ChargerSauver
         private void doAction(string n)
         {
             GestionFichiers.action(n, charger);
-
-            if (charger)
-            {
-                mainWindow.afficherJeu();
-            }
-            else
-            {
-                mainWindow.afficherJeu();
-            }
+            mainWindow.afficherJeu();
         }
 
         private void refreshListeFichiers()
