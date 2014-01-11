@@ -23,13 +23,16 @@ namespace WPF.Menu
     public partial class Menu : Page
     {
         private MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
-        private SoundPlayer sound = new SoundPlayer(@"Ressources/SmallWorldIntro.wav");
+        //private SoundPlayer sound = new SoundPlayer("Ressources/SmallWorldIntro.mp3");
+        private MediaPlayer sound3 = new MediaPlayer();
         private bool inGame = false;
         public Menu()
         {
             InitializeComponent();
+            sound3.Open(new Uri(@"Ressources/SmallWorldIntro.mp3", UriKind.RelativeOrAbsolute));
+            sound3.Play();
 
-            sound.PlayLooping();
+            //sound.PlayLooping();
             sauvegarder.IsEnabled = false;
         }
 
@@ -61,8 +64,8 @@ namespace WPF.Menu
 
         private void clickNouvellePartie(object sender, RoutedEventArgs e)
         {
-            mainWindow.afficherNouvellePartie();
-            sound.Stop();
+            mainWindow.afficherNouvellePartie(inGame);
+            sound3.Stop();
         }
 
         private void clickSauvegarder(object sender, RoutedEventArgs e)

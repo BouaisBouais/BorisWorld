@@ -17,7 +17,7 @@ using Small_World;
 namespace WPF.NouvellePartie
 {
     /// <summary>
-    /// Interaction logic for NouvellePartie1.xaml
+    /// Interaction logic for NouvellePartie2.xaml
     /// </summary>
     public partial class NouvellePartie : Page
     {
@@ -27,21 +27,27 @@ namespace WPF.NouvellePartie
         private TypeUnite j1;
         private TypeUnite j2;
 
+        private bool gameLaunched = false;
+
         public NouvellePartie()
         {
             InitializeComponent();
         }
 
+        public NouvellePartie(bool inGame)
+        {
+            InitializeComponent();
+            gameLaunched = inGame;
+        }
+
         private void tailleClick(object sender, RoutedEventArgs e)
         {
+            tailleDemo.Style = this.FindResource("smallButton") as Style;
+            tailleNormale.Style = this.FindResource("smallButton") as Style;
+            taillePetite.Style = this.FindResource("smallButton") as Style;
             Button clicked = (Button)sender;
 
-            taillePetite.Background = Brushes.Gray;
-            tailleDemo.Background = Brushes.Gray;
-            tailleNormale.Background = Brushes.Gray;
-
-            clicked.Background = Brushes.SteelBlue;
-
+            clicked.Style = this.FindResource("smallButtonActivated") as Style;
             switch (clicked.Name)
             {
                 case "taillePetite":
@@ -70,12 +76,12 @@ namespace WPF.NouvellePartie
 
         private void j1Click(object sender, RoutedEventArgs e)
         {
+            j1Gaulois.Style = this.FindResource("smallButton") as Style;
+            j1Nain.Style = this.FindResource("smallButton") as Style;
+            j1Viking.Style = this.FindResource("smallButton") as Style;
             Button clicked = (Button)sender;
-            j1Gaulois.Background = Brushes.Gray;
-            j1Nain.Background = Brushes.Gray;
-            j1Viking.Background = Brushes.Gray;
 
-            clicked.Background = Brushes.SteelBlue;
+            clicked.Style = this.FindResource("smallButtonActivated") as Style;
             switch (clicked.Name)
             {
                 case "j1Gaulois":
@@ -96,12 +102,13 @@ namespace WPF.NouvellePartie
         {
             valider.IsEnabled = false;
 
+            j2Gaulois.Style = this.FindResource("smallButton") as Style;
+            j2Nain.Style = this.FindResource("smallButton") as Style;
+            j2Viking.Style = this.FindResource("smallButton") as Style;
+
             j2Gaulois.IsEnabled = true;
             j2Nain.IsEnabled = true;
             j2Viking.IsEnabled = true;
-            j2Gaulois.Background = Brushes.White;
-            j2Nain.Background = Brushes.White;
-            j2Viking.Background = Brushes.White;
 
             switch (j1)
             {
@@ -119,12 +126,12 @@ namespace WPF.NouvellePartie
 
         private void j2Click(object sender, RoutedEventArgs e)
         {
+            j2Gaulois.Style = this.FindResource("smallButton") as Style;
+            j2Nain.Style = this.FindResource("smallButton") as Style;
+            j2Viking.Style = this.FindResource("smallButton") as Style;
             Button clicked = (Button)sender;
-            j2Gaulois.Background = Brushes.Gray;
-            j2Nain.Background = Brushes.Gray;
-            j2Viking.Background = Brushes.Gray;
 
-            clicked.Background = Brushes.SteelBlue;
+            clicked.Style = this.FindResource("smallButtonActivated") as Style;
             switch (clicked.Name)
             {
                 case "j2Gaulois":
@@ -154,7 +161,7 @@ namespace WPF.NouvellePartie
 
         private void annulerClick(object sender, RoutedEventArgs e)
         {
-            mainWindow.afficherMenu(false);
+            mainWindow.afficherMenu(gameLaunched);
         }
     }
 }

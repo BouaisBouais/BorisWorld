@@ -28,7 +28,7 @@ namespace WPF
         public MainWindow()
         {
             InitializeComponent();
-
+            afficherMenu(false);
         }
 
         public void afficherMenu(bool ingame)
@@ -52,9 +52,12 @@ namespace WPF
             this.Content = jeu;
         }
 
-        public void afficherNouvellePartie()
+        public void afficherNouvellePartie(bool inGame)
         {
-            nouvellePartie = new NouvellePartie.NouvellePartie();
+            if (inGame)
+                nouvellePartie = new NouvellePartie.NouvellePartie(inGame);
+            else
+                nouvellePartie = new NouvellePartie.NouvellePartie();
             this.Content = nouvellePartie;
         }
 

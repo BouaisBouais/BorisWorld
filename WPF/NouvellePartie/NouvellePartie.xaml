@@ -1,42 +1,71 @@
 ﻿<Page x:Class="WPF.NouvellePartie.NouvellePartie"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      mc:Ignorable="d"
-      d:DesignHeight="600" d:DesignWidth="800"
-        Title="Nouvelle Partie">
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800" Width="1027" Height="720"
+	Title="NouvellePartie2">
+    <Page.Background>
+        <ImageBrush ImageSource="/WPF;component/Ressources/background.png"/>
+    </Page.Background>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="1*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="3*"/>
-            <RowDefinition Height="1*"/>
+            <RowDefinition Height="20*"/>
+            <RowDefinition Height="80*"/>
         </Grid.RowDefinitions>
 
-        <Label Grid.Column="0" Grid.Row="0" Content="Taille de Carte :"/>
-        <Button x:Name="tailleDemo" Grid.Column="0" Grid.Row="1" Content="Démo" Click="tailleClick" Background="White"/>
-        <Button x:Name="taillePetite" Grid.Column="0" Grid.Row="2" Content="Petite" Click="tailleClick" Background="White"/>
-        <Button x:Name="tailleNormale" Grid.Column="0" Grid.Row="3" Content="Normale" Click="tailleClick" Background="White"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="6*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="1" Grid.Row="0" Content="Peuple joueur 1 :"/>
-        <Button x:Name="j1Gaulois" Grid.Column="1" Grid.Row="1" Content="Gaulois" Click="j1Click" Background="White" IsEnabled="False"/>
-        <Button x:Name="j1Nain" Grid.Column="1" Grid.Row="2" Content="Nain" Click="j1Click" Background="White" IsEnabled="False"/>
-        <Button x:Name="j1Viking" Grid.Column="1" Grid.Row="3" Content="Viking" Click="j1Click" Background="White" IsEnabled="False"/>
+            <TextBlock x:Name="header" Grid.Column="1" Margin="97,55,95,504" FontFamily="Charlemagne Std" FontSize="20" FontWeight="Bold" Text="Nouvelle Partie" Foreground="#FFAE9B47" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" Width="424" TextAlignment="Center"/>
 
-        <Label Grid.Column="2" Grid.Row="0" Content="Peuple joueur 2 :"/>
-        <Button x:Name="j2Gaulois" Grid.Column="2" Grid.Row="1" Content="Gaulois" Click="j2Click" Background="White" IsEnabled="False"/>
-        <Button x:Name="j2Nain" Grid.Column="2" Grid.Row="2" Content="Nain" Click="j2Click" Background="White" IsEnabled="False"/>
-        <Button x:Name="j2Viking" Grid.Column="2" Grid.Row="3" Content="Viking" Click="j2Click" Background="White" IsEnabled="False"/>
+            <Image Grid.Column="1" Height="500" Width="458" Source="/WPF;component/Ressources/SauvegardeLOL.png" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="80,21,78,55"/>
 
-        <Button x:Name="annuler" Grid.Column="0" Grid.Row="4" Content="Annuler" Click="annulerClick" Background="White"/>
-        <Button x:Name="valider" Grid.Column="2" Grid.Row="4" Content="Valider" Click="validerClik" Background="White" IsEnabled="False"/>
+            <Grid x:Name="options" Grid.Column="1" Background="{x:Null}" Margin="97,100,95,111" Panel.ZIndex="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" FontFamily="Charlemagne Std" FontSize="14" Text="Taille de la Carte" Foreground="#FFAE9B47" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" Width="424" TextAlignment="Center"/>
+                <Button x:Name="tailleDemo" Grid.Row="1" Content="Démo" Click="tailleClick" Style="{StaticResource smallButton}" Margin="0,0,280,0"/>
+                <Button x:Name="taillePetite" Grid.Row="1" Content="Petite" Click="tailleClick" Style="{StaticResource smallButton}"/>
+                <Button x:Name="tailleNormale" Grid.Row="1" Content="Normale" Click="tailleClick" Style="{StaticResource smallButton}" Margin="280,0,0,0"/>
+
+
+                <TextBlock Grid.Row="2" FontFamily="Charlemagne Std" FontSize="14" Text="Peuple du Joueur 1" Foreground="#FFAE9B47" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" Width="424" TextAlignment="Center"/>
+                <Button x:Name="j1Gaulois" Grid.Row="3" Content="Gaulois" Click="j1Click" Style="{StaticResource smallButton}" Margin="0,0,280,0" IsEnabled="False"/>
+                <Button x:Name="j1Nain" Grid.Row="3" Content="Nain" Click="j1Click" Style="{StaticResource smallButton}" IsEnabled="False"/>
+                <Button x:Name="j1Viking" Grid.Row="3" Content="Viking" Click="j1Click" Style="{StaticResource smallButton}" Margin="280,0,0,0" IsEnabled="False"/>
+
+                <TextBlock Grid.Row="4" FontFamily="Charlemagne Std" FontSize="14" Text="Peuple du Joueur 2" Foreground="#FFAE9B47" HorizontalAlignment="Center" VerticalAlignment="Center" Panel.ZIndex="1" Width="424" TextAlignment="Center"/>
+                <Button x:Name="j2Gaulois" Grid.Row="5" Content="Gaulois" Click="j2Click" Style="{StaticResource smallButton}" Margin="0,0,280,0" IsEnabled="False"/>
+                <Button x:Name="j2Nain" Grid.Row="5" Content="Nain" Click="j2Click" Style="{StaticResource smallButton}" IsEnabled="False"/>
+                <Button x:Name="j2Viking" Grid.Row="5" Content="Viking" Click="j2Click" Style="{StaticResource smallButton}" Margin="280,0,0,0" IsEnabled="False"/>
+            </Grid>
+            
+            <Grid Grid.Column="1" Margin="0,465,0,65" Height="50">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="50*"/>
+                    <ColumnDefinition Width="50*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="annuler" Content="Annuler" Margin="50,0,0,0" Click="annulerClick" Grid.Column="0" Style="{StaticResource smallButton}"/>
+                <Button x:Name="valider" Content="Commencer" Margin="0,0,50,0" Click="validerClik" Grid.Column="1" Style="{StaticResource smallButton}" IsEnabled="False"/>
+            </Grid>
+            
+
+        </Grid>
+
+
+
     </Grid>
 </Page>
