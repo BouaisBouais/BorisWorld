@@ -33,5 +33,11 @@ namespace WPF.FinJeu
             points.Foreground = Brushes.White;
             points.Text = gagnant.getPoints().ToString();
         }
+
+        private void Ok_Click_1(object sender, RoutedEventArgs e)
+        {
+            MainWindow m = (MainWindow)Application.Current.MainWindow;
+            m.afficherMenu(false);
+        }
     }
 }
