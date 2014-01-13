@@ -61,6 +61,7 @@ namespace WPF.Jeu
                 if (fenetreParent != null)
                 {
                     fenetreParent.refreshStatUniteCourante();
+                    fenetreParent.actualiserDonnées();
                 }
             }
             catch (NullReferenceException ex)
@@ -253,9 +254,7 @@ namespace WPF.Jeu
                 
 
                 // Survol d'une unité
-                // TODO : rendre la classe carte plus propre
                 Dictionary<Unite, int> d = SmallWorld.Instance.carte.getUnites(tempCaseSurvol);
-                Console.WriteLine("COUNT : {0}", d.Count);
                 if (d.Count == 1)
                 {
                     if (fenetreParent != null)
@@ -322,6 +321,7 @@ namespace WPF.Jeu
                     b.Click += changerUniteCourante_Click;
                     b.MouseMove += setDetailUnit;
                     b.MouseLeave += hideDetailUnit;
+                    b.Style = this.FindResource("smallButton") as Style;
 
                     if (u.mouvement == 0)
                         b.IsEnabled = false;

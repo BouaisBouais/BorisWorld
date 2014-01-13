@@ -64,6 +64,7 @@
             
 
         </Grid>
+        <Image Height="100" Margin="209,22,190,22" Grid.Row="0" Source="/WPF;component/Ressources/logoSmallWorld.png"/>
 
 
 

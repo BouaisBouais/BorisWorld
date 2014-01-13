@@ -5,40 +5,57 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:local="clr-namespace:WPF.Jeu"
       mc:Ignorable="d" d:DesignWidth="800"
+      Width="1027" Height="720"
         Title="Boris World">
+    <Page.Background>
+        <ImageBrush ImageSource="/WPF;component/Ressources/background.png"/>
+    </Page.Background>
 
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="430*" />
-            <RowDefinition Height="150*" />
-            <RowDefinition Height="50*" />
+            <RowDefinition Height="400*" />
+            <RowDefinition Height="170*" />
+            <RowDefinition Height="170*" />
         </Grid.RowDefinitions>
-        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="Black">
+        <ScrollViewer Grid.Row="0" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="{x:Null}">
             <local:CanvasCarte x:Name="canvasCarte" Background="Black"/>
         </ScrollViewer>
-        <Grid Background="#FFF4F4F5" Grid.Row="1">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
-                <TextBlock Margin="10">Joueur 1 : <TextBlock x:Name="peupleJ1"></TextBlock></TextBlock>
-                <TextBlock Margin="10">Nombre de points : <TextBlock x:Name="ptsJ1"></TextBlock></TextBlock>
-                <TextBlock Margin="10">Nombre d'unités restantes : <TextBlock x:Name="unitesJ1"></TextBlock></TextBlock>
-                <TextBlock Margin="10" x:Name="tourJ1"/>
+
+            <Image Source="/WPF;component/Ressources/fondRecapUnites.png" Grid.Column="0"/>
+            <Image Source="/WPF;component/Ressources/inputBox.png" Grid.Column="1"/>
+            <Image Source="/WPF;component/Ressources/fondRecapUnites.png" Grid.Column="2"/>
+
+            <StackPanel Grid.Column="0" Margin="21,20">
+                <TextBlock Margin="10" Style="{StaticResource texte}"><Run Text="Joueur 1 : "/><InlineUIContainer>
+            			<TextBlock x:Name="peupleJ1" Style="{StaticResource texte}"/>
+            		</InlineUIContainer></TextBlock>
+                <TextBlock Margin="10" Style="{StaticResource texte}"><Run Text="Nombre de points : "/><InlineUIContainer>
+            			<TextBlock x:Name="ptsJ1" Style="{StaticResource texte}"/>
+            		</InlineUIContainer></TextBlock>
+                <TextBlock Margin="10" Style="{StaticResource texte}"><Run Text="Nombre d'unités restantes : "/><InlineUIContainer>
+            			<TextBlock x:Name="unitesJ1" Style="{StaticResource texte}"/>
+            		</InlineUIContainer></TextBlock>
+                <TextBlock Margin="10" Style="{StaticResource texte}" x:Name="tourJ1"/>
             </StackPanel>
 
-            <StackPanel Grid.Column="1">
-                <TextBlock Margin="10">Joueur 2 : <TextBlock x:Name="peupleJ2"></TextBlock></TextBlock>
-                <TextBlock Margin="10">Nombre de points : <TextBlock x:Name="ptsJ2"></TextBlock></TextBlock>
-                <TextBlock Margin="10">Nombre d'unités restantes : <TextBlock x:Name="unitesJ2"></TextBlock></TextBlock>
-                <TextBlock Margin="10" x:Name="tourJ2"></TextBlock>
+            <StackPanel Grid.Column="2" Margin="21,20">
+                <TextBlock Margin="10" Style="{StaticResource texte}">Joueur 2 : <TextBlock x:Name="peupleJ2" Style="{StaticResource texte}"></TextBlock></TextBlock>
+                <TextBlock Margin="10" Style="{StaticResource texte}">Nombre de points : <TextBlock x:Name="ptsJ2" Style="{StaticResource texte}"></TextBlock></TextBlock>
+                <TextBlock Margin="10" Style="{StaticResource texte}">Nombre d'unités restantes : <TextBlock x:Name="unitesJ2" Style="{StaticResource texte}"></TextBlock></TextBlock>
+                <TextBlock Margin="10" Style="{StaticResource texte}" x:Name="tourJ2"></TextBlock>
             </StackPanel>
 
-            <TextBlock Grid.Column="2" Margin="10"><Run Text="N"/><Run Text="ombre de tours res"/><Run Text="tants :"/><Run Text=" "/><InlineUIContainer>
+            <TextBlock Grid.Column="1" Margin="10,77,10,78" Style="{StaticResource texte}" TextAlignment="Center" VerticalAlignment="Center">Tour
             		<TextBlock x:Name="nbToursRestants"/>
-            	</InlineUIContainer></TextBlock>
+                     /
+                    <TextBlock x:Name="nbToursMax"/>
+            </TextBlock>
 
         </Grid>
 
@@ -46,17 +63,22 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="4*"/>
-                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
             </Grid.ColumnDefinitions>
 
+            <Image Source="/WPF;component/Ressources/fondRecapUnites.png" Grid.Column="0"/>
+            <Image Name="img_UnitSurv" Source="/WPF;component/Ressources/fondRecapUnites.png" Grid.Column="1" Visibility="Hidden"/>
+            
+            
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Name="ID_UnitCourr" TextWrapping="Wrap" Grid.Row="0" Text="Aucune unité active"/>
+                <TextBlock x:Name="ID_UnitCourr" TextWrapping="Wrap" Grid.Row="0" Text="Aucune unité active" Style="{StaticResource texte}" Margin="10,45,0,58" Grid.RowSpan="2"/>
+
 
                 <Grid Grid.Row="1" Visibility="Hidden" Name="GridUniteActive" >
                     <Grid.ColumnDefinitions>
@@ -64,33 +86,33 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="atk_unitLabelCourr" TextWrapping="Wrap" Grid.Column="0"><Run Language="fr-fr" Text="Attaque :"/><TextBlock x:Name="atkUnitCourr"></TextBlock></TextBlock>
-                    <TextBlock x:Name="def_unitLabelCourr" TextWrapping="Wrap" Grid.Column="1"><Run Language="fr-fr" Text="Def :"/> <TextBlock x:Name="defUnitCourr"></TextBlock></TextBlock>
-                    <TextBlock x:Name="vie_unitLabelCourr" TextWrapping="Wrap" Grid.Column="2"><Run Language="fr-fr" Text="Vie :"/> <TextBlock x:Name="vieUnitCourr"></TextBlock></TextBlock>
+                    <TextBlock x:Name="atk_unitLabelCourr" Grid.Column="0" Style="{StaticResource texte}" Margin="10,0,0,0">Atk : <TextBlock x:Name="atkUnitCourr" Style="{StaticResource texte}">44</TextBlock></TextBlock>
+                    <TextBlock x:Name="def_unitLabelCourr" Grid.Column="1" Style="{StaticResource texte}">Def : <TextBlock x:Name="defUnitCourr" Style="{StaticResource texte}">88</TextBlock></TextBlock>
+                    <TextBlock x:Name="vie_unitLabelCourr" Grid.Column="2" Style="{StaticResource texte}" >Vie : <TextBlock x:Name="vieUnitCourr" Style="{StaticResource texte}">99</TextBlock></TextBlock>
                 </Grid>
             </Grid>
 
-            <Grid Grid.Column="1">
+            <Grid Grid.Column="1" Name="all_InfoUnitSurv" Visibility="Hidden">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock x:Name="ID_UnitSurv" TextWrapping="Wrap" Grid.Row="0" Text="Aucune unité survolée"/>
+                <TextBlock x:Name="ID_UnitSurv" Grid.Row="0" Text="Aucune unité survolée" Style="{StaticResource texte}" Margin="10,45,0,0" />
 
-                <Grid Grid.Row="1" Visibility="Hidden" Name="GridUniteSurv">
+                <Grid Grid.Row="1" Name="GridUniteSurv">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <TextBlock x:Name="atk_unitLabelSurv" TextWrapping="Wrap" Grid.Column="0"><Run Language="fr-fr" Text="Attaque :"/><TextBlock x:Name="atkUnitSurv"> </TextBlock></TextBlock>
-                    <TextBlock x:Name="def_unitLabelSurv" TextWrapping="Wrap" Grid.Column="1"><Run Language="fr-fr" Text="Def :"/> <TextBlock x:Name="defUnitSurv"></TextBlock></TextBlock>
-                    <TextBlock x:Name="vie_unitLabelSurv" TextWrapping="Wrap" Grid.Column="2"><Run Language="fr-fr" Text="Vie :"/> <TextBlock x:Name="vieUnitSurv"></TextBlock></TextBlock>
+                    <TextBlock x:Name="atk_unitLabelSurv" Grid.Column="0" Style="{StaticResource texte}" Margin="10,0,0,0">Atk : <TextBlock x:Name="atkUnitSurv" Style="{StaticResource texte}"> </TextBlock></TextBlock>
+                    <TextBlock x:Name="def_unitLabelSurv" Grid.Column="1" Style="{StaticResource texte}">Def : <TextBlock x:Name="defUnitSurv" Style="{StaticResource texte}"></TextBlock></TextBlock>
+                    <TextBlock x:Name="vie_unitLabelSurv" Grid.Column="2" Style="{StaticResource texte}"> Vie : <TextBlock x:Name="vieUnitSurv" Style="{StaticResource texte}"></TextBlock></TextBlock>
                 </Grid>
             </Grid>
 
-            <Button Content="Menu" Click="popMenu_Click" Grid.Column="3"/>
+            <Button Content="Menu" Click="popMenu_Click" Grid.Column="3" Style="{StaticResource SimpleButton}" Margin="10,61,32,10"/>
         </Grid>
     </Grid>
 </Page>

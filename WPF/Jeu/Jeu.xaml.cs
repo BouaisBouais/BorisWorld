@@ -47,8 +47,10 @@ namespace WPF.Jeu
 
         public void actualiserDonnées()
         {
-            // TODO : IDée => Gérer ca avec un tableau pas possible ?
-            nbToursRestants.Text = SmallWorld.Instance.getToursRestants().ToString();
+            Console.WriteLine("loool");
+
+            nbToursRestants.Text = (SmallWorld.Instance.nbTours + 1 ).ToString();
+            nbToursMax.Text = SmallWorld.Instance.nbTourMax.ToString();
             ptsJ1.Text = SmallWorld.Instance.joueurs[0].getPoints().ToString();
             ptsJ2.Text = SmallWorld.Instance.joueurs[1].getPoints().ToString();
             unitesJ1.Text = SmallWorld.Instance.joueurs[0].getUnites().Count.ToString();
@@ -98,6 +100,8 @@ namespace WPF.Jeu
             vieUnitSurv.Text = u.vie.ToString();
 
             GridUniteSurv.Visibility = System.Windows.Visibility.Visible;
+            img_UnitSurv.Visibility = System.Windows.Visibility.Visible;
+            all_InfoUnitSurv.Visibility = System.Windows.Visibility.Visible;
         }
 
 
@@ -105,12 +109,16 @@ namespace WPF.Jeu
         {
             ID_UnitSurv.Text = s + " unités survolées";
             GridUniteSurv.Visibility = System.Windows.Visibility.Hidden;
+            all_InfoUnitSurv.Visibility = System.Windows.Visibility.Visible;
+            img_UnitSurv.Visibility = System.Windows.Visibility.Visible;
         }
 
         public void hideInfoUniteSurvole()
         {
             ID_UnitSurv.Text = "";
             GridUniteSurv.Visibility = System.Windows.Visibility.Hidden;
+            img_UnitSurv.Visibility = System.Windows.Visibility.Hidden;
+            all_InfoUnitSurv.Visibility = System.Windows.Visibility.Hidden;
         }
 
         private void HandleKeys(object sender, KeyEventArgs e)

@@ -22,7 +22,7 @@
 
         <Button
             x:Name="CancelButton"
-            Content="Cancel"
+            Content="Annuler"
             IsCancel="True"  Style="{StaticResource smallButton}" Margin="235,67,25,10"/>
         
         

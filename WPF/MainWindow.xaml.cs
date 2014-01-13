@@ -25,6 +25,7 @@ namespace WPF
         private Page nouvellePartie;
         private Page finJeu;
 
+
         public MainWindow()
         {
             InitializeComponent();

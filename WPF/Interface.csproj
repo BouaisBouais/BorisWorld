@@ -231,6 +231,7 @@
     <Resource Include="Ressources\iconeJeu.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Ressources\fondRecapUnites.png" />
     <Content Include="Ressources\SmallWorldIntro.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
