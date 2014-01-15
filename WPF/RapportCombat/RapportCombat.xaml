@@ -1,0 +1,20 @@
+﻿<Window x:Class="WPF.RapportCombat.RapportCombatDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" ShowInTaskbar="False" WindowStyle="None" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Width="500" Height="500">
+    <Window.Background>
+        <ImageBrush ImageSource="/WPF;component/Ressources/fondFenetre.png"/>
+    </Window.Background>
+    
+    <Grid Margin="0,10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="90*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource texte}" FontSize="16"> Rapport de combat </TextBlock>
+        <Button Click="Button_Click_1" Content="fermer" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" Style="{StaticResource SimpleButton}"/>
+        <StackPanel x:Name="PanelResult" HorizontalAlignment="Center" Grid.Row="1" VerticalAlignment="Center" Width="365" Height="329" Margin="71,20,64,27"/>
+
+    </Grid>
+    
+</Window>

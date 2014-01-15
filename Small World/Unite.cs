@@ -25,6 +25,7 @@ namespace Small_World
         public int defense { get; set; }
         public int vie { get; set; }
         public double mouvement { get; set; }
+        public Log logDernierCombat {get; set;}
 
         public const int MOUVEMENT_MAX = 1;
         public const int ATTAQUE_MAX = 2;
@@ -34,6 +35,7 @@ namespace Small_World
         public Unite(Coordonnee coords)
         {
             coordonnees = new Coordonnee();
+            logDernierCombat = new Log();
 
             attaque = ATTAQUE_MAX;
             defense = DEFENSE_MAX;
@@ -68,16 +70,23 @@ namespace Small_World
          */
         public resultatCombat combattre(int indexUnite, bool uniteSeule, Joueur ennemi)
         {
+            logDernierCombat = new Log();
             Unite @unite = ennemi.getUnites()[indexUnite];
             Random r = new Random();
             double rapportForce = 0;
             int nombreTire = 0;
-
+            
+            logDernierCombat.typeAtk = this.getPeuple();
+            logDernierCombat.typeDef = @unite.getPeuple();
+            
+            
             if (@unite.defense != 0)
             {
                 int nombreCombats = r.Next(3, Math.Max(this.vie, @unite.vie) + 2);
                 double attaqueAtt;
                 double defenseDef;
+
+                logDernierCombat.nbCombat = nombreCombats;
 
                 while (nombreCombats > 0 && this.vie > 0 && @unite.vie > 0)
                 {
@@ -99,11 +108,15 @@ namespace Small_World
                     if (nombreTire < rapportForce)
                     {
                         @unite.vie--;
+                        logDernierCombat.logCombat.Add("D");
                     }
                     else
                     {
                         this.vie--;
+                        logDernierCombat.logCombat.Add("A");
                     }
+
+                    nombreCombats--;
                 }
             }
             else
@@ -113,32 +126,39 @@ namespace Small_World
             ennemi.getUnites()[indexUnite] = @unite;
             SmallWorld.Instance.getJoueurCourant().getUnites()[SmallWorld.Instance.uniteCourante] = this;
 
+            logDernierCombat.logVide = false;
+
             if (uniteSeule && @unite.vie == 0 && this.vie > 0)
             {
                 ennemi.getUnites().RemoveAt(indexUnite);
+                logDernierCombat.result = resultatCombat.DEPLACEMENT_BATAILLE;
                 return resultatCombat.DEPLACEMENT_BATAILLE;
             }
 
             if (@unite.vie == 0 && this.vie == 0)
             {
                 ennemi.getUnites().RemoveAt(indexUnite);
+                logDernierCombat.result = resultatCombat.DEUX_MORTS;
                 return resultatCombat.DEUX_MORTS;
             }
             else if (@unite.vie == 0)
             {
                 ennemi.getUnites().RemoveAt(indexUnite);
+                logDernierCombat.result = resultatCombat.DEFENSEUR_MORT;
                 return resultatCombat.DEFENSEUR_MORT;
             }
             else if (this.vie == 0)
             {
+                logDernierCombat.result = resultatCombat.ATTAQUANT_MORT;
                 return resultatCombat.ATTAQUANT_MORT;
             }
-            else
-            {
+            else {
+
+                logDernierCombat.result = resultatCombat.AUCUN_MORT;
                 return resultatCombat.AUCUN_MORT;
             }
 
-          
+
         }
 
         /**

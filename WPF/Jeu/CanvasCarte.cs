@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Small_World;
+using WPF.RapportCombat;
 
 namespace WPF.Jeu
 {
@@ -285,6 +286,22 @@ namespace WPF.Jeu
 
             Coordonnee arrivee = pointToCoordonne(click);
             bool finJeu = SmallWorld.Instance.deplacement(arrivee);
+
+            Log log = SmallWorld.Instance.getUniteCourante().logDernierCombat;
+
+            if (!log.logVide)
+            {
+                    resultatCombat r = (resultatCombat)log.result;
+
+                    if (r != resultatCombat.DEPLACEMENT_SIMPLE ||
+                        r != resultatCombat.DEPLACEMENT_IMPOSSIBLE)
+                    {
+                        RapportCombatDialog rapport = new RapportCombatDialog(log);
+                        rapport.Owner = (MainWindow)Application.Current.MainWindow;
+                        rapport.ShowDialog();
+                    }
+
+            }
             this.InvalidateVisual();
             if (finJeu) {
                 MainWindow m = (MainWindow)Application.Current.MainWindow;
