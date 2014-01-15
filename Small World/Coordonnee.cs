@@ -97,10 +97,20 @@ namespace Small_World
             return "X:" + X + ",Y:" + Y;
         }
 
+        public override bool Equals(object obj)
+        {
+            if (obj == null) return false;
+            Coordonnee objAsPart = obj as Coordonnee;
+            if (objAsPart == null) return false;
+            else return Equals(objAsPart);
+
+        }
+
         public bool Equals(Coordonnee obj)
         {
             return (X == obj.X && Y == obj.Y);
         }
+
 
 
     }

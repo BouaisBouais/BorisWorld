@@ -32,7 +32,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="200" />
                 <RowDefinition Height="100"/>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="150"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="2*"/>
                 <RowDefinition Height="50"/>
@@ -54,7 +54,7 @@
                     <TextBlock x:Name="nbToursMax"/>
             </TextBlock>
 
-            <Grid Grid.Row="2" Name="GridUniteActive">
+            <Grid Grid.Row="2" Name="GridUniteActive" Margin="0,0,0,49">
                 <Image Source="/WPF;component/Ressources/fondRecapUnitesNew.png" Grid.Row="2"/>
                 <Image Name="img_UnitSurvT" Source="/WPF;component/Ressources/fondRecapUnitesNew.png" Grid.Column="1" Visibility="Hidden"/>
                 <Image x:Name="imgUnitCour" HorizontalAlignment="Left" Height="32" Margin="18,34,0,0" Grid.Row="2" VerticalAlignment="Top" Width="32" RenderTransformOrigin="0.906,1" Source="/WPF;component/Ressources/nain.png"/>
@@ -81,6 +81,9 @@
             <Button Content="Menu" Click="popMenu_Click" Grid.Row="5" Style="{StaticResource smallButton}"/>
             <TextBlock x:Name="pointJ1" HorizontalAlignment="Left" Margin="77,58,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.105" Style="{StaticResource texte}" Foreground="Black"/>
             <TextBlock x:Name="pointJ2" HorizontalAlignment="Left" Margin="77,125,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.105" Style="{StaticResource texte}" Foreground="Black"/>
+            
+            <Button x:Name="passerTour" Content="Passer tour" HorizontalAlignment="Left" Margin="70,62,0,0" Grid.Row="1" VerticalAlignment="Top" Width="132" Style="{StaticResource smallButton}" Click="passerTour_Click"/>
+            <Button x:Name="passerUnite" Content="Passer Unite" HorizontalAlignment="Left" Margin="72,75,0,0" Grid.Row="2" VerticalAlignment="Top" Width="132" Style="{StaticResource smallButton}" RenderTransformOrigin="0.469,4.781" Click="passerUnite_Click"/>
         </Grid>
         
         <Image Grid.Column="1" Source="/WPF;component/Ressources/fondMap.png" Stretch="Fill"/>

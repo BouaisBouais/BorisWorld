@@ -22,6 +22,8 @@ namespace WPF.Jeu
     public partial class Jeu : Page
     {
         private MainWindow mainWindow = (MainWindow)Application.Current.MainWindow;
+        private const Key keyPasserTour = Key.Enter;
+        private const Key keyPasserUnit = Key.Space;
 
         public Jeu()
         {
@@ -65,8 +67,8 @@ peupleJ2.Text = App.getNameFromPeuple(j2);*/
             unitesJ1.Text = SmallWorld.Instance.joueurs[0].getUnites().Count.ToString();
             unitesJ2.Text = SmallWorld.Instance.joueurs[1].getUnites().Count.ToString();*/
 
-            pointJ1.Text = SmallWorld.Instance.joueurs[0].getPoints().ToString();
-            pointJ2.Text = SmallWorld.Instance.joueurs[1].getPoints().ToString();
+            pointJ1.Text = SmallWorld.Instance.joueurs[0].points.ToString();
+            pointJ2.Text = SmallWorld.Instance.joueurs[1].points.ToString();
             nbUnitJ1.Text = SmallWorld.Instance.joueurs[0].getUnites().Count.ToString();
             nbUnitJ2.Text = SmallWorld.Instance.joueurs[1].getUnites().Count.ToString();
 
@@ -171,12 +173,12 @@ peupleJ2.Text = App.getNameFromPeuple(j2);*/
                 finJeu = SmallWorld.Instance.deplacement(down);
                 actualiserDonnées();
             }
-            if (e.Key == Key.Space)
+            if (e.Key == keyPasserUnit)
             {
                 SmallWorld.Instance.passerUnite();
                 actualiserDonnées();
             }
-            if (e.Key == Key.Enter)
+            if (e.Key == keyPasserTour)
             {
                 finJeu = SmallWorld.Instance.passerTour();
                 actualiserDonnées();
@@ -197,6 +199,28 @@ peupleJ2.Text = App.getNameFromPeuple(j2);*/
         private void canvasCarte_MouseLeave_1(object sender, MouseEventArgs e)
         {
 
+
+        }
+
+        private void passerTour_Click(object sender, RoutedEventArgs e)
+        {
+            KeyEventArgs k = new KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource,
+                0, keyPasserTour)
+                {
+                    RoutedEvent = Keyboard.PreviewKeyDownEvent
+                };
+            this.RaiseEvent(k);
+
+        }
+
+        private void passerUnite_Click(object sender, RoutedEventArgs e)
+        {
+            KeyEventArgs k = new KeyEventArgs(Keyboard.PrimaryDevice, Keyboard.PrimaryDevice.ActiveSource,
+                               0,keyPasserUnit)
+             {
+                 RoutedEvent = Keyboard.PreviewKeyDownEvent
+            };
+            this.RaiseEvent(k);
         }
     }
 }
