@@ -9,6 +9,7 @@
 #ifndef MAPLIB
 #define MAPLIB
 #include "Coordonnee.h"
+#include <string>
 
 class DLL MapLib {
 private :
@@ -38,24 +39,18 @@ public:
 
 	MapLib() {};
 	~MapLib() {};
-	int** genererMap(int taille);
+	int** genererMap(int taille, std::string chaine);
 	int** genererMapTest();
 	int** posJoueurs(); 
 	int** suggestions(int peuple, int x, int y);
-	void chargerMap(int value);
-	void initializeLoad(int taille);
-	int** getMap();
 	int getCase(Coordonnee coords);
 };
 
 // A ne pas implémenter dans le .h !
 EXTERNC DLL MapLib* MapLib_new();
 EXTERNC DLL void MapLib_delete(MapLib* maplib);
-EXTERNC DLL int** MapLib_genererMap(MapLib* maplib, int taille);
+EXTERNC DLL int** MapLib_genererMap(MapLib* maplib, int taille, std::string chaine);
 EXTERNC DLL int** MapLib_posJoueurs(MapLib* maplib);
 EXTERNC DLL int** MapLib_suggestions(MapLib* maplib, int peuple, int x, int y);
-EXTERNC DLL void MapLib_initializeLoad(MapLib* maplib, int taille);
-EXTERNC DLL void MapLib_chargerMap(MapLib* maplib, int value);
-EXTERNC DLL int** MapLib_getMap(MapLib* maplib);
 
 #endif

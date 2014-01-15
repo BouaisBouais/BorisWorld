@@ -155,32 +155,11 @@ Console.WriteLine("j1res.getUnites()[0].coordonnees.getX(): {0} // j2res.getUnit
                 if (charger)
                 {
                     SmallWorld.Instance = ((SmallWorld)formatter.Deserialize(stream));
-                    int tailleCarte = SmallWorld.Instance.carte.taille;
-
-
-                    Carte.wrapper.initializeLoad(tailleCarte);
-
-                    for(int x=0;x < tailleCarte;x++) {
-                        for (int y=0;y<tailleCarte;y++) {
-                            Carte.wrapper.chargerMap(SmallWorld.Instance.carte.grid[x, y]);
-                        }
-                    }
-
-                    unsafe
-                    {
-                        testerCettePutainDeDLLQuiMePeteBienLesBurnes(SmallWorld.Instance.carte.taille, Carte.wrapper.getMap());
-                    }
-                   
+                    SmallWorld.Instance.carte.load();
                 }
                 else
                 {
                     formatter.Serialize(stream, SmallWorld.Instance);
-
-                    unsafe
-                    {
-                        testerCettePutainDeDLLQuiMePeteBienLesBurnes(SmallWorld.Instance.carte.taille, Carte.wrapper.getMap());
-                    }
-
                 }
             }
             catch (SerializationException e)
