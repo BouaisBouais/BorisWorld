@@ -12,6 +12,7 @@ namespace Small_World
     {
         public int[,] grid { get; set; }
         public int taille { get; set; }
+        public String chaineGeneration { get; set; }
         [NonSerialized] public static WrapperMap wrapper = new WrapperMap();
 
         private List<Coordonnee> departJoueurs;
@@ -19,7 +20,11 @@ namespace Small_World
         unsafe public Carte(int t)
         {
             this.taille = t;
-            int** gridTemp = wrapper.genererMap(t);
+
+            chaineGeneration = RandomString(t);
+            Console.WriteLine(chaineGeneration);
+
+            int** gridTemp = wrapper.genererMap(t, chaineGeneration);
 
             grid = new int[t, t];
             for (int i = 0; i < t; i++)
@@ -31,6 +36,11 @@ namespace Small_World
             }
 
             departJoueurs = new List<Coordonnee>();
+        }
+
+        unsafe public void load()
+        {
+            wrapper.genererMap(taille, chaineGeneration);
         }
 
         public Carte(int t, int[,] g)
@@ -203,6 +213,20 @@ namespace Small_World
                 }
             }
             return retour;
+        }
+
+        private readonly Random _rng = new Random();
+        private const string _chars = "0123456789";
+
+        private string RandomString(int size)
+        {
+            char[] buffer = new char[size];
+
+            for (int i = 0; i < size; i++)
+            {
+                buffer[i] = _chars[_rng.Next(_chars.Length)];
+            }
+            return new string(buffer);
         }
 
     }

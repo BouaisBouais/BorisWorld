@@ -4,6 +4,7 @@
 #include <cmath>
 #include "Coordonnee.h"
 #include <stdio.h>
+#include <stdio.h>
 
 /**
 * Génère la carte de taille taille et la retourne sous tableau d'int
@@ -11,12 +12,13 @@
 * @return int** Le tableau représentant la carte
 * @todo Donner des valeurs d'apparitions aux cases, sinon les vikngs sont meilleurs
 */
-int** MapLib::genererMap(int taille){
+int** MapLib::genererMap(int taille, std::string chaine){
 	nbTypes = MapLib::typeCases::PLAINE +1;
 	tailleCourante = taille;
 
+	int randSeed = atoi(chaine.c_str());
+	srand (randSeed);
 
-	srand (time(0));
 	Coordonnee::initialise(taille);
 	
 	carte = NULL;
@@ -194,40 +196,9 @@ bool MapLib::bordEau(Coordonnee coords){
 		(coords.getY() < tailleCarte && getCase(coords.decaler(0,1)) == MapLib::typeCases::EAU));
 }
 
-// Initilise le chargment d'une map
-void MapLib::initializeLoad(int taille) {
-	positionX = 0;
-	positionY = 0;
-	Coordonnee::initialise(taille);
-	carte = NULL;
-	carte = new int* [taille];
-	for(int x=0; x<taille; x++){
-		carte[x] = new int [taille];
-	}
-	tailleCourante = taille;
-}
-
-void MapLib::chargerMap(int value) {
-	if (positionX < tailleCourante) {
-		carte[positionX][positionY] = value;
-		positionY++;
-		if (positionY >= tailleCourante) {
-			positionX++;
-			positionY=0;
-		}
-	}
-}
-
-int** MapLib::getMap() {
-	return carte;
-}
-
 MapLib* MapLib_new() { return new MapLib(); }
 void MapLib_delete(MapLib* maplib) { delete maplib; }
 
-int** MapLib_genererMap(MapLib* maplib, int taille){ return maplib->genererMap(taille); }
+int** MapLib_genererMap(MapLib* maplib, int taille, std::string chaineAleatoire){ return maplib->genererMap(taille, chaineAleatoire); }
 int** MapLib_posJoueurs(MapLib* maplib){ return maplib->posJoueurs(); }
 int** MapLib_suggestions(MapLib* maplib, int peuple, int x, int y){ return maplib->suggestions(peuple, x, y); }
-void MapLib_initializeLoad(MapLib* maplib,int taille){return maplib->initializeLoad(taille);}
-void MapLib_chargerMap(MapLib* maplib,int value){return maplib->chargerMap(value);}
-int** MapLib_getMap(MapLib* maplib) {return maplib->getMap();}

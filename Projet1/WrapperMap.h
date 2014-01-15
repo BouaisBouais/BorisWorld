@@ -5,6 +5,9 @@
 #include "../MapLib/MapLib.h"
 //#pragma comment(lib, "../Debug/MapLib.lib") // A changer
 #pragma comment(lib, "MapLib.lib") // A changer
+#include <string>
+
+#include <msclr\marshal_cppstd.h>
 
 using namespace System;
 
@@ -17,12 +20,14 @@ namespace Wrapper {
 
 			WrapperMap(){ map = MapLib_new(); }
 			~WrapperMap(){ MapLib_delete(map); }
-			int** genererMap(int taille) { return MapLib_genererMap(map,taille);}
+			int** genererMap(int taille, String^ chaineAleatoire)
+			{ 
+				msclr::interop::marshal_context context;
+				std::string standardString = context.marshal_as<std::string>(chaineAleatoire);
+				return MapLib_genererMap(map, taille, standardString);
+			}
 			int** posJoueurs() { return MapLib_posJoueurs(map);}
 			int** suggestions(int peuple, int x, int y) { return MapLib_suggestions(map, peuple, x, y);}
-			void initializeLoad(int taille) {return MapLib_initializeLoad(map,taille);}
-			void chargerMap(int value) {return MapLib_chargerMap(map,value);}
-			int** getMap() {return MapLib_getMap(map);}
 	};
 }
 #endif
