@@ -231,7 +231,15 @@
     <Resource Include="Ressources\iconeJeu.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Ressources\viking.png" />
     <Resource Include="Ressources\fondRecapUnites.png" />
+    <Resource Include="Ressources\HUD info.png" />
+    <Resource Include="Ressources\gaulois.png" />
+    <Resource Include="Ressources\nain.png" />
+    <Resource Include="Ressources\fondRecapUnitesNew.png" />
+    <Resource Include="Ressources\iconeAtk.png" />
+    <Resource Include="Ressources\iconeDef.png" />
+    <Resource Include="Ressources\iconeVie.png" />
     <Content Include="Ressources\SmallWorldIntro.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

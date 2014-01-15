@@ -263,6 +263,7 @@ namespace WPF.Jeu
                 else if (d.Count > 1)
                 {
                     if (fenetreParent != null)
+                        // TODO : A virer
                         fenetreParent.setInfoUniteSurvole(d.Count);
                 }
                 else

@@ -54,6 +54,10 @@ namespace Small_World
             return retour;
         }
 
+        public override TypeUnite getPeuple()
+        {
+            return TypeUnite.Gaulois;
+        }
 
     }
 }

@@ -54,7 +54,7 @@ namespace Small_World
 
         public abstract resultatCombat deplacement(Coordonnee coords);
         public abstract bool deplacementPossible(Coordonnee coords);
-
+        public abstract TypeUnite getPeuple();
         public abstract int getPoints();
 
 

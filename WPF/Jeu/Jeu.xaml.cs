@@ -35,11 +35,18 @@ namespace WPF.Jeu
             tourJ2.Foreground = Brushes.Red;
 
             TypeUnite j1 = SmallWorld.Instance.joueurs[0].Peuple;
-            peupleJ1.Foreground = App.getColorFromPeuple(j1);
-            peupleJ1.Text = App.getNameFromPeuple(j1);
             TypeUnite j2 = SmallWorld.Instance.joueurs[1].Peuple;
-            peupleJ2.Foreground = App.getColorFromPeuple(j2);
-            peupleJ2.Text = App.getNameFromPeuple(j2);
+
+
+            /*
+            
+peupleJ1.Foreground = App.getColorFromPeuple(j1);
+peupleJ1.Text = App.getNameFromPeuple(j1);
+            
+peupleJ2.Foreground = App.getColorFromPeuple(j2);
+peupleJ2.Text = App.getNameFromPeuple(j2);*/
+            imgPeupleJ1.Source = App.getImageFromPeuple(j1);
+            imgPeupleJ2.Source = App.getImageFromPeuple(j2);
 
             this.canvasCarte.setFenetreParent(this);
             
@@ -51,20 +58,29 @@ namespace WPF.Jeu
 
             nbToursRestants.Text = (SmallWorld.Instance.nbTours + 1 ).ToString();
             nbToursMax.Text = SmallWorld.Instance.nbTourMax.ToString();
+
+            /*
             ptsJ1.Text = SmallWorld.Instance.joueurs[0].getPoints().ToString();
             ptsJ2.Text = SmallWorld.Instance.joueurs[1].getPoints().ToString();
             unitesJ1.Text = SmallWorld.Instance.joueurs[0].getUnites().Count.ToString();
-            unitesJ2.Text = SmallWorld.Instance.joueurs[1].getUnites().Count.ToString();
+            unitesJ2.Text = SmallWorld.Instance.joueurs[1].getUnites().Count.ToString();*/
+
+            pointJ1.Text = SmallWorld.Instance.joueurs[0].getPoints().ToString();
+            pointJ2.Text = SmallWorld.Instance.joueurs[1].getPoints().ToString();
+
+
+            SolidColorBrush couleurActif =  Brushes.DarkRed;
+            SolidColorBrush couleurInactif = Brushes.White;
 
             if (SmallWorld.Instance.joueurCourant == 0)
             {
-                tourJ1.Text = "A ton tour !";
-                tourJ2.Text = "";
+                j1Actif.Foreground = couleurActif;
+                j2Actif.Foreground = couleurInactif;
             }
             else
             {
-                tourJ2.Text = "A ton tour !";
-                tourJ1.Text = "";
+                j1Actif.Foreground = couleurInactif;
+                j2Actif.Foreground = couleurActif;
             }
 
 
@@ -77,8 +93,10 @@ namespace WPF.Jeu
             if (SmallWorld.Instance.uniteCourante != -1)
             {
                 Unite u = SmallWorld.Instance.getUniteCourante();
-
-                ID_UnitCourr.Text = "Unité n°" + SmallWorld.Instance.uniteCourante;
+                imgUnitCour.Source = App.getImageFromPeuple(SmallWorld.Instance.joueurs[SmallWorld.Instance.getJoueurCourant().idJoueur].Peuple);
+                
+                
+                // ID_UnitCourr.Text = "Unité n°" + SmallWorld.Instance.uniteCourante;
                 atkUnitCourr.Text = u.attaque.ToString();
                 defUnitCourr.Text = u.defense.ToString();
                 vieUnitCourr.Text = u.vie.ToString();
@@ -94,31 +112,32 @@ namespace WPF.Jeu
 
         public void setInfoUniteSurvole(Unite u, int id)
         {
-            ID_UnitSurv.Text = "Unité n°" + id;
+            //ID_UnitSurv.Text = "Unité n°" + id;
+
+            // TODO : Ca marche pas
+            Console.WriteLine(u.getPeuple());
+            imgUnitSurv.Source = App.getImageFromPeuple(u.getPeuple());
+  
             atkUnitSurv.Text = u.attaque.ToString();
             defUnitSurv.Text = u.defense.ToString();
             vieUnitSurv.Text = u.vie.ToString();
 
             GridUniteSurv.Visibility = System.Windows.Visibility.Visible;
-            img_UnitSurv.Visibility = System.Windows.Visibility.Visible;
-            all_InfoUnitSurv.Visibility = System.Windows.Visibility.Visible;
+            //img_UnitSurv.Visibility = System.Windows.Visibility.Visible;
+            //all_InfoUnitSurv.Visibility = System.Windows.Visibility.Visible;
         }
 
 
         public void setInfoUniteSurvole(int s)
         {
-            ID_UnitSurv.Text = s + " unités survolées";
             GridUniteSurv.Visibility = System.Windows.Visibility.Hidden;
-            all_InfoUnitSurv.Visibility = System.Windows.Visibility.Visible;
-            img_UnitSurv.Visibility = System.Windows.Visibility.Visible;
+            //all_InfoUnitSurv.Visibility = System.Windows.Visibility.Visible;
+            //img_UnitSurv.Visibility = System.Windows.Visibility.Visible;
         }
 
         public void hideInfoUniteSurvole()
         {
-            ID_UnitSurv.Text = "";
             GridUniteSurv.Visibility = System.Windows.Visibility.Hidden;
-            img_UnitSurv.Visibility = System.Windows.Visibility.Hidden;
-            all_InfoUnitSurv.Visibility = System.Windows.Visibility.Hidden;
         }
 
         private void HandleKeys(object sender, KeyEventArgs e)

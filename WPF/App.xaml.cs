@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using Small_World;
 using WPF.Menu;
 
@@ -25,6 +26,29 @@ namespace WPF
             window.Show();
 
 
+        }
+
+        public static BitmapImage getImageFromPeuple(TypeUnite peuple)
+        {
+            BitmapImage logo = new BitmapImage();
+            logo.BeginInit();
+
+            switch (peuple)
+            {
+                case TypeUnite.Gaulois:
+                    logo.UriSource = new Uri("pack://application:,,,/WPF;component/Ressources/gaulois.png");
+                    break;
+                case TypeUnite.Nain:
+                    logo.UriSource = new Uri("pack://application:,,,/WPF;component/Ressources/nain.png");
+                    break;
+                case TypeUnite.Viking:
+                    logo.UriSource = new Uri("pack://application:,,,/WPF;component/Ressources/viking.png");
+                    break;
+            }
+
+            logo.EndInit();
+            return logo;
+            
         }
 
         public static SolidColorBrush getColorFromPeuple(TypeUnite peuple)

@@ -55,5 +55,10 @@ namespace Small_World
             return (mouvement >= 1);
         }
 
+        public override TypeUnite getPeuple()
+        {
+            return TypeUnite.Nain;
+        }
+
     }
 }
