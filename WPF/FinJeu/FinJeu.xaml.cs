@@ -31,7 +31,7 @@ namespace WPF.FinJeu
             vainqueur.Text = App.getNameFromPeuple(gagnant.Peuple);
 
             points.Foreground = Brushes.White;
-            points.Text = gagnant.getPoints().ToString();
+            points.Text = gagnant.points.ToString();
         }
 
         private void Ok_Click_1(object sender, RoutedEventArgs e)

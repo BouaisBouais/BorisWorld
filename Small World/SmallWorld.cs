@@ -92,6 +92,7 @@ namespace Small_World
          */
         public bool passerTour()
         {
+            SmallWorld.instance.getJoueurCourant().calculerPoints();
             joueurCourant++;
             uniteCourante = 0;
             if (joueurCourant >= NOMBRE_JOUEURS)
@@ -162,7 +163,7 @@ namespace Small_World
 
             foreach (Joueur j in joueurs)
             {
-                if (vainqueur == null || vainqueur.getPoints() < j.getPoints())
+                if (vainqueur == null || vainqueur.points < j.points)
                 {
                     vainqueur = j;
                 }

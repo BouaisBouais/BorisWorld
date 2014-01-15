@@ -10,15 +10,19 @@ namespace Small_World
     [Serializable]
     public class Joueur
     {
-        public TypeUnite Peuple { get; private set; }
-        public int idJoueur {get;   private set;}
+        public TypeUnite Peuple { get; set; }
+        public int idJoueur {get; set;}
+        public int points {get; set;}
 
         private List<Unite> unites = new List<Unite>();
+         
+
 
         public Joueur(TypeUnite t, int id)
         {
             Peuple = t;
             idJoueur = id;
+            points = 0;
         }
 
         public void addUnite(Unite unite)
@@ -34,14 +38,21 @@ namespace Small_World
         /**
          * Retourne le nombre total de points du joueur
          */
-        public int getPoints()
+        public void calculerPoints()
         {
             int total = 0;
+            List<Coordonnee> dejaCompte = new List<Coordonnee>();
+
             foreach (Unite u in unites)
             {
-                total += u.getPoints();
+               
+                if (!dejaCompte.Contains(u.coordonnees))
+                {
+                    total += u.getPoints();
+                    dejaCompte.Add(u.coordonnees);
+                }
             }
-            return total;
+            points += total;
         }
 
         /**
