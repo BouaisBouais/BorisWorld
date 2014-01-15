@@ -10,7 +10,8 @@ namespace Small_World
 		EAU,
 		FORET,
 		MONTAGNE,
-		PLAINE
+		PLAINE,
+        VORTEX
 	}
 
     static public class FabriqueCase
@@ -20,6 +21,7 @@ namespace Small_World
         static private CaseForet foret = null;
         static private CaseMontagne montagne = null;
         static private CaseDesert desert = null;
+        static private CaseVortex vortex = null;
 
         static public Case obtenirCase(TypeCases type)
         {
@@ -45,6 +47,10 @@ namespace Small_World
                     if (foret == null)
                         creerCaseForet();
                     return foret;
+                case TypeCases.VORTEX:
+                    if (vortex == null)
+                        creerCaseVortex();
+                    return vortex;
             }
             throw new Exception("Type de case inconnu");
         }
@@ -72,6 +78,11 @@ namespace Small_World
         static void creerCaseDesert()
         {
             desert = new CaseDesert();
+        }
+
+        static void creerCaseVortex()
+        {
+            vortex = new CaseVortex();
         }
     }
 }

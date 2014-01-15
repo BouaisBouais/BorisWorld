@@ -13,7 +13,7 @@
 * @todo Donner des valeurs d'apparitions aux cases, sinon les vikngs sont meilleurs
 */
 int** MapLib::genererMap(int taille, std::string chaine){
-	nbTypes = MapLib::typeCases::PLAINE +1;
+	nbTypes = MapLib::NBCASE;
 	tailleCourante = taille;
 
 	int randSeed = atoi(chaine.c_str());
@@ -26,8 +26,23 @@ int** MapLib::genererMap(int taille, std::string chaine){
 	for(int x=0; x<taille; x++){
 		carte[x] = new int [taille];
 		for(int y=0; y<taille; y++){
-			int random = rand() % nbTypes;
-			carte[x][y] = random;
+			bool caseOk = false;
+			while(!caseOk){
+				int random = rand() % nbTypes;
+				carte[x][y] = random;
+
+				//Diviser les chances d'apparition d'eau et de vortex par 2
+				if(random == MapLib::typeCases::EAU || random == MapLib::typeCases::VORTEX)
+				{
+					int chance2 = rand() % 2;
+					if(chance2 == 1)
+						caseOk = true;
+				}
+				else
+				{
+					caseOk = true;
+				}
+			}
 		}
 	}
 

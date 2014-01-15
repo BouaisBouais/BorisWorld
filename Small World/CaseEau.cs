@@ -7,11 +7,11 @@ namespace Small_World
 {
     public class CaseEau : Case
     {
-        public void print()
+        static private Uri uri = new Uri(@"Ressources/terrains/eau.png", UriKind.RelativeOrAbsolute);
+        static public Uri getUri()
         {
-            Console.Write("Case");
+            return uri;
         }
-
         public TypeCases getTypeCase()
         {
             return TypeCases.EAU;

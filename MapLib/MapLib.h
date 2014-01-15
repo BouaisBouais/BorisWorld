@@ -24,12 +24,14 @@ private :
 	int tailleCourante;
 
 public:
+	static const int NBCASE = 6;
 	static enum typeCases{
 		DESERT = 0,
 		EAU,
 		FORET,
 		MONTAGNE,
-		PLAINE
+		PLAINE,
+		VORTEX
 	};
 	static enum typeUnite{
 		VIKING = 0,

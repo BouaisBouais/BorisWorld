@@ -7,11 +7,11 @@ namespace Small_World
 {
     public class CaseForet : Case
     {
-        public void print()
+        static private Uri uri = new Uri(@"Ressources/terrains/forest.gif", UriKind.RelativeOrAbsolute);
+        static public Uri getUri()
         {
-            Console.Write("Case");
+            return uri;
         }
-
         public TypeCases getTypeCase()
         {
             return TypeCases.FORET;

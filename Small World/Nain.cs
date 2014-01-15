@@ -19,6 +19,7 @@ namespace Small_World
                     return 2;
                 case TypeCases.PLAINE:
                 case TypeCases.EAU:
+                case TypeCases.VORTEX:
                     return 0;
                 default:
                     return 1;
@@ -48,7 +49,8 @@ namespace Small_World
             if (c.getTypeCase() == TypeCases.EAU) return false;
 
             Case currentCase = SmallWorld.Instance.carte.getCase(coordonnees);
-            if (currentCase.getTypeCase() == TypeCases.MONTAGNE && c.getTypeCase() == TypeCases.MONTAGNE && mouvement >= 1) return true;
+            if (currentCase.getTypeCase() == TypeCases.MONTAGNE && c.getTypeCase() == TypeCases.MONTAGNE && mouvement >= 1
+                && !SmallWorld.Instance.carte.presenceUniteEnnemie(coords, this)) return true;
 
             if (distance > 1) return false;
 
