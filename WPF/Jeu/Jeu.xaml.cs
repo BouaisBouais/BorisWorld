@@ -37,14 +37,6 @@ namespace WPF.Jeu
             TypeUnite j1 = SmallWorld.Instance.joueurs[0].Peuple;
             TypeUnite j2 = SmallWorld.Instance.joueurs[1].Peuple;
 
-
-            /*
-            
-peupleJ1.Foreground = App.getColorFromPeuple(j1);
-peupleJ1.Text = App.getNameFromPeuple(j1);
-            
-peupleJ2.Foreground = App.getColorFromPeuple(j2);
-peupleJ2.Text = App.getNameFromPeuple(j2);*/
             imgPeupleJ1.Source = App.getImageFromPeuple(j1);
             imgPeupleJ2.Source = App.getImageFromPeuple(j2);
 
@@ -54,16 +46,8 @@ peupleJ2.Text = App.getNameFromPeuple(j2);*/
 
         public void actualiserDonnées()
         {
-            Console.WriteLine("loool");
-
             nbToursRestants.Text = (SmallWorld.Instance.nbTours + 1 ).ToString();
             nbToursMax.Text = SmallWorld.Instance.nbTourMax.ToString();
-
-            /*
-            ptsJ1.Text = SmallWorld.Instance.joueurs[0].getPoints().ToString();
-            ptsJ2.Text = SmallWorld.Instance.joueurs[1].getPoints().ToString();
-            unitesJ1.Text = SmallWorld.Instance.joueurs[0].getUnites().Count.ToString();
-            unitesJ2.Text = SmallWorld.Instance.joueurs[1].getUnites().Count.ToString();*/
 
             pointJ1.Text = SmallWorld.Instance.joueurs[0].getPoints().ToString();
             pointJ2.Text = SmallWorld.Instance.joueurs[1].getPoints().ToString();
@@ -98,7 +82,6 @@ peupleJ2.Text = App.getNameFromPeuple(j2);*/
                 imgUnitCour.Source = App.getImageFromPeuple(SmallWorld.Instance.joueurs[SmallWorld.Instance.getJoueurCourant().idJoueur].Peuple);
                 
                 
-                // ID_UnitCourr.Text = "Unité n°" + SmallWorld.Instance.uniteCourante;
                 atkUnitCourr.Text = u.attaque.ToString();
                 defUnitCourr.Text = u.defense.ToString();
                 vieUnitCourr.Text = u.vie.ToString();
@@ -125,16 +108,12 @@ peupleJ2.Text = App.getNameFromPeuple(j2);*/
             vieUnitSurv.Text = u.vie.ToString();
 
             GridUniteSurv.Visibility = System.Windows.Visibility.Visible;
-            //img_UnitSurv.Visibility = System.Windows.Visibility.Visible;
-            //all_InfoUnitSurv.Visibility = System.Windows.Visibility.Visible;
         }
 
 
         public void setInfoUniteSurvole(int s)
         {
             GridUniteSurv.Visibility = System.Windows.Visibility.Hidden;
-            //all_InfoUnitSurv.Visibility = System.Windows.Visibility.Visible;
-            //img_UnitSurv.Visibility = System.Windows.Visibility.Visible;
         }
 
         public void hideInfoUniteSurvole()

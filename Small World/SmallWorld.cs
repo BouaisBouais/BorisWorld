@@ -16,6 +16,7 @@ namespace Small_World
         public int joueurCourant { get; set; }
         public int uniteCourante { get; set; }
         public const int NOMBRE_JOUEURS = 2;
+        public int premierJoueur { get; set; }
 
         public int nbTours { get; set; }
         public int nbTourMax { get; set; }
@@ -74,9 +75,6 @@ namespace Small_World
         {
             Unite u = getUniteCourante();
             u.mouvement = 0;
-            // TODO : Utile ?
-            //getJoueurCourant().getUnites().Remove(u);
-            //getJoueurCourant().addUnite(u);
 
             int id_next = getJoueurCourant().getFirstMovementAbleUnit();
 
@@ -99,8 +97,10 @@ namespace Small_World
             if (joueurCourant >= NOMBRE_JOUEURS)
             {
                 joueurCourant = 0;
-                return nouveauTour();
             }
+            if(joueurCourant == premierJoueur)
+                return nouveauTour();
+
             return false;
         }
 

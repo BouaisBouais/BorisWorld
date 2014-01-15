@@ -9,6 +9,7 @@ namespace Small_World
     {
         private FabriqueAutre fabAutre;
         private FabriqueUnite fabUnit;
+        private Random r;
 
         public MonteurPartie()
         {
@@ -21,6 +22,11 @@ namespace Small_World
             SmallWorld.Instance.carte.print();
 
             List<Joueur> joueurs = new List<Joueur>();
+
+            r = new Random();
+            SmallWorld.Instance.premierJoueur = r.Next(SmallWorld.NOMBRE_JOUEURS);
+            SmallWorld.Instance.joueurCourant = SmallWorld.Instance.premierJoueur;
+            Console.WriteLine("Premier joueur : " + SmallWorld.Instance.premierJoueur);
 
             joueurs.Add(fabAutre.creerJoueur(typeJ1, 0));
             joueurs.Add(fabAutre.creerJoueur(typeJ2, 1));
