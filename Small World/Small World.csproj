@@ -96,6 +96,7 @@
     <Compile Include="Gaulois.cs" />
     <Compile Include="GestionFichiers.cs" />
     <Compile Include="Joueur.cs" />
+    <Compile Include="Log.cs" />
     <Compile Include="MonteurPartie.cs" />
     <Compile Include="Nain.cs" />
     <Compile Include="FabriqueUnite.cs" />
