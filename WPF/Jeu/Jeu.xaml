@@ -23,7 +23,7 @@
             <ColumnDefinition Width="4*" />
         </Grid.ColumnDefinitions>
         
-        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="{x:Null}">
+        <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Background="{x:Null}" Margin="81,97,76,78" Panel.ZIndex="1">
             <local:CanvasCarte x:Name="canvasCarte"/>
         </ScrollViewer>
 
@@ -34,14 +34,17 @@
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
                 <RowDefinition Height="100"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="50"/>
+                               
             </Grid.RowDefinitions>
             <Image HorizontalAlignment="Left" VerticalAlignment="Top" Source="/WPF;component/Ressources/HUD info.png" Width="174"/>
             <Image x:Name="imgPeupleJ1" HorizontalAlignment="Left" Height="32" Margin="18,38,0,0" VerticalAlignment="Top" Width="32" RenderTransformOrigin="0.5,-0.031"/>
             <Image x:Name="imgPeupleJ2" HorizontalAlignment="Left" Height="32" Margin="18,107,0,0" VerticalAlignment="Top" Width="32" RenderTransformOrigin="0.5,-0.031"/>
-            <TextBlock x:Name="pointJ1" HorizontalAlignment="Left" Margin="111,58,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="19" Height="13" Style="{StaticResource texte}" TextAlignment="Center" FontSize="12" Foreground="White"/>
-            <TextBlock x:Name="pointJ2" HorizontalAlignment="Left" Margin="110,126,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="19" Height="13" Style="{StaticResource texte}" TextAlignment="Center" FontSize="12" Foreground="White" RenderTransformOrigin="0.632,6.385"/>
-            <TextBlock x:Name="j1Actif" HorizontalAlignment="Left" Margin="51,48,0,0" TextWrapping="Wrap" Text="Joueur 1" VerticalAlignment="Top" Style="{StaticResource texte}" Foreground="#FFC71D1D"/>
-            <TextBlock x:Name="j2Actif" HorizontalAlignment="Left" Margin="49,117,0,0" TextWrapping="Wrap" Text="Joueur 2" VerticalAlignment="Top" Style="{StaticResource texte}" Foreground="#FFC71D1D"/>
+            <TextBlock x:Name="nbUnitJ1" HorizontalAlignment="Left" Margin="111,58,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="19" Height="13" Style="{StaticResource texte}" TextAlignment="Center" FontSize="12" Foreground="White"/>
+            <TextBlock x:Name="nbUnitJ2" HorizontalAlignment="Left" Margin="110,126,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="19" Height="13" Style="{StaticResource texte}" TextAlignment="Center" FontSize="12" Foreground="White" RenderTransformOrigin="0.632,6.385"/>
+            <TextBlock x:Name="j1Actif" HorizontalAlignment="Left" Margin="50,39,0,0" TextWrapping="Wrap" Text="Joueur 1" VerticalAlignment="Top" Style="{StaticResource texte}" Foreground="#FFC71D1D"/>
+            <TextBlock x:Name="j2Actif" HorizontalAlignment="Left" Margin="49,107,0,0" TextWrapping="Wrap" Text="Joueur 2" VerticalAlignment="Top" Style="{StaticResource texte}" Foreground="#FFC71D1D"/>
 
             <Image Source="/WPF;component/Ressources/inputBox.png" Grid.Row="1"/>
             
@@ -74,8 +77,13 @@
                 <TextBlock x:Name="defUnitSurv" HorizontalAlignment="Left" Margin="179,45,0,0" Grid.Row="3" TextWrapping="Wrap" Text="5" VerticalAlignment="Top" Width="7" Height="12" Style="{StaticResource texte}"/>
 
             </Grid>
-           
+
+            <Button Content="Menu" Click="popMenu_Click" Grid.Row="5" Style="{StaticResource smallButton}"/>
+            <TextBlock x:Name="pointJ1" HorizontalAlignment="Left" Margin="77,58,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.105" Style="{StaticResource texte}" Foreground="Black"/>
+            <TextBlock x:Name="pointJ2" HorizontalAlignment="Left" Margin="77,125,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" RenderTransformOrigin="0.153,0.105" Style="{StaticResource texte}" Foreground="Black"/>
         </Grid>
+        
+        <Image Grid.Column="1" Source="/WPF;component/Ressources/fondMap.png" Stretch="Fill"/>
         
         
         <Grid Grid.Row="1" Visibility="Hidden">
@@ -166,7 +174,7 @@
                 </Grid>
             </Grid>
 
-            <Button Content="Menu" Click="popMenu_Click" Grid.Column="3" Style="{StaticResource SimpleButton}" Margin="10,61,32,10"/>
+
         </Grid>
     </Grid>
 </Page>

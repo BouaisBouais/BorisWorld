@@ -240,6 +240,7 @@
     <Resource Include="Ressources\iconeAtk.png" />
     <Resource Include="Ressources\iconeDef.png" />
     <Resource Include="Ressources\iconeVie.png" />
+    <Resource Include="Ressources\fondMap.png" />
     <Content Include="Ressources\SmallWorldIntro.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

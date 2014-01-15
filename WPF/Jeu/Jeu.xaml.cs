@@ -67,6 +67,8 @@ peupleJ2.Text = App.getNameFromPeuple(j2);*/
 
             pointJ1.Text = SmallWorld.Instance.joueurs[0].getPoints().ToString();
             pointJ2.Text = SmallWorld.Instance.joueurs[1].getPoints().ToString();
+            nbUnitJ1.Text = SmallWorld.Instance.joueurs[0].getUnites().Count.ToString();
+            nbUnitJ2.Text = SmallWorld.Instance.joueurs[1].getUnites().Count.ToString();
 
 
             SolidColorBrush couleurActif =  Brushes.DarkRed;
