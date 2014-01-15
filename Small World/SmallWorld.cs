@@ -164,9 +164,12 @@ namespace Small_World
 
             foreach (Joueur j in joueurs)
             {
-                if (vainqueur == null || vainqueur.points < j.points)
+                if (j.getUnites().Count > 0)
                 {
-                    vainqueur = j;
+                    if (vainqueur == null || vainqueur.points < j.points)
+                    {
+                        vainqueur = j;
+                    }
                 }
             }
 
