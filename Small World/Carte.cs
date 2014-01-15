@@ -14,11 +14,13 @@ namespace Small_World
         public int taille { get; set; }
         public String chaineGeneration { get; set; }
         [NonSerialized] public static WrapperMap wrapper = new WrapperMap();
+        public List<Coordonnee> vortexs { get; set; }
 
         private List<Coordonnee> departJoueurs;
 
         unsafe public Carte(int t)
         {
+            vortexs = new List<Coordonnee>();
             this.taille = t;
 
             chaineGeneration = RandomString(t);
@@ -31,7 +33,8 @@ namespace Small_World
             {
                 for (int j = 0; j < t; j++)
                 {
-                    grid[i, j] = gridTemp[i][j];
+                    int typeCase = gridTemp[i][j];
+                    grid[i, j] = typeCase;
                 }
             }
 
@@ -47,6 +50,22 @@ namespace Small_World
         {
             grid = g;
             this.taille = t;
+        }
+
+        public void initialiseVortexs()
+        {
+            for (int i = 0; i < taille; i++)
+            {
+                for (int j = 0; j < taille; j++)
+                {
+                    int typeCase = grid[i, j];
+                    if (typeCase == (int)TypeCases.VORTEX)
+                    {
+                        Coordonnee c = new Coordonnee(i + 1, j + 1);
+                        vortexs.Add(c);
+                    }
+                }
+            }
         }
 
         public List<Coordonnee> getDepartJoueurs()
@@ -127,6 +146,8 @@ namespace Small_World
                     return FabriqueCase.obtenirCase(TypeCases.FORET);
                 case (int)TypeCases.MONTAGNE:
                     return FabriqueCase.obtenirCase(TypeCases.MONTAGNE);
+                case (int)TypeCases.VORTEX:
+                    return FabriqueCase.obtenirCase(TypeCases.VORTEX);
                 case (int)TypeCases.PLAINE:
                 default:
                     return FabriqueCase.obtenirCase(TypeCases.PLAINE);
@@ -137,9 +158,9 @@ namespace Small_World
 
         unsafe public void print()
         {
-            for (int i = 0; i < taille; i++)
+            for (int j = 0; j < taille; j++)
             {
-                for (int j = 0; j < taille; j++)
+                for (int i = 0; i < taille; i++)
                 {
                     Console.Write(grid[i, j]);
                 }
@@ -163,6 +184,22 @@ namespace Small_World
                 }
             }
             return nb;
+        }
+
+        public bool presenceUniteEnnemie(Coordonnee coord, Unite amie)
+        {
+            foreach (Joueur j in SmallWorld.Instance.joueurs)
+            {
+                if (j.Peuple != amie.getPeuple())
+                {
+                    foreach (Unite u in j.getUnites())
+                    {
+                        if (u.coordonnees.Equals(coord))
+                            return true;
+                    }
+                }
+            }
+            return false;
         }
 
         public Dictionary<Unite,int> getUnites(Coordonnee coord)
@@ -213,6 +250,28 @@ namespace Small_World
                 }
             }
             return retour;
+        }
+
+        /**
+         * Bouge (avec probabilité) les unités sur les vortex sur les autres vortex inoccupés
+         */
+        public void bougeVortex()
+        {
+            foreach(Joueur j in SmallWorld.Instance.joueurs)
+            {
+                foreach (Unite u in j.getUnites())
+                {
+                    if (getCase(u.coordonnees).getTypeCase() == TypeCases.VORTEX)
+                    {
+                        Coordonnee newPos = vortexs[_rng.Next(vortexs.Count)];
+                        if (!presenceUniteEnnemie(newPos, u))
+                        {
+                            u.coordonnees.setX(newPos.getX());
+                            u.coordonnees.setY(newPos.getY());
+                        }
+                    }
+                }
+            }
         }
 
         private readonly Random _rng = new Random();

@@ -111,6 +111,7 @@ namespace Small_World
          */
         public bool nouveauTour()
         {
+            carte.bougeVortex();
             nbTours++;
             foreach (Joueur j in joueurs)
             {

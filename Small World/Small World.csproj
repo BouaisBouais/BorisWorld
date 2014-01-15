@@ -89,10 +89,10 @@
     <Compile Include="CaseForet.cs" />
     <Compile Include="CaseMontagne.cs" />
     <Compile Include="CasePlaine.cs" />
+    <Compile Include="CaseVortex.cs" />
     <Compile Include="Coordonnee.cs" />
     <Compile Include="FabriqueCase.cs" />
     <Compile Include="FabriqueAutre.cs" />
-    <Compile Include="FabriquePartie.cs" />
     <Compile Include="Gaulois.cs" />
     <Compile Include="GestionFichiers.cs" />
     <Compile Include="Joueur.cs" />

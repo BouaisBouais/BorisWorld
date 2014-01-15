@@ -19,6 +19,7 @@ namespace Small_World
         public void nouvellePartie(TypeCarte taille, TypeUnite typeJ1, TypeUnite typeJ2)
         {
             SmallWorld.Instance.carte = fabAutre.creerCarte(taille);
+            SmallWorld.Instance.carte.initialiseVortexs();
             SmallWorld.Instance.carte.print();
 
             List<Joueur> joueurs = new List<Joueur>();

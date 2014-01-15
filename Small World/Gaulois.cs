@@ -20,6 +20,7 @@ namespace Small_World
                     return 2;
                 case TypeCases.MONTAGNE:
                 case TypeCases.EAU:
+                case TypeCases.VORTEX:
                     return 0;
                 default:
                     return 1;

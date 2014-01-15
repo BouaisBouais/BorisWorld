@@ -20,11 +20,12 @@ namespace WPF.Jeu
 {
     public partial class CanvasCarte : Canvas
     {
-        private BitmapImage desert = new BitmapImage(new Uri(@"Ressources/terrains/desert.png", UriKind.RelativeOrAbsolute));
-        private BitmapImage montagne = new BitmapImage(new Uri(@"Ressources/terrains/montagne.png", UriKind.RelativeOrAbsolute));
-        private BitmapImage eau = new BitmapImage(new Uri(@"Ressources/terrains/eau.png", UriKind.RelativeOrAbsolute));
-        private BitmapImage plaine = new BitmapImage(new Uri(@"Ressources/terrains/plaine.png", UriKind.RelativeOrAbsolute));
-        private BitmapImage foret = new BitmapImage(new Uri(@"Ressources/terrains/forest.gif", UriKind.RelativeOrAbsolute));
+        private BitmapImage desert = new BitmapImage(CaseDesert.getUri());
+        private BitmapImage montagne = new BitmapImage(CaseMontagne.getUri());
+        private BitmapImage eau = new BitmapImage(CaseEau.getUri());
+        private BitmapImage plaine = new BitmapImage(CasePlaine.getUri());
+        private BitmapImage foret = new BitmapImage(CaseForet.getUri());
+        private BitmapImage vortex = new BitmapImage(CaseVortex.getUri());
         private const int imgSize = 50;
 
 
@@ -96,6 +97,9 @@ namespace WPF.Jeu
                             break;
                         case TypeCases.FORET:
                             dc.DrawImage(foret, new Rect((x - 1) * imgSize, (y - 1) * imgSize, imgSize, imgSize));
+                            break;
+                        case TypeCases.VORTEX:
+                            dc.DrawImage(vortex, new Rect((x - 1) * imgSize, (y - 1) * imgSize, imgSize, imgSize));
                             break;
                     }
                 }

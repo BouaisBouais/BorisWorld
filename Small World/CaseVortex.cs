@@ -5,16 +5,16 @@ using System.Text;
 
 namespace Small_World
 {
-    public class CaseMontagne : Case
+    public class CaseVortex : Case
     {
-        static private Uri uri = new Uri(@"Ressources/terrains/montagne.png", UriKind.RelativeOrAbsolute);
+        static private Uri uri = new Uri(@"Ressources/terrains/vortex.png", UriKind.RelativeOrAbsolute);
         static public Uri getUri()
         {
             return uri;
         }
         public TypeCases getTypeCase()
         {
-            return TypeCases.MONTAGNE;
+            return TypeCases.VORTEX;
         }
     }
 }

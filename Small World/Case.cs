@@ -7,7 +7,6 @@ namespace Small_World
 {
     public interface Case
     {
-        void print(); // TODO : A virer je pense
         TypeCases getTypeCase();
     }
 
