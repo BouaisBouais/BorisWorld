@@ -173,7 +173,7 @@ int** MapLib::suggestions(int peuple, int x, int y){
 					interesting = true;
 				break;
 			case MapLib::typeUnite::VIKING :
-				if(bordEau(testCoords))
+				if(bordEau(testCoords) && getCase(testCoords) != MapLib::typeCases::VORTEX)
 					interesting = true;
 				break;
 			}

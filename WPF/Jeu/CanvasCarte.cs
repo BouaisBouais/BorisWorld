@@ -105,6 +105,19 @@ namespace WPF.Jeu
                     }
                 }
             }
+            
+            SolidColorBrush scb = Brushes.Black;
+            Pen p = new Pen(scb, 3);
+            dc.DrawLine(p, new Point(0,0), new Point(0,taille*imgSize));
+            dc.DrawLine(p, new Point(taille*imgSize, 0), new Point(0,0));
+            for (int x = 1; x <= taille; x++)
+            {
+                dc.DrawLine(p, new Point(x*imgSize, 0), new Point(x*imgSize, taille*imgSize));
+            }
+            for (int y = 1; y <= taille; y++)
+            {
+                dc.DrawLine(p, new Point(0, y * imgSize), new Point(taille * imgSize, y * imgSize));
+            }
         }
 
         private void drawSuggestions(DrawingContext dc)

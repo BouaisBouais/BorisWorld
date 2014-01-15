@@ -52,6 +52,9 @@
   <PropertyGroup>
     <StartupObject>WPF.App</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>iconeJeu.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -248,6 +251,7 @@
     <Resource Include="Ressources\iconeDef.png" />
     <Resource Include="Ressources\iconeVie.png" />
     <Resource Include="Ressources\fondMap.png" />
+    <Resource Include="iconeJeu.ico" />
     <Content Include="Ressources\SmallWorldIntro.mp3" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
