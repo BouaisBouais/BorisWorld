@@ -121,9 +121,13 @@ namespace WPF.Jeu
         {
             Coordonnee currentUnit = SmallWorld.Instance.getUniteCourante().coordonnees;
             SolidColorBrush scb = Brushes.Red;
-            int x = (currentUnit.getX() - 1) * imgSize + 25;
-            int y = (currentUnit.getY() - 1) * imgSize + 25;
-            dc.DrawEllipse(scb, null, new Point(x, y), radiusPoints + 2, radiusPoints +2);
+            int x = (currentUnit.getX() - 1) * imgSize;
+            int y = (currentUnit.getY() - 1) * imgSize;
+            Pen p = new Pen(scb, 3);
+            dc.DrawLine(p, new Point(x, y), new Point(x + imgSize, y));
+            dc.DrawLine(p, new Point(x + imgSize, y), new Point(x + imgSize, y + imgSize));
+            dc.DrawLine(p, new Point(x + imgSize, y + imgSize), new Point(x, y + imgSize));
+            dc.DrawLine(p, new Point(x, y + imgSize), new Point(x, y));
 
 
             
@@ -132,15 +136,10 @@ namespace WPF.Jeu
                 foreach (Unite unite in joueur.getUnites())
                 {
                     Coordonnee coords = unite.coordonnees;
-                    
-                    SolidColorBrush color = App.getColorFromPeuple(joueur.Peuple);
-                    int ellipseX = (coords.getX() - 1) * imgSize + 25;
-                    int ellipseY = (coords.getY() - 1) * imgSize + 25;
-                    
-                    Point p = new Point(ellipseX, ellipseY);
-                   
-                    dc.DrawEllipse(color, null, p, radiusPoints, radiusPoints);
+                    int ellipseX = (coords.getX() - 1) * imgSize + 9;
+                    int ellipseY = (coords.getY() - 1) * imgSize + 9;
 
+                    dc.DrawImage(App.getImageFromPeuple(joueur.Peuple), new Rect(ellipseX, ellipseY, 32, 32));
 
                     int nb = SmallWorld.Instance.carte.getNombreUnites(coords);
 
@@ -289,9 +288,9 @@ namespace WPF.Jeu
         {
 
             Coordonnee arrivee = pointToCoordonne(click);
+            Unite u = SmallWorld.Instance.getUniteCourante();
             bool finJeu = SmallWorld.Instance.deplacement(arrivee);
-
-            Log log = SmallWorld.Instance.getUniteCourante().logDernierCombat;
+            Log log = u.logDernierCombat;
 
             if (!log.logVide)
             {
